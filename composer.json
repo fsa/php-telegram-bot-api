@@ -1,5 +1,5 @@
 {
-    "name": "fsa/telegram-bot",
+    "name": "fsa/telegram-bot-api",
     "description": "Telegram Bot API",
     "type": "library",
     "authors": [
@@ -11,7 +11,7 @@
     "license": "GPL-3.0-or-later",
     "autoload": {
         "psr-4": {
-            "Telegram\\": "classes/"
+            "FSA\\Telegram\\": "classes/"
         }
     },
     "require": {
