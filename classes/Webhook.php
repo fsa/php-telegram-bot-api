@@ -27,7 +27,7 @@ class Webhook {
         return self::$update;
     }
 
-    public static function logRequet() {
+    public static function logRequest() {
         if(!Query::getConfigVar('debug')) {
             return;
         }
