@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram;
 
-class SendLocation extends Query
+class SendLocation extends SendAbstract
 {
     public $chat_id;
     public $latitude;
@@ -15,11 +15,6 @@ class SendLocation extends Query
     public $live_period;
     public $heading;
     public $proximity_alert_radius;
-    public $disable_notification;
-    public $protect_content;
-    public $reply_to_message_id;
-    public $allow_sending_without_reply;
-    public $reply_markup;
 
     public function __construct(int|string $chat_id = null, float $latitude = null, float $longitude = null)
     {
@@ -71,31 +66,6 @@ class SendLocation extends Query
             throw new AppException('proximity_alert_radius must be between 1 and 100000.');
         }
         $this->proximity_alert_radius = $proximity_alert_radius;
-    }
-
-    public function setDisableNotification(bool $bool = true): void
-    {
-        $this->disable_notification = $bool;
-    }
-
-    public function setProtectContent(bool $protect_content = true): void
-    {
-        $this->protect_content = $protect_content;
-    }
-
-    public function setReplyToMessageId(int $id): void
-    {
-        $this->reply_to_message_id = $id;
-    }
-
-    public function setAllowSendingWithoutReply(bool $allow_sending_without_reply = true): void
-    {
-        $this->allow_sending_without_reply = $allow_sending_without_reply;
-    }
-
-    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): void
-    {
-        $this->reply_markup = $keyboard;
     }
 
     public function buildQuery(): array

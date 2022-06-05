@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram;
 
-class SendMessage extends Query
+class SendMessage extends SendAbstract
 {
 
     public $chat_id;
@@ -14,11 +14,6 @@ class SendMessage extends Query
     public $parse_mode;
     public $entities;
     public $disable_web_page_preview;
-    public $disable_notification;
-    public $protect_content;
-    public $reply_to_message_id;
-    public $allow_sending_without_reply;
-    public $reply_markup;
 
     public function __construct(string $chat_id = null, string $text = null, string $parseMode = null)
     {
@@ -89,31 +84,6 @@ class SendMessage extends Query
     public function setDisableWebPagePreview(bool $bool = true): void
     {
         $this->disable_web_page_preview = $bool;
-    }
-
-    public function setDisableNotification(bool $bool = true): void
-    {
-        $this->disable_notification = $bool;
-    }
-
-    public function setProtectContent(bool $protect_content = true): void
-    {
-        $this->protect_content = $protect_content;
-    }
-
-    public function setReplyToMessageId(int $id): void
-    {
-        $this->reply_to_message_id = $id;
-    }
-
-    public function setAllowSendingWithoutReply(bool $allow_sending_without_reply = true): void
-    {
-        $this->allow_sending_without_reply = $allow_sending_without_reply;
-    }
-
-    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): void
-    {
-        $this->reply_markup = $keyboard;
     }
 
     public function buildQuery(): array

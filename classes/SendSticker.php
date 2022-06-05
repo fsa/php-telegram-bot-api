@@ -1,18 +1,15 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.0
  */
 
 namespace FSA\Telegram;
 
-class SendSticker extends Query {
+class SendSticker extends SendAbstract {
 
     public $chat_id;
     public $sticker;
-    public $disable_notification;
-    public $reply_to_message_id;
-    public $reply_markup;
 
     public function __construct(string $chat_id=null, string $sticker=null) {
         if (!is_null($chat_id)) {
@@ -33,18 +30,6 @@ class SendSticker extends Query {
 
     public function setSticker(string $sticker): void {
         $this->sticker=$sticker;
-    }
-
-    public function setDisableNotification(bool $bool=true): void {
-        $this->disable_notification=$bool;
-    }
-
-    public function setReplyToMessageId(int $id): void {
-        $this->reply_to_message_id=$id;
-    }
-
-    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): void {
-        $this->reply_markup=$keyboard;
     }
 
     public function buildQuery(): array {
