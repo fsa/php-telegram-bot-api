@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.0
  */
 
 namespace FSA\Telegram;
@@ -16,6 +16,11 @@ class GetFile extends Query {
         if (!is_null($file_id)) {
             $this->file_id=$file_id;
         }
+    }
+
+    public function setFileId(string $file_id) {
+        $this->file_id = $file_id;
+        return $this;
     }
 
     public function buildQuery(): array {

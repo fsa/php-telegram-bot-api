@@ -2,6 +2,6 @@
 
 namespace FSA\Telegram;
 
-class AppException extends \Exception {
-
+class AppException extends \Exception
+{
 }

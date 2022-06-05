@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.0
  */
 
 namespace FSA\Telegram;
 
 class ForwardMessage extends Query {
-
     public $chat_id;
     public $from_chat_id;
     public $disable_notification;
+    public $protect_content;
     public $message_id;
 
     public function __construct(string $chat_id=null, string $from_chat_id=null, int $message_id=null, bool $disable_notification=null) {
@@ -28,20 +28,30 @@ class ForwardMessage extends Query {
         }
     }
 
-    public function setChatId(string $id): void {
+    public function setChatId(string $id): static {
         $this->chat_id=$id;
+        return $this;
     }
 
-    public function setFromChatId(string $id): void {
+    public function setFromChatId(string $id): static {
         $this->from_chat_id=$id;
+        return $this;
     }
 
-    public function setDisableNotification(bool $bool=true): void {
+    public function setDisableNotification(bool $bool=true): static {
         $this->disable_notification=$bool;
+        return $this;
     }
 
-    public function setMessageId(int $id) {
+    public function setProtectContent(bool $protect_content = true): static
+    {
+        $this->protect_content = $protect_content;
+        return $this;
+    }
+
+    public function setMessageId(int $id): static {
         $this->message_id=$id;
+        return $this;
     }
 
     public function buildQuery(): array {
