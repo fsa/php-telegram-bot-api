@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -18,12 +18,14 @@ class InlineKeyboardMarkup extends AbstractEntity implements ReplyMarkupInterfac
         $this->row=0;
     }
 
-    public function addButton(InlineKeyboardButton $button) {
+    public function addButton(InlineKeyboardButton $button): static {
         $this->inline_keyboard[$this->row][]=clone $button;
+        return $this;
     }
 
-    public function nextRow() {
+    public function nextRow(): static {
         $this->row++;
+        return $this;
     }
 
     public function __toString(): string {
