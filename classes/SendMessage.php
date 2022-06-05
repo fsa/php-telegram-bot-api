@@ -1,22 +1,27 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.0
  */
 
 namespace FSA\Telegram;
 
-class SendMessage extends Query {
+class SendMessage extends Query
+{
 
     public $chat_id;
     public $text;
     public $parse_mode;
+    public $entities;
     public $disable_web_page_preview;
     public $disable_notification;
+    public $protect_content;
     public $reply_to_message_id;
+    public $allow_sending_without_reply;
     public $reply_markup;
 
-    public function __construct(string $chat_id=null, string $text=null, string $parseMode=null) {
+    public function __construct(string $chat_id = null, string $text = null, string $parseMode = null)
+    {
         if (!is_null($chat_id)) {
             $this->setChatId($chat_id);
         }
@@ -35,63 +40,87 @@ class SendMessage extends Query {
         }
     }
 
-    public function getActionName(): string {
+    public function getActionName(): string
+    {
         return 'sendMessage';
     }
 
-    public function setChatId($chat_id): void {
-        $this->chat_id=$chat_id;
+    public function setChatId($chat_id): void
+    {
+        $this->chat_id = $chat_id;
     }
 
-    public function setText(string $text): void {
-        $this->text=$this->removeHtmlEntities($text);
+    public function setText(string $text): void
+    {
+        $this->text = $this->removeHtmlEntities($text);
     }
 
-    public function appendText(string $text): void {
+    public function appendText(string $text): void
+    {
         if (is_null($this->text)) {
-            $this->text=$this->removeHtmlEntities($text);
+            $this->text = $this->removeHtmlEntities($text);
         } else {
-            $this->text.=$this->removeHtmlEntities($text);
+            $this->text .= $this->removeHtmlEntities($text);
         }
     }
 
-    private function removeHtmlEntities(string $text) {
+    private function removeHtmlEntities(string $text)
+    {
         return str_replace(['&nbsp;', '&laquo;', '&raquo;', '&quot;', '&deg;'], [' ', '«', '»', '"', '°'], $text);
     }
 
-    public function setParseModeMarkdown(): void {
-        $this->parse_mode='MarkdownV2';
+    public function setParseModeMarkdown(): void
+    {
+        $this->parse_mode = 'MarkdownV2';
     }
 
-    public function setParseModeHTML(): void {
-        $this->parse_mode='HTML';
+    public function setParseModeHTML(): void
+    {
+        $this->parse_mode = 'HTML';
     }
 
-    public function setParseMode(string $parse_mode): void {
-        $this->parse_mode=$parse_mode;
+    public function setParseMode(string $parse_mode): void
+    {
+        $this->parse_mode = $parse_mode;
     }
 
-    public function setDisableWebPagePreview(bool $bool=true): void {
-        $this->disable_web_page_preview=$bool;
+    // public function setEntities(array|MessageEntity $entity) {}
+
+    public function setDisableWebPagePreview(bool $bool = true): void
+    {
+        $this->disable_web_page_preview = $bool;
     }
 
-    public function setDisableNotification(bool $bool=true): void {
-        $this->disable_notification=$bool;
+    public function setDisableNotification(bool $bool = true): void
+    {
+        $this->disable_notification = $bool;
     }
 
-    public function setReplyToMessageId(int $id): void {
-        $this->reply_to_message_id=$id;
+    public function setProtectContent(bool $protect_content = true): void
+    {
+        $this->protect_content = $protect_content;
     }
 
-    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): void {
-        $this->reply_markup=$keyboard;
+    public function setReplyToMessageId(int $id): void
+    {
+        $this->reply_to_message_id = $id;
     }
 
-    public function buildQuery(): array {
+    public function setAllowSendingWithoutReply(bool $allow_sending_without_reply = true): void
+    {
+        $this->allow_sending_without_reply = $allow_sending_without_reply;
+    }
+
+    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): void
+    {
+        $this->reply_markup = $keyboard;
+    }
+
+    public function buildQuery(): array
+    {
         if (is_null($this->chat_id) or is_null($this->text)) {
             throw new AppException('Required: chat_id, text');
         }
         return parent::buildQuery();
     }
-
 }
