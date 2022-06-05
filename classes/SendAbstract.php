@@ -44,12 +44,4 @@ class SendAbstract extends Query
     {
         $this->reply_markup = $keyboard;
     }
-
-    public function buildQuery(): array
-    {
-        if (is_null($this->chat_id) or is_null($this->latitude) or is_null($this->longitude)) {
-            throw new AppException('Required: chat_id, latitude, longitude');
-        }
-        return parent::buildQuery();
-    }
 }
