@@ -32,8 +32,8 @@ class SendDice extends SendAbstract
 
     public function buildQuery(): array
     {
-        if (is_null($this->chat_id) or is_null($this->latitude) or is_null($this->longitude)) {
-            throw new AppException('Required: chat_id, latitude, longitude');
+        if (is_null($this->chat_id)) {
+            throw new AppException('Required: chat_id');
         }
         return parent::buildQuery();
     }
