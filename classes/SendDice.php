@@ -30,6 +30,18 @@ class SendDice extends SendAbstract
         $this->emoji = $emoji;
     }
 
+    public function setEmojiNum(int $num = 0) {
+        $this->emoji = match ($num) {
+            0 => '🎲',
+            1 => '🎯',
+            2 => '🏀',
+            3 => '⚽',
+            4 => '🎳',
+            5 => '🎰',
+            default => '🎲'
+        };
+    }
+
     public function buildQuery(): array
     {
         if (is_null($this->chat_id)) {
