@@ -20,14 +20,10 @@ class SendSticker extends SendAbstract
         }
     }
 
-    public function getActionName(): string
-    {
-        return 'sendSticker';
-    }
-
-    public function setSticker(string $sticker): void
+    public function setSticker(string $sticker): static
     {
         $this->sticker = $sticker;
+        return $this;
     }
 
     public function buildQuery(): array

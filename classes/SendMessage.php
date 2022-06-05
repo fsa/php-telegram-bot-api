@@ -33,23 +33,20 @@ class SendMessage extends SendAbstract
         }
     }
 
-    public function getActionName(): string
-    {
-        return 'sendMessage';
-    }
-
-    public function setText(string $text): void
+    public function setText(string $text): static
     {
         $this->text = $this->removeHtmlEntities($text);
+        return $this;
     }
 
-    public function appendText(string $text): void
+    public function appendText(string $text): static
     {
         if (is_null($this->text)) {
             $this->text = $this->removeHtmlEntities($text);
         } else {
             $this->text .= $this->removeHtmlEntities($text);
         }
+        return $this;
     }
 
     private function removeHtmlEntities(string $text)
@@ -57,26 +54,30 @@ class SendMessage extends SendAbstract
         return str_replace(['&nbsp;', '&laquo;', '&raquo;', '&quot;', '&deg;'], [' ', '«', '»', '"', '°'], $text);
     }
 
-    public function setParseModeMarkdown(): void
+    public function setParseModeMarkdown(): static
     {
         $this->parse_mode = 'MarkdownV2';
+        return $this;
     }
 
-    public function setParseModeHTML(): void
+    public function setParseModeHTML(): static
     {
         $this->parse_mode = 'HTML';
+        return $this;
     }
 
-    public function setParseMode(string $parse_mode): void
+    public function setParseMode(string $parse_mode): static
     {
         $this->parse_mode = $parse_mode;
+        return $this;
     }
 
     // public function setEntities(array|MessageEntity $entity) {}
 
-    public function setDisableWebPagePreview(bool $bool = true): void
+    public function setDisableWebPagePreview(bool $bool = true): static
     {
         $this->disable_web_page_preview = $bool;
+        return $this;
     }
 
     public function buildQuery(): array

@@ -20,17 +20,13 @@ class SendDice extends SendAbstract
         }
     }
 
-    public function getActionName(): string
-    {
-        return 'sendDice';
-    }
-
-    public function setEmoji(string $emoji): void
+    public function setEmoji(string $emoji): static
     {
         $this->emoji = $emoji;
+        return $this;
     }
 
-    public function setEmojiNum(int $num = 0) {
+    public function setEmojiNum(int $num = 0): static {
         $this->emoji = match ($num) {
             0 => '🎲',
             1 => '🎯',
@@ -40,6 +36,7 @@ class SendDice extends SendAbstract
             5 => '🎰',
             default => '🎲'
         };
+        return $this;
     }
 
     public function buildQuery(): array

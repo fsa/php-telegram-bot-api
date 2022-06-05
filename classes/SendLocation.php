@@ -30,36 +30,41 @@ class SendLocation extends SendAbstract
         return 'sendLocation';
     }
 
-    public function setLocation(float $latitude, float $longitude): void
+    public function setLocation(float $latitude, float $longitude): static
     {
         $this->latitude = $latitude;
         $this->longitude = $longitude;
+        return $this;
     }
 
-    public function setHorizontalAccuracy(float $accuracy)
+    public function setHorizontalAccuracy(float $accuracy): static
     {
         $this->horizontal_accuracy = $accuracy;
+        return $this;
     }
 
-    public function setLivePeriod(int $live_period)
+    public function setLivePeriod(int $live_period): static
     {
         $this->live_period = $live_period;
+        return $this;
     }
 
-    public function setHeading(int $heading)
+    public function setHeading(int $heading): static
     {
         if ($heading < 1 or $heading > 360) {
             throw new AppException('Heading must be between 1 and 360.');
         }
         $this->heading = $heading;
+        return $this;
     }
 
-    public function setProximityAlertRadius(int $proximity_alert_radius)
+    public function setProximityAlertRadius(int $proximity_alert_radius): static
     {
         if ($proximity_alert_radius < 1 or $proximity_alert_radius > 100000) {
             throw new AppException('proximity_alert_radius must be between 1 and 100000.');
         }
         $this->proximity_alert_radius = $proximity_alert_radius;
+        return $this;
     }
 
     public function buildQuery(): array

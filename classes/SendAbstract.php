@@ -15,33 +15,39 @@ class SendAbstract extends Query
     public $allow_sending_without_reply;
     public $reply_markup;
 
-    public function setChatId(int|string $chat_id): void
+    public function setChatId(int|string $chat_id): static
     {
         $this->chat_id = $chat_id;
+        return $this;
     }
 
-    public function setDisableNotification(bool $bool = true): void
+    public function setDisableNotification(bool $bool = true): static
     {
         $this->disable_notification = $bool;
+        return $this;
     }
 
-    public function setProtectContent(bool $protect_content = true): void
+    public function setProtectContent(bool $protect_content = true): static
     {
         $this->protect_content = $protect_content;
+        return $this;
     }
 
-    public function setReplyToMessageId(int $id): void
+    public function setReplyToMessageId(int $id): static
     {
         $this->reply_to_message_id = $id;
+        return $this;
     }
 
-    public function setAllowSendingWithoutReply(bool $allow_sending_without_reply = true): void
+    public function setAllowSendingWithoutReply(bool $allow_sending_without_reply = true): static
     {
         $this->allow_sending_without_reply = $allow_sending_without_reply;
+        return $this;
     }
 
-    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): void
+    public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): static
     {
         $this->reply_markup = $keyboard;
+        return $this;
     }
 }
