@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram;
 
-class SendLocation extends SendAbstract
+class SendDice extends SendAbstract
 {
     public $emoji;
 
