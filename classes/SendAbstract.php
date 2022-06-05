@@ -8,11 +8,17 @@ namespace FSA\Telegram;
 
 class SendAbstract extends Query
 {
+    public $chat_id;
     public $disable_notification;
     public $protect_content;
     public $reply_to_message_id;
     public $allow_sending_without_reply;
     public $reply_markup;
+
+    public function setChatId(int|string $chat_id): void
+    {
+        $this->chat_id = $chat_id;
+    }
 
     public function setDisableNotification(bool $bool = true): void
     {

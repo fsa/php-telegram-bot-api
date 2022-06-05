@@ -6,12 +6,12 @@
 
 namespace FSA\Telegram;
 
-class SendSticker extends SendAbstract {
-
-    public $chat_id;
+class SendSticker extends SendAbstract
+{
     public $sticker;
 
-    public function __construct(string $chat_id=null, string $sticker=null) {
+    public function __construct(string $chat_id = null, string $sticker = null)
+    {
         if (!is_null($chat_id)) {
             $this->setChatId($chat_id);
         }
@@ -20,23 +20,21 @@ class SendSticker extends SendAbstract {
         }
     }
 
-    public function getActionName(): string {
+    public function getActionName(): string
+    {
         return 'sendSticker';
     }
 
-    public function setChatId(string $id): void {
-        $this->chat_id=$id;
+    public function setSticker(string $sticker): void
+    {
+        $this->sticker = $sticker;
     }
 
-    public function setSticker(string $sticker): void {
-        $this->sticker=$sticker;
-    }
-
-    public function buildQuery(): array {
+    public function buildQuery(): array
+    {
         if (is_null($this->chat_id) or is_null($this->sticker)) {
             throw new AppException('Required: chat_id, sticker');
         }
         return parent::buildQuery();
     }
-
 }

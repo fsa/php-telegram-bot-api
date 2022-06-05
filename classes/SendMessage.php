@@ -8,8 +8,6 @@ namespace FSA\Telegram;
 
 class SendMessage extends SendAbstract
 {
-
-    public $chat_id;
     public $text;
     public $parse_mode;
     public $entities;
@@ -38,11 +36,6 @@ class SendMessage extends SendAbstract
     public function getActionName(): string
     {
         return 'sendMessage';
-    }
-
-    public function setChatId($chat_id): void
-    {
-        $this->chat_id = $chat_id;
     }
 
     public function setText(string $text): void

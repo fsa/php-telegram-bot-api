@@ -8,7 +8,6 @@ namespace FSA\Telegram;
 
 class SendLocation extends SendAbstract
 {
-    public $chat_id;
     public $latitude;
     public $longitude;
     public $horizontal_accuracy;
@@ -29,11 +28,6 @@ class SendLocation extends SendAbstract
     public function getActionName(): string
     {
         return 'sendLocation';
-    }
-
-    public function setChatId(int|string $chat_id): void
-    {
-        $this->chat_id = $chat_id;
     }
 
     public function setLocation(float $latitude, float $longitude): void
