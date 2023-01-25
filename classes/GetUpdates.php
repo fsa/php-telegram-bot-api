@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram;
 
-class GetUpdates extends Query
+class GetUpdates extends AbstractMethod
 {
     public int $offset;
     public int $limit;
@@ -31,15 +31,9 @@ class GetUpdates extends Query
         return $this;
     }
 
-    public function setAllowedUpdates(array $allowed_updates): static
+    public function setAllowedUpdates(string|array $allowed_updates): static
     {
         $this->allowed_updates = $allowed_updates;
-        return $this;
-    }
-
-    public function addAllowedUpdates(string $allowed_update): static
-    {
-        $this->allowed_updates[] = $allowed_update;
         return $this;
     }
 }

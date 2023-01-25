@@ -1,26 +1,22 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram;
 
-class SendMessage extends SendAbstract
+class SendMessage extends AbstractSendMethod
 {
     public $text;
     public $parse_mode;
     public $entities;
     public $disable_web_page_preview;
 
-    public function __construct(string $chat_id = null, string $text = null, string $parseMode = null)
+    public function __construct(string $chat_id, string $text, string $parseMode = null)
     {
-        if (!is_null($chat_id)) {
-            $this->setChatId($chat_id);
-        }
-        if (!is_null($text)) {
-            $this->setText($text);
-        }
+        $this->setChatId($chat_id);
+        $this->setText($text);
         switch ($parseMode) {
             case 'HTML':
                 $this->setParseModeHTML();
@@ -78,13 +74,5 @@ class SendMessage extends SendAbstract
     {
         $this->disable_web_page_preview = $bool;
         return $this;
-    }
-
-    public function buildQuery(): array
-    {
-        if (is_null($this->chat_id) or is_null($this->text)) {
-            throw new AppException('Required: chat_id, text');
-        }
-        return parent::buildQuery();
     }
 }

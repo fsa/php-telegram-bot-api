@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram;
 
-class SetWebhook extends Query
+class SetWebhook extends AbstractMethod
 {
     public string $url;
     public $certificate;
@@ -14,6 +14,7 @@ class SetWebhook extends Query
     public int $max_connections;
     public array $allowed_updates;
     public bool $drop_pending_updates;
+    public string $secret_token;
 
     public function __construct(string $url)
     {
@@ -47,24 +48,21 @@ class SetWebhook extends Query
         return $this;
     }
 
-    public function setAllowedUpdates(array $allowed_updates): static
+    public function setAllowedUpdates(string|array $allowed_updates): static
     {
         $this->allowed_updates = $allowed_updates;
-        return $this;
-    }
-
-    public function addAllowedUpdates(string $allowed_update): static
-    {
-        if (!isset($this->allowed_updates)) {
-            $this->allowed_updates = [];
-        }
-        $this->allowed_updates[] = $allowed_update;
         return $this;
     }
 
     public function setDropPendingUpdates(bool $drop_pending_updates): static
     {
         $this->drop_pending_updates = $drop_pending_updates;
+        return $this;
+    }
+
+    public function setSecretToken(string $secret_token)
+    {
+        $this->secret_token = $secret_token;
         return $this;
     }
 }

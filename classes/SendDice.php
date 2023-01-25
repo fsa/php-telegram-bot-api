@@ -1,23 +1,19 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram;
 
-class SendDice extends SendAbstract
+class SendDice extends AbstractSendMethod
 {
     public $emoji;
 
-    public function __construct(int|string $chat_id = null, string $emoji = null)
+    public function __construct(int|string $chat_id, string $emoji)
     {
-        if (!is_null($chat_id)) {
-            $this->setChatId($chat_id);
-        }
-        if (!is_null($emoji)) {
-            $this->setEmoji($emoji);
-        }
+        $this->setChatId($chat_id);
+        $this->setEmoji($emoji);
     }
 
     public function setEmoji(string $emoji): static
@@ -37,13 +33,5 @@ class SendDice extends SendAbstract
             default => '🎲'
         };
         return $this;
-    }
-
-    public function buildQuery(): array
-    {
-        if (is_null($this->chat_id)) {
-            throw new AppException('Required: chat_id');
-        }
-        return parent::buildQuery();
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram;
 
-class GetMe extends Query
+class GetMe extends AbstractMethod
 {
 }

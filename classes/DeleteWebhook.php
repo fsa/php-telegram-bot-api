@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram;
 
-class DeleteWebhook extends Query
+class DeleteWebhook extends AbstractMethod
 {
     public bool $drop_pending_updates;
 

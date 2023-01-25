@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram;
 
-class SendLocation extends SendAbstract
+class SendLocation extends AbstractSendMethod
 {
     public $latitude;
     public $longitude;
@@ -15,14 +15,10 @@ class SendLocation extends SendAbstract
     public $heading;
     public $proximity_alert_radius;
 
-    public function __construct(int|string $chat_id = null, float $latitude = null, float $longitude = null)
+    public function __construct(int|string $chat_id, float $latitude, float $longitude)
     {
-        if (!is_null($chat_id)) {
-            $this->setChatId($chat_id);
-        }
-        if (!is_null($latitude) and !is_null($longitude)) {
-            $this->setLocation($latitude, $longitude);
-        }
+        $this->setChatId($chat_id);
+        $this->setLocation($latitude, $longitude);
     }
 
     public function getActionName(): string
@@ -65,13 +61,5 @@ class SendLocation extends SendAbstract
         }
         $this->proximity_alert_radius = $proximity_alert_radius;
         return $this;
-    }
-
-    public function buildQuery(): array
-    {
-        if (is_null($this->chat_id) or is_null($this->latitude) or is_null($this->longitude)) {
-            throw new AppException('Required: chat_id, latitude, longitude');
-        }
-        return parent::buildQuery();
     }
 }

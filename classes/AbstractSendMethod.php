@@ -1,14 +1,15 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram;
 
-class SendAbstract extends Query
+class AbstractSendMethod extends AbstractMethod
 {
     public $chat_id;
+    public $message_thread_id;
     public $disable_notification;
     public $protect_content;
     public $reply_to_message_id;
@@ -18,6 +19,12 @@ class SendAbstract extends Query
     public function setChatId(int|string $chat_id): static
     {
         $this->chat_id = $chat_id;
+        return $this;
+    }
+
+    public function setMessageThreadId(int|string $id): static
+    {
+        $this->message_thread_id = $id;
         return $this;
     }
 
