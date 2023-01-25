@@ -10,10 +10,14 @@ class SendDice extends AbstractSendMethod
 {
     public $emoji;
 
-    public function __construct(int|string $chat_id, string $emoji)
+    public function __construct(int|string $chat_id, int|string $emoji)
     {
         $this->setChatId($chat_id);
-        $this->setEmoji($emoji);
+        if (is_int($emoji)) {
+            $this->setEmojiNum($emoji);
+        } else {
+            $this->setEmoji($emoji);
+        }
     }
 
     public function setEmoji(string $emoji): static

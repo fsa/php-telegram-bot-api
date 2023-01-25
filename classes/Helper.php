@@ -52,7 +52,8 @@ class Helper
 
     public static function webhookReplyJson($query)
     {
-        return self::$query->webhookReplyJson($query);
+        self::$query->webhookReplyJson($query);
+        exit;
     }
 
     public static function getWebhookUpdate()
