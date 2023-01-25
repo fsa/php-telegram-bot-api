@@ -1,119 +1,126 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API
+ * Отправка запросов на сервер
  */
 
 namespace FSA\Telegram;
 
-abstract class Query
+class Query
 {
-    protected const API_URL = 'https://api.telegram.org/bot';
+    protected $token;
+    protected $api_url = 'https://api.telegram.org';
+    protected $proxy;
 
-    protected static $token;
-    protected static $proxy;
-    protected static $config;
-
-    public static function init(array $config)
+    public function __construct(string $token, string $proxy = null)
     {
-        if (!isset($config['token'])) {
-            throw new AppException('Token not set.');
-        }
-        self::$token = $config['token'];
-        if (isset($config['proxy'])) {
-            self::$proxy = $config['proxy'];
-        }
-        self::$config = $config;
+        $this->token = $token;
+        $this->proxy = $proxy;
     }
 
-    public static function getConfigVar($name)
+    public function setApiUrl(string $url)
     {
-        return isset(self::$config[$name]) ? self::$config[$name] : null;
+        $this->api_url = $url;
     }
 
-    public function getActionName(): string
+    public function setProxy(string $proxy)
     {
-        $class = explode('\\', get_class($this));
-        return lcfirst(end($class));
+        $this->proxy = $proxy;
     }
 
-    public function buildQuery(): array
-    {
-        return array_filter(get_object_vars($this), fn ($element) => !empty($element));
-    }
-
-    public function httpPost(): object
+    public function httpPost(AbstractMethod $query): object
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, self::API_URL . self::$token . '/' . $this->getActionName());
+        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getActionName());
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if (isset(self::$proxy)) {
-            curl_setopt($ch, CURLOPT_PROXY, self::$proxy);
+        if (isset($this->proxy)) {
+            curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
         }
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->buildQuery());
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $query->buildQuery());
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new AppException('Не удалось поучить данные для ' . $this->getActionName());
+            throw new AppException('Не удалось поучить данные для ' . $query->getActionName());
         }
         return json_decode($result);
     }
 
-    public function httpPostJson(): object
+    public function httpPostJson(AbstractMethod $query): object
     {
-        $query = json_encode($this->buildQuery(), JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
+        $query_string = json_encode($query->buildQuery(), JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, self::API_URL . self::$token . '/' . $this->getActionName());
+        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getActionName());
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if (isset(self::$proxy)) {
-            curl_setopt($ch, CURLOPT_PROXY, self::$proxy);
+        if (isset($this->proxy)) {
+            curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
         }
         curl_setopt(
             $ch,
             CURLOPT_HTTPHEADER,
             array(
                 'Content-Type: application/json',
-                'Content-Length: ' . strlen($query)
+                'Content-Length: ' . strlen($query_string)
             )
         );
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $query_string);
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new AppException('Не удалось поучить данные для ' . $this->getActionName());
+            throw new AppException('Не удалось поучить данные для ' . $query->getActionName());
         }
         return json_decode($result);
     }
 
-    public function httpGet(): object
+    public function httpGet(AbstractMethod $query): object
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, self::API_URL . self::$token . '/' . $this->getActionName() . '?' . http_build_query($this->buildQuery()));
+        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getActionName() . '?' . http_build_query($query->buildQuery()));
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if (isset(self::$proxy)) {
-            curl_setopt($ch, CURLOPT_PROXY, self::$proxy);
+        if (isset($this->proxy)) {
+            curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
         }
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new AppException('Не удалось поучить данные для ' . $this->getActionName());
+            throw new AppException('Не удалось поучить данные для ' . $query->getActionName());
         }
         return json_decode($result);
     }
 
-    public function webhookReplyJson(): void
+    public function webhookReplyJson(AbstractMethod $query): void
     {
-        $query = $this->buildQuery();
-        $query['method'] = $this->getActionName();
+        $query_string = $query->buildQuery();
+        $query_string['method'] = $query->getActionName();
         header('Content-Type: application/json');
-        echo json_encode($query, JSON_UNESCAPED_UNICODE);
+        echo json_encode($query_string, JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    public function getFileContent(string $file_id)
+    {
+        $file = $this->httpPost(new GetFile($file_id));
+        if (!$file->ok) {
+            return null;
+        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/file/bot' . $this->token . '/' . $file->result->file_path);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        if (isset($this->proxy)) {
+            curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
+        }
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
     }
 }
