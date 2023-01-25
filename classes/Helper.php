@@ -50,6 +50,11 @@ class Helper
         return self::$query->httpGet($query);
     }
 
+    public static function webhookReplyJson($query)
+    {
+        return self::$query->webhookReplyJson($query);
+    }
+
     public static function getWebhookUpdate()
     {
         return json_decode(self::getWebhookUpdateRaw(), true, 512, JSON_THROW_ON_ERROR);
