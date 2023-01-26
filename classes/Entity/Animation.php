@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram\Entity;
 
-class Animation extends AbstractEntity {
+class Animation extends AbstractEntity
+{
 
     public string $file_id;
     public string $file_unique_id;
     public int $width;
     public int $height;
     public int $duration;
-    public ?PhotoSize $thumb=null;
-    public ?string $file_name=null;
-    public ?string $mime_type=null;
-    public ?int $file_size=null;
-
+    public ?PhotoSize $thumb;
+    public ?string $file_name;
+    public ?string $mime_type;
+    public ?int $file_size;
 }

@@ -7,26 +7,26 @@
 namespace FSA\Telegram\Entity;
 
 class ChatMember extends AbstractEntity {
-
-    public User $user;
+    //TODO: Разные типы пользователей
     public string $status;
-    public ?string $custom_title=null;
-    public ?bool $is_anonymous=null;
-    public ?bool $can_be_edited=null;
-    public ?bool $can_post_messages=null;
-    public ?bool $can_edit_messages=null;
-    public ?bool $can_delete_messages=null;
-    public ?bool $can_restrict_members=null;
-    public ?bool $can_promote_members=null;
-    public ?bool $can_change_info=null;
-    public ?bool $can_invite_users=null;
-    public ?bool $can_pin_messages=null;
-    public ?bool $is_member=null;
-    public ?bool $can_send_messages=null;
-    public ?bool $can_send_media_messages=null;
-    public ?bool $can_send_polls=null;
-    public ?bool $can_send_other_messages=null;
-    public ?bool $can_add_web_page_previews=null;
-    public ?int $until_date=null;
+    public User $user;
+    public ?bool $is_anonymous;
+    public ?string $custom_title;
+    public ?bool $can_be_edited;
+    public ?bool $can_post_messages;
+    public ?bool $can_edit_messages;
+    public ?bool $can_delete_messages;
+    public ?bool $can_restrict_members;
+    public ?bool $can_promote_members;
+    public ?bool $can_change_info;
+    public ?bool $can_invite_users;
+    public ?bool $can_pin_messages;
+    public ?bool $is_member;
+    public ?bool $can_send_messages;
+    public ?bool $can_send_media_messages;
+    public ?bool $can_send_polls;
+    public ?bool $can_send_other_messages;
+    public ?bool $can_add_web_page_previews;
+    public ?int $until_date;
 
 }

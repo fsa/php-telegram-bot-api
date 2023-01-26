@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram\Entity;
 
-class CallbackQuery extends AbstractEntity {
+class CallbackQuery extends AbstractEntity
+{
 
     public string $id;
     public User $from;
-    public ?Message $message=null;
-    public ?string $inline_message_id=null;
-    public ?string $chat_instance=null;
-    public ?string $data=null;
-    public ?string $game_short_name=null;
-
+    public ?Message $message;
+    public ?string $inline_message_id;
+    public ?string $chat_instance;
+    public ?string $data;
+    public ?string $game_short_name;
 }
