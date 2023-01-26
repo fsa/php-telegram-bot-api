@@ -1,45 +1,51 @@
 <?php
 
 /**
- * Telegram Bot API 4.9
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram\Entity;
 
-class KeyboardButton extends AbstractEntity {
-
+class KeyboardButton extends AbstractEntity
+{
     public string $text;
-    public ?bool $request_contact=null;
-    public ?bool $request_location=null;
-    public ?KeyboardButtonPollType $request_poll=null;
-    
-    public function __construct(string $text, bool $request_contact=null, bool $request_location=null, KeyboardButtonPollType $request_poll=null) {
-        $this->text=$text;
-        if(isset($request_contact)) {
-            $this->request_contact=$request_contact;
-        }
-        if(isset($request_location)) {
-            $this->request_location=$request_location;
-        }
-        if(isset($request_poll)) {
-            $this->request_poll=$request_poll;
-        }
-    }
-    
-    public function setText(string $text) {
-        $this->text=$text;        
+    public ?bool $request_contact;
+    public ?bool $request_location;
+    public ?KeyboardButtonPollType $request_poll;
+    public ?WebAppInfo $web_app;
+
+    public function __construct(string $text)
+    {
+        $this->text = $text;
     }
 
-    public function setRequestContact(bool $request_contact=true) {
-        $this->request_contact=$request_contact;
-    }
-    
-    public function setRequestLocation(bool $request_location=true) {
-        $this->request_location=$request_location;
-    }
-    
-    public function setRequestPoll(KeyboardButtonPollType $request_poll) {
-        $this->request_poll=$request_poll;
+    public function setText(string $text): static
+    {
+        $this->text = $text;
+        return $this;
     }
 
+    public function setRequestContact(bool $request_contact = true): static
+    {
+        $this->request_contact = $request_contact;
+        return $this;
+    }
+
+    public function setRequestLocation(bool $request_location = true): static
+    {
+        $this->request_location = $request_location;
+        return $this;
+    }
+
+    public function setRequestPoll(KeyboardButtonPollType $request_poll): static
+    {
+        $this->request_poll = $request_poll;
+        return $this;
+    }
+
+    public function setWebApp(WebAppInfo $web_app): static
+    {
+        $this->web_app = $web_app;
+        return $this;
+    }
 }

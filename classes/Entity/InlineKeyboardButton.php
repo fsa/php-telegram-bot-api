@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram\Entity;
@@ -65,7 +65,7 @@ class InlineKeyboardButton extends AbstractEntity
         return $this;
     }
 
-    public function setCallbackGame(CallbackGame $callback_game): static
+    public function setCallbackGame($callback_game): static
     {
         $this->callback_game = $callback_game;
         return $this;
