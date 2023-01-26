@@ -16,7 +16,7 @@ class Webhook
 
     public function getUpdate()
     {
-        return json_decode($this->getUpdateRaw(), true, 512, JSON_THROW_ON_ERROR);
+        return json_decode(json: $this->getUpdateRaw(), flags: JSON_THROW_ON_ERROR);
     }
 
     public function getUpdateRaw()
