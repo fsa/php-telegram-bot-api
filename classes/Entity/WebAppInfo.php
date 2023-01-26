@@ -6,13 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class WebAppInfo extends AbstractEntity {
+class WebAppInfo extends AbstractEntity
+{
 
     public string $url;
-
-    public function __construct(string $url)
-    {
-        $this->url = $url;
-    }
-
 }

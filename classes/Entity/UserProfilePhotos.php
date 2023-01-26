@@ -19,7 +19,7 @@ class UserProfilePhotos extends AbstractEntity {
         $i=0;
         foreach ($value as $row) {
             foreach ($row as $entity) {
-                $result[i][]=new PhotoSize($entity);
+                $result[$i][]=new PhotoSize($entity);
             }
             $i++;
         }

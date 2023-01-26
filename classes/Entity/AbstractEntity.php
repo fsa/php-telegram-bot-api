@@ -12,9 +12,9 @@ abstract class AbstractEntity implements \JsonSerializable {
 
     public array $unsupported=[];
 
-    public function __construct(array $entity) {
+    public function __construct(object $entity) {
         $r = new \ReflectionClass(static::class);
-        foreach ($entity as $key=> $value) {
+        foreach ((array)$entity as $key=> $value) {
             if (!$r->hasProperty($key)) {
                 $this->unsupported[$key]=$value;
                 continue;

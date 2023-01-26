@@ -1,22 +1,26 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram\Entity;
 
-class Sticker extends AbstractEntity {
+class Sticker extends AbstractEntity
+{
 
     public string $file_id;
     public string $file_unique_id;
+    public string $type;
     public int $width;
     public int $height;
     public bool $is_animated;
-    public ?PhotoSize $thumb=null;
-    public ?string $emoji=null;
-    public ?string $set_name=null;
-    public ?MaskPosition $mask_position=null;
-    public ?int $file_size=null;
-
+    public bool $is_video;
+    public ?PhotoSize $thumb;
+    public ?string $emoji;
+    public ?string $set_name;
+    public ?File $premium_animation;
+    public ?MaskPosition $mask_position;
+    public ?string $custom_emoji_id;
+    public ?int $file_size;
 }

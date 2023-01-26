@@ -1,21 +1,13 @@
 <?php
 
 /**
- * Telegram Bot API 4.9
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram\Entity;
 
-class KeyboardButtonPollType extends AbstractEntity {
+class KeyboardButtonPollType extends AbstractEntity
+{
 
-    public string $type;
-    
-    public function __construct(string $type) {
-        $this->type=$type;
-    }
-    
-    public function setType(string $type) {
-        $this->type=$type;
-    }
-
+    public ?string $type;
 }

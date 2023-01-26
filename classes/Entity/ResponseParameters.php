@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 6.4
  */
 
 namespace FSA\Telegram\Entity;
 
-class ResponseParameters extends AbstractEntity {
+class ResponseParameters extends AbstractEntity
+{
 
-    public ?int $migrate_to_chat_id=null;
-    public ?int $retry_after=null;
-
+    public ?int $migrate_to_chat_id;
+    public ?int $retry_after;
 }
