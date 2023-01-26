@@ -54,7 +54,7 @@ class AbstractSendMethod extends AbstractMethod
 
     public function setReplyMarkup(Entity\ReplyMarkupInterface $keyboard): static
     {
-        $this->reply_markup = $keyboard;
+        $this->reply_markup = (string)$keyboard;
         return $this;
     }
 }
