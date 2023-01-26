@@ -21,8 +21,8 @@ abstract class AbstractEntity implements \JsonSerializable {
             }
             $prop = $r->getProperty($key);
             $type = $prop->getType();
-            $classname=$type->getName();
-            switch ($classname) {
+            $class_name=$type->getName();
+            switch ($class_name) {
                 case 'int':
                     $this->$key=intval($value);
                     break;
@@ -39,7 +39,7 @@ abstract class AbstractEntity implements \JsonSerializable {
                     $this->$key=$this->parseArray($key, $value);
                     break;
                 default:
-                    $this->$key = new $classname($value);
+                    $this->$key = new $class_name($value);
             }
         }
     }
