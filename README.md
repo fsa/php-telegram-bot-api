@@ -30,7 +30,7 @@ $message = (new FSA\Telegram\SendDice($chat_id, 1))->setDisableNotification()->s
 
 ```php
 // Создание нового запроса
-$query = new FSA\Telegram\Query('TOKEN');
+$query = new FSA\Telegram\Query('TOKEN', 'socks5://user:pwd@example.com:1080');
 // Создание метода sendMessage
 $message = new FSA\Telegram\SendMessage($chat_id, "Привет");
 // Передача запроса на сервер
