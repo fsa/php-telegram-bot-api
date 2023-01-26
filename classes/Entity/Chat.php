@@ -19,7 +19,7 @@ class Chat extends AbstractEntity {
     public ?string $description=null;
     public ?string $invite_link=null;
     public ?Message $pinned_message=null;
-    public ?ChatPermission $permissions=null;
+    public ?ChatPermissions $permissions=null;
     public ?int $slow_mode_delay=null;
     public ?string $sticker_set_name=null;
     public ?bool $can_set_sticker_set=null;
