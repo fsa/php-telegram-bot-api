@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram;
 
-class ReplyKeyboardRemove implements ReplyMarkupInterface
+class ReplyKeyboardRemove extends AbstractObject implements ReplyMarkupInterface
 {
 
     public bool $remove_keyboard = true;

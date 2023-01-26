@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram;
 
-class ForceReply implements ReplyMarkupInterface
+class ForceReply extends AbstractObject implements ReplyMarkupInterface
 {
 
     public bool $force_reply;

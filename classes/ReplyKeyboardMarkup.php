@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram;
 
-class ReplyKeyboardMarkup implements ReplyMarkupInterface {
+class ReplyKeyboardMarkup extends AbstractObject implements ReplyMarkupInterface {
 
     public array $keyboard;
     public ?bool $is_persistent; 

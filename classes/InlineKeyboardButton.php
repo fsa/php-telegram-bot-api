@@ -7,7 +7,7 @@
 
 namespace FSA\Telegram;
 
-class InlineKeyboardButton
+class InlineKeyboardButton extends AbstractObject
 {
     public $text;
     public $url;

@@ -7,7 +7,8 @@
 
 namespace FSA\Telegram;
 
-class LoginUrl {
+class LoginUrl extends AbstractObject
+{
 
     public string $url;
     public ?string $forward_text;

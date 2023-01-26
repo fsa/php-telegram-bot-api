@@ -7,7 +7,7 @@
 
 namespace FSA\Telegram;
 
-class WebAppInfo
+class WebAppInfo extends AbstractObject
 {
 
     public string $url;

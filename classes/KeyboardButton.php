@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram;
 
-class KeyboardButton
+class KeyboardButton extends AbstractObject
 {
     public string $text;
     public ?bool $request_contact;

@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace FSA\Telegram\Entity;
 
-abstract class AbstractEntity implements \JsonSerializable {
+abstract class AbstractEntity {
 
     public array $unsupported=[];
 
@@ -46,12 +46,6 @@ abstract class AbstractEntity implements \JsonSerializable {
 
     protected function parseArray($key, $value) {
         return $value;
-    }
-
-    public function jsonSerialize() {
-        $props=get_object_vars($this);
-        unset($props['unsupported']);
-        return array_filter($props, fn($element)=>!is_null($element));
     }
 
 }

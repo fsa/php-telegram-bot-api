@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram;
 
-class KeyboardButtonPollType
+class KeyboardButtonPollType extends AbstractObject
 {
 
     public string $type;

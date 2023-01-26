@@ -7,7 +7,7 @@
 
 namespace FSA\Telegram;
 
-class InlineKeyboardMarkup implements ReplyMarkupInterface {
+class InlineKeyboardMarkup extends AbstractObject implements ReplyMarkupInterface {
 
     public array $inline_keyboard=[];
     private $row;
