@@ -37,15 +37,30 @@ $message = new FSA\Telegram\SendMessage($chat_id, "Привет");
 $query->httpPostJson($message);
 ```
 
-## Ответ на WebHook
-
-Ответ на WebHook может быть выполнен с помощью метода webhookReplyJson().
+## Работа с WebHook
 
 ```php
-$query = new FSA\Telegram\Query('TOKEN');
-$reply=new \FSA\Telegram\SendMessage($chat_id, "Привет");
-$query->webhookReplyJson($reply);
+$webhook = new FSA\Telegram\Webhook;
+$update = $webhook->getUpdate();
 ```
+
+Данные можно получить в сыром виде:
+
+```php
+$update = $webhook->getUpdateRaw();
+```
+
+Получать данные запроса можно любое число раз. Оригинальный запрос сохраняется внутри класса и используется при последующих запросах.
+
+Ответ на WebHook может быть выполнен с помощью метода replyJson().
+
+```php
+$webhook = new FSA\Telegram\Webhook();
+$reply=new \FSA\Telegram\SendMessage($chat_id, "Привет");
+$webhook->replyJson($reply);
+```
+
+Отправить ответ можно только один раз. После отправки ответа работа скрипта будет остановлена.
 
 ## Вспомогательный класс Helper
 
@@ -73,42 +88,26 @@ $admin_id = FSA\Telegram\Helper::getConfigVar('admin_id');
 
 ### Отправка запросов на сервер
 
-Запросы можно выполнять тремя способами. Все методы соответствуют методам `FSA\Telegram\Query`:
+Получение экземпляра `FSA\Telegram\Query` и отправка запросов на сервер:
 
 ```php
-FSA\Telegram\Helper::httpGet($query);
-FSA\Telegram\Helper::httpPost($query);
-FSA\Telegram\Helper::httpPostJson($query);
+FSA\Telegram\Helper::query()->httpGet($query);
+FSA\Telegram\Helper::query()->httpPost($query);
+FSA\Telegram\Helper::query()->httpPostJson($query);
 ```
 
 ### Работа с Webhook
 
-Получение данных запроса:
+Получение экземпляра `FSA\Telegram\Webhook` и данных запроса:
 
 ```php
-FSA\Telegram\Helper::getWebhookUpdate();
+FSA\Telegram\Helper::webhook()->getUpdate();
 ```
 
-Данные можно получить в сыром виде:
-
-```php
-FSA\Telegram\Helper::getWebhookUpdateRaw();
-```
-
-Получать данные запроса можно любое число раз. Оригинальный запрос сохраняется внутри `Helper` и используется при последующих запросах.
-
-При первом получении запроса устанавливается обработчик исключений. Данные об ошибках при обработке Webhook будут отправлены администратору на аккаунт в телеграм, если он указан в массиве параметров инициализации в ключе `admin_id`. Чтобы пользователь смог получать сообщения об ошибках необходимо указать его `chat_id` с помощью метода:
+При первом получении экземпляра `FSA\Telegram\Webhook` устанавливается обработчик исключений. Данные об ошибках при обработке Webhook будут отправлены администратору на аккаунт в телеграм, если он указан в массиве параметров инициализации в ключе `admin_id`. Чтобы пользователь смог получать сообщения об ошибках необходимо указать его `chat_id` с помощью метода:
 
 ```php
 FSA\Telegram\Helper::setExceptionChatId($chat_id);
 ```
 
 После этого при возникновении исключения пользователь в `$chat_id` будет оповещён о проблеме. Текст исключения `UserException` из любого пространства имён будет передан пользователю без изменения. При других типах исключений пользователю будет сообщено об ошибке, при этом будет отправлено оповещение на учётную запись администратора (если он был указан).
-
-Для отправки ответа на Webhook можно применять метод `webhookReplyJson`:
-
-```php
-FSA\Telegram\Helper::webhookReplyJson($query);
-```
-
-Отправить ответ можно только один раз. После отправки ответа работа скрипта будет остановлена.

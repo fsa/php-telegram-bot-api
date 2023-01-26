@@ -96,15 +96,6 @@ class Query
         return json_decode($result);
     }
 
-    public function webhookReplyJson(AbstractMethod $query): void
-    {
-        $query_string = $query->buildQuery();
-        $query_string['method'] = $query->getActionName();
-        header('Content-Type: application/json');
-        echo json_encode($query_string, JSON_UNESCAPED_UNICODE);
-        exit;
-    }
-
     public function getFileContent(string $file_id)
     {
         $file = $this->httpPost(new GetFile($file_id));

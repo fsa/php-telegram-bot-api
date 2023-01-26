@@ -13,7 +13,7 @@ class Helper
     private static $query;
     private static $webhook_chat_id;
     private static $webhook_admin_id;
-    private static $webhook_json;
+    private static $webhook;
 
     public static function init(array $config)
     {
@@ -35,42 +35,21 @@ class Helper
         return isset(self::$config[$name]) ? self::$config[$name] : null;
     }
 
-    public static function httpPost($query)
+    public static function query()
     {
-        return self::$query->httpPost($query);
+        return self::$query;
     }
 
-    public static function httpPostJson($query)
+    public static function webhook()
     {
-        return self::$query->httpPostJson($query);
-    }
-
-    public static function httpGet($query)
-    {
-        return self::$query->httpGet($query);
-    }
-
-    public static function webhookReplyJson($query)
-    {
-        self::$query->webhookReplyJson($query);
-        exit;
-    }
-
-    public static function getWebhookUpdate()
-    {
-        return json_decode(self::getWebhookUpdateRaw(), true, 512, JSON_THROW_ON_ERROR);
-    }
-
-    public static function getWebhookUpdateRaw()
-    {
-        if (is_null(self::$webhook_json)) {
+        if (is_null(self::$webhook)) {
             if (isset(self::$config['admin_id'])) {
                 self::$webhook_admin_id = self::$config['admin_id'];
                 set_exception_handler([self::class, 'Exception']);
             }
-            self::$webhook_json = file_get_contents('php://input');
+            self::$webhook = new Webhook();
         }
-        return self::$webhook_json;
+        return self::$webhook;
     }
 
     public static function setExceptionChatId($chat_id)
