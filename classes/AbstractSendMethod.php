@@ -57,4 +57,9 @@ class AbstractSendMethod extends AbstractMethod
         $this->reply_markup = (string)$keyboard;
         return $this;
     }
+
+    protected function removeHtmlEntities(string $text)
+    {
+        return str_replace(['&nbsp;', '&laquo;', '&raquo;', '&quot;', '&deg;'], [' ', '«', '»', '"', '°'], $text);
+    }
 }

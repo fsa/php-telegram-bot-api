@@ -13,19 +13,12 @@ class SendMessage extends AbstractSendMethod
     public $entities;
     public $disable_web_page_preview;
 
-    public function __construct(string $chat_id, string $text, string $parseMode = null)
+    public function __construct(int|string $chat_id, string $text, string $parse_mode = null)
     {
         $this->setChatId($chat_id);
         $this->setText($text);
-        switch ($parseMode) {
-            case 'HTML':
-                $this->setParseModeHTML();
-                break;
-            case 'Markdown':
-            case 'MarkdownV2':
-                $this->setParseModeMarkdown();
-                break;
-            default:
+        if ($parse_mode) {
+            $this->setParseMode($parse_mode);
         }
     }
 
@@ -45,9 +38,16 @@ class SendMessage extends AbstractSendMethod
         return $this;
     }
 
-    private function removeHtmlEntities(string $text)
+    public function setParseMode(string $parse_mode): static
     {
-        return str_replace(['&nbsp;', '&laquo;', '&raquo;', '&quot;', '&deg;'], [' ', '«', '»', '"', '°'], $text);
+        switch ($parse_mode) {
+            case 'Markdown':
+                $this->setParseModeMarkdown();
+                break;
+            default:
+                $this->parse_mode = $parse_mode;
+        }
+        return $this;
     }
 
     public function setParseModeMarkdown(): static
@@ -62,17 +62,11 @@ class SendMessage extends AbstractSendMethod
         return $this;
     }
 
-    public function setParseMode(string $parse_mode): static
-    {
-        $this->parse_mode = $parse_mode;
-        return $this;
-    }
-
     // public function setEntities(array|MessageEntity $entity) {}
 
-    public function setDisableWebPagePreview(bool $bool = true): static
+    public function setDisableWebPagePreview(bool $disable_web_page_preview = true): static
     {
-        $this->disable_web_page_preview = $bool;
+        $this->disable_web_page_preview = $disable_web_page_preview;
         return $this;
     }
 }
