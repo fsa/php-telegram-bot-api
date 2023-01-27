@@ -8,23 +8,26 @@ namespace FSA\Telegram;
 
 use CURLFile;
 
-class SendPhoto extends AbstractSendMethod
+class SendAudio extends AbstractSendMethod
 {
-    public $photo;
+    public $audio;
     public $caption;
     public $parse_mode;
     public $caption_entities;
-    public $has_spoiler;
+    public $duration;
+    public $performer;
+    public $title;
+    public $thumb;
 
-    public function __construct(int|string $chat_id, CURLFile|string $photo)
+    public function __construct(int|string $chat_id, CURLFile|string $audio)
     {
         $this->setChatId($chat_id);
-        $this->setPhoto($photo);
+        $this->setAudio($audio);
     }
 
-    public function setPhoto(CURLFile|string $photo): static
+    public function setAudio(CURLFile|string $audio): static
     {
-        $this->photo = $photo;
+        $this->audio = $audio;
         return $this;
     }
 
@@ -60,9 +63,27 @@ class SendPhoto extends AbstractSendMethod
 
     //TODO: setCaptionEntities
 
-    public function setHasSpoiler(bool $has_spoiler = true): static
+    public function setDuration(int $duration): static
     {
-        $this->has_spoiler = $has_spoiler;
+        $this->duration = $duration;
+        return $this;
+    }
+
+    public function setPerformer(string $performer): static
+    {
+        $this->performer = $this->removeHtmlEntities($performer);
+        return $this;
+    }
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $this->removeHtmlEntities($title);
+        return $this;
+    }
+
+    public function setThumb(CURLFile|string $thumb): static
+    {
+        $this->thumb = $thumb;
         return $this;
     }
 }
