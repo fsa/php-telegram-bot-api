@@ -6,15 +6,18 @@
 
 Дла методов Telegram Bot API созданы соответствующие классы. Отличие имени метода от имени класса в том, что имя класса начинается с заглавной буквы.
 
-Доступные методы API:
+Доступные через библиотеку методы API:
 
 * getFile;
 * getMe;
 * getUpdates;
 * getWebhookInfo;
+* sendAudio;
 * sendDice;
+* sendDocument;
 * sendLocation;
 * sendMessage;
+* sendPhoto;
 * sendSticker;
 * setWebhook.
 
@@ -22,6 +25,12 @@
 
 ```php
 $message = (new FSA\Telegram\SendDice($chat_id, 1))->setDisableNotification()->setProtectContent();
+```
+
+Если в запросе необходимо прикрепить файл, то сделать это можно с помощью `CURLFile`, в том числе через процедурный стиль:
+
+```php
+$file = curl_file_create(realpath('my_photo.jpg'));
 ```
 
 ## Выполнение запросов на сервер
