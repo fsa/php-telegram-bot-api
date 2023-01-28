@@ -61,7 +61,21 @@ class SendAudio extends AbstractSendMethod
         return $this;
     }
 
-    //TODO: setCaptionEntities
+    public function setCaptionEntities(array $caption_entities): static
+    {
+        $this->caption_entities = $caption_entities;
+        return $this;
+    }
+
+    public function addCaptionEntity(MessageEntity $caption_entity): static
+    {
+        if (!$this->caption_entities) {
+            $this->caption_entities = [$caption_entity];
+        } else {
+            $this->caption_entities[] = $caption_entity;
+        }
+        return $this;
+    }
 
     public function setDuration(int $duration): static
     {
