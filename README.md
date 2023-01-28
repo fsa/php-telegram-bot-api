@@ -12,6 +12,7 @@
 * getMe;
 * getUpdates;
 * getWebhookInfo;
+* sendAnimation;
 * sendAudio;
 * sendDice;
 * sendDocument;
