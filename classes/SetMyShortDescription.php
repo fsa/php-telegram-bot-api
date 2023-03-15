@@ -11,11 +11,6 @@ class SetMyShortDescription extends AbstractMethod
     public string $short_description;
     public string $language_code;
 
-    public function __construct(string $short_description)
-    {
-        $this->setShortDescription($short_description);
-    }
-
     public function setShortDescription(string $short_description): static
     {
         $this->short_description = $short_description;

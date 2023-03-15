@@ -10,11 +10,6 @@ class GetMyShortDescription extends AbstractMethod
 {
     public string $language_code;
 
-    public function __construct(string $language_code)
-    {
-        $this->setLanguageCode($language_code);
-    }
-
     public function setLanguageCode(string $language_code)
     {
         if (strlen($language_code) != 2) {
