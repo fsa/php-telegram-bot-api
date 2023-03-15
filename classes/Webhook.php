@@ -27,6 +27,11 @@ class Webhook
         return $this->json;
     }
 
+    public function verify(string $secret_token): bool
+    {
+        return filter_input(INPUT_SERVER, 'HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN') == $secret_token;
+    }
+
     public function replyJson(AbstractMethod $query): void
     {
         $query_string = $query->buildQuery();
