@@ -60,6 +60,6 @@ class AbstractSendMethod extends AbstractMethod
 
     protected function removeHtmlEntities(string $text)
     {
-        return str_replace(['&nbsp;', '&laquo;', '&raquo;', '&quot;', '&deg;'], [' ', '«', '»', '"', '°'], $text);
+        return html_entity_decode($text);
     }
 }
