@@ -42,7 +42,7 @@ class SetWebhook extends AbstractMethod
     public function setMaxConnections(int $max_connections): static
     {
         if ($max_connections < 1 or $max_connections > 100) {
-            throw new AppException('Max_connections - 1-100');
+            throw new TelegramException('Max_connections - 1-100');
         }
         $this->max_connections = $max_connections;
         return $this;

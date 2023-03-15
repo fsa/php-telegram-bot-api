@@ -44,7 +44,7 @@ class Query
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new AppException('Не удалось поучить данные для ' . $query->getActionName());
+            throw new TelegramException('Не удалось поучить данные для ' . $query->getActionName());
         }
         return json_decode($result);
     }
@@ -73,7 +73,7 @@ class Query
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new AppException('Не удалось поучить данные для ' . $query->getActionName());
+            throw new TelegramException('Не удалось поучить данные для ' . $query->getActionName());
         }
         return json_decode($result);
     }
@@ -91,7 +91,7 @@ class Query
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new AppException('Не удалось поучить данные для ' . $query->getActionName());
+            throw new TelegramException('Не удалось поучить данные для ' . $query->getActionName());
         }
         return json_decode($result);
     }

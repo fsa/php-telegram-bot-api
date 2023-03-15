@@ -19,7 +19,7 @@ class Helper
     {
         self::$config = $config;
         if (!isset($config['token'])) {
-            throw new AppException("Token required.");
+            throw new TelegramException("Token required.");
         }
         self::$query = new Query($config['token']);
         if (isset($config['proxy'])) {

@@ -47,7 +47,7 @@ class MessageEntity extends AbstractObject
                 $this->type = $type;
                 break;
             default:
-                throw new AppException('Неверное значение type');
+                throw new TelegramException('Неверное значение type');
         }
         return $this;
     }

@@ -13,7 +13,7 @@ class GetMyDescription extends AbstractMethod
     public function setLanguageCode(string $language_code)
     {
         if (strlen($language_code) != 2) {
-            throw new AppException('The language code must contain a two-letter ISO 639-1');
+            throw new TelegramException('The language code must contain a two-letter ISO 639-1');
         }
         $this->language_code = $language_code;
     }
