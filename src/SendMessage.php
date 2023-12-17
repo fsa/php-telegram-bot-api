@@ -13,10 +13,12 @@ class SendMessage extends AbstractSendMethod
     public $entities;
     public $disable_web_page_preview;
 
-    public function __construct(int|string $chat_id, string $text, string $parse_mode = null)
+    public function __construct(int|string $chat_id, string $text = null, string $parse_mode = null)
     {
         $this->setChatId($chat_id);
-        $this->setText($text);
+        if ($text) {
+            $this->setText($text);
+        }
         if ($parse_mode) {
             $this->setParseMode($parse_mode);
         }

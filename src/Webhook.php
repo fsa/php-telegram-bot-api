@@ -1,43 +1,63 @@
 <?php
 
 /**
- * Telegram Bot API 6.0
+ * Telegram Bot API
+ * Обработка webhook
  */
 
 namespace FSA\Telegram;
 
 class Webhook
 {
-    private $json;
+    private string $json;
 
-    public function __construct()
+    public function __construct(private ?string $secret = null)
     {
     }
 
-    public function getUpdate()
+    public function setSecret(?string $secret): static
     {
-        return json_decode(json: $this->getUpdateRaw(), flags: JSON_THROW_ON_ERROR);
+        $this->secret = $secret;
+
+        return $this;
     }
 
-    public function getUpdateRaw()
+    public function setUpdate(string $json): static
     {
-        if (is_null($this->json)) {
-            $this->json = file_get_contents('php://input');
-        }
+        $this->json = $json;
+
+        return $this;
+    }
+
+    public function getUpdate(): object
+    {
+        return json_decode(json: $this->json, flags: JSON_THROW_ON_ERROR);
+    }
+
+    public function getUpdateRaw(): string
+    {
         return $this->json;
     }
 
-    public function verify(string $secret_token): bool
+    /**
+     * @param $secret: header X_TELEGRAM_BOT_API_SECRET_TOKEN
+     */
+    public function verify(string $secret): static
     {
-        return filter_input(INPUT_SERVER, 'HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN') == $secret_token;
+        if (!$this->secret) {
+            throw new TelegramBotSecretException('Secret is not set');
+        }
+        if ($secret == $this->secret) {
+            throw new TelegramBotSecretException('Wrong secret');
+        };
+
+        return $this;
     }
 
-    public function replyJson(AbstractMethod $query): void
+    public function getReply(AbstractMethod $query): array
     {
         $query_string = $query->buildQuery();
         $query_string['method'] = $query->getActionName();
-        header('Content-Type: application/json');
-        echo json_encode($query_string, JSON_UNESCAPED_UNICODE);
-        exit;
+        return $query_string;
     }
 }

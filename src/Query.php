@@ -9,24 +9,27 @@ namespace FSA\Telegram;
 
 class Query
 {
-    protected $token;
-    protected $api_url = 'https://api.telegram.org';
-    protected $proxy;
+    protected string $token;
+    protected string $api_url = 'https://api.telegram.org';
+    protected string $proxy;
 
-    public function __construct(string $token, string $proxy = null)
+    public function __construct(string $token)
     {
         $this->token = $token;
-        $this->proxy = $proxy;
     }
 
-    public function setApiUrl(string $url)
+    public function setApiUrl(string $url): static
     {
         $this->api_url = $url;
+
+        return $this;
     }
 
-    public function setProxy(string $proxy)
+    public function setProxy(string $proxy): static
     {
         $this->proxy = $proxy;
+
+        return $this;
     }
 
     public function httpPost(AbstractMethod $query): object
