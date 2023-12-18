@@ -31,16 +31,23 @@ composer require fsa/telegram-bot-api
 * sendVideo;
 * setWebhook.
 
-Конструкторы соответствующих классов в качестве аргументов требуют соответствующие обязательные параметры. При установке необязательных аргументов можно использовать цепочки методов, например:
+Создать нужный запрос можно как с помощью класса TelegramBotApi вызвав соответствующий метод, так и непосредственно используя соовтетствующий класс. Методы и конструкторы классов в качестве аргументов требуют соответствующие обязательные параметры. При установке необязательных аргументов можно использовать цепочки методов, например:
 
 ```php
 $message = (new FSA\Telegram\SendDice($chat_id, 1))->setDisableNotification()->setProtectContent();
+```
+
+или
+
+```php
+$message = (new FSA\Telegram\TelegramBotApi)->sendDice($chat_id, 1)->setDisableNotification()->setProtectContent();
 ```
 
 Если в запросе необходимо прикрепить файл, то сделать это можно с помощью `CURLFile`, в том числе через процедурный стиль:
 
 ```php
 $file = curl_file_create(realpath('my_photo.jpg'));
+$message = (new FSA\Telegram\TelegramBotApi)->sendPhoto($chat_id, $file);
 ```
 
 ## Выполнение запросов на сервер
@@ -54,6 +61,14 @@ $query = new FSA\Telegram\Query('TOKEN');
 $message = new FSA\Telegram\SendMessage($chat_id, "Привет");
 // Передача запроса на сервер
 $query->httpPostJson($message);
+```
+
+При использовании фреймворков можно просто создать сервис. Например, для Symfony это может выглядеть так:
+
+```yaml
+    FSA\Telegram\Query:
+        bind:
+            $token: '%env(resolve:TELEGRAM_BOT_API_TOKEN)%'
 ```
 
 ## Работа с WebHook
@@ -71,15 +86,13 @@ $update = $webhook->getUpdateRaw();
 
 Получать данные запроса можно любое число раз. Оригинальный запрос сохраняется внутри класса и используется при последующих запросах.
 
-Ответ на WebHook может быть выполнен с помощью метода replyJson().
+Ответ на WebHook может быть получен с помощью метода `getReply()`. Его необходимо передать в формате JSON. Например, в контроллере Symfony:
 
 ```php
 $webhook = new FSA\Telegram\Webhook();
-$reply=new \FSA\Telegram\SendMessage($chat_id, "Привет");
-$webhook->replyJson($reply);
+$reply=(new \FSA\Telegram\TelegramBotApi())->SendMessage($chat_id, "Привет");
+$this->json($webhook->getReply($reply))->setEncodingOptions(JSON_UNESCAPED_UNICODE);
 ```
-
-Отправить ответ можно только один раз. После отправки ответа работа скрипта будет остановлена.
 
 ## Сущности Update
 

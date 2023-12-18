@@ -19,7 +19,7 @@ class InlineKeyboardButton extends AbstractObject
     public $callback_game;
     public $pay;
 
-    public function __construct($text)
+    public function __construct(string $text)
     {
         $this->text = $text;
     }
