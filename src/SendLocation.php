@@ -48,7 +48,7 @@ class SendLocation extends AbstractSendMethod
     public function setHeading(int $heading): static
     {
         if ($heading < 1 or $heading > 360) {
-            throw new TelegramException('Heading must be between 1 and 360.');
+            throw new TelegramBotParameterException('Heading must be between 1 and 360.');
         }
         $this->heading = $heading;
         return $this;
@@ -57,7 +57,7 @@ class SendLocation extends AbstractSendMethod
     public function setProximityAlertRadius(int $proximity_alert_radius): static
     {
         if ($proximity_alert_radius < 1 or $proximity_alert_radius > 100000) {
-            throw new TelegramException('proximity_alert_radius must be between 1 and 100000.');
+            throw new TelegramBotParameterException('proximity_alert_radius must be between 1 and 100000.');
         }
         $this->proximity_alert_radius = $proximity_alert_radius;
         return $this;

@@ -7,7 +7,7 @@
 
 namespace FSA\Telegram;
 
-class Webhook
+class TelegramBotWebhook
 {
     private string $json;
 

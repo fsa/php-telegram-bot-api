@@ -1,6 +1,26 @@
-# Библиотека PHP для работы с Telegram Bot API
+# Обёртка для Telegram Bot API на PHP
 
-Данная библиотека может использоваться для упрощения взаимодействия с Telegram Bot API - <https://core.telegram.org/bots/api>. С её помощью можно формировать запросы к API и передавать на сервер. Кроме этого, библиотека поддерживает возможность использовать Webhook.
+Данная библиотека может использоваться для упрощения взаимодействия с Telegram Bot API - <https://core.telegram.org/bots/api>. С её помощью можно формировать запросы к API и передавать на сервер, а также поддерживает возможность использовать Webhook.
+
+Данная обёртка может работать как в простых проектах на PHP, так и в составе фреймворков. При использовании библиотеки с фреймворком необходимо создать следующие сервисы (по мере необходимости):
+
+1. TelegramBotApi -- генератор объектов для запроса к API;
+2. TelegramBotQuery -- сервис по передаче запросов к API;
+3. TelegramBotWebhook -- вспомогательный сервис для обработки Webhook.
+
+Пример для Symfony, файл `config/services.yaml`:
+
+```yaml
+    FSA\Telegram\TelegramBotApi:
+
+    FSA\Telegram\TelegramBotQuery:
+        bind:
+            $token: '%env(resolve:TELEGRAM_BOT_API_TOKEN)%'
+
+    FSA\Telegram\TelegramBotWebhook:
+        bind:
+            $token: '%env(resolve:TELEGRAM_BOT_API_SECRET)%'
+```
 
 ## Установка
 
@@ -31,7 +51,7 @@ composer require fsa/telegram-bot-api
 * sendVideo;
 * setWebhook.
 
-Создать нужный запрос можно как с помощью класса TelegramBotApi вызвав соответствующий метод, так и непосредственно используя соовтетствующий класс. Методы и конструкторы классов в качестве аргументов требуют соответствующие обязательные параметры. При установке необязательных аргументов можно использовать цепочки методов, например:
+Создать нужный запрос можно как с помощью класса TelegramBotApi вызвав соответствующий метод, так и непосредственно используя соответствующий класс. Методы и конструкторы классов в качестве аргументов требуют соответствующие обязательные параметры для выбранного запроса. Для установки необязательных аргументов можно использовать цепочки методов, например:
 
 ```php
 $message = (new FSA\Telegram\SendDice($chat_id, 1))->setDisableNotification()->setProtectContent();
@@ -52,29 +72,27 @@ $message = (new FSA\Telegram\TelegramBotApi)->sendPhoto($chat_id, $file);
 
 ## Выполнение запросов на сервер
 
-Запросы на сервер выполняются с помощью методов `httpGet()`, `httpPost()` или `httpPostJson()`. При этом необходимо установить токен доступа в конструкторе `FSA\Telegram\Query`.
+Запросы на сервер выполняются с помощью методов `httpGet()`, `httpPost()` или `httpPostJson()`. При этом необходимо установить токен доступа в конструкторе `FSA\Telegram\TelegramBotQuery`.
 
 ```php
 // Создание нового запроса
-$query = new FSA\Telegram\Query('TOKEN');
+$query = new FSA\Telegram\TelegramBotQuery('TOKEN');
 // Создание метода sendMessage
 $message = new FSA\Telegram\SendMessage($chat_id, "Привет");
 // Передача запроса на сервер
-$query->httpPostJson($message);
+$telegram_bot_query->httpPostJson($message);
 ```
 
-При использовании фреймворков можно просто создать сервис. Например, для Symfony это может выглядеть так:
+Или при использовании контроллера фреймворка, который передаёт в `$telegramBotApi` сервис `TelegramBotApi`, а в `$telegramBotQuery` -- `TelegramBotQuery`:
 
-```yaml
-    FSA\Telegram\Query:
-        bind:
-            $token: '%env(resolve:TELEGRAM_BOT_API_TOKEN)%'
+```php
+$telegramBotQuery->httpPostJson($telegramBotApi->sendMessage($chat_id, 'Привет'));
 ```
 
 ## Работа с WebHook
 
 ```php
-$webhook = new FSA\Telegram\Webhook;
+$webhook = new FSA\Telegram\TelegramBotWebhook;
 $update = $webhook->getUpdate();
 ```
 
@@ -86,12 +104,10 @@ $update = $webhook->getUpdateRaw();
 
 Получать данные запроса можно любое число раз. Оригинальный запрос сохраняется внутри класса и используется при последующих запросах.
 
-Ответ на WebHook может быть получен с помощью метода `getReply()`. Его необходимо передать в формате JSON. Например, в контроллере Symfony:
+Ответ на WebHook может быть получен с помощью метода `getReply()`. Его необходимо передать в формате JSON просто выводя на экран и используя соответствующие HTTP заголовки или, при использовании фреймворков, например, Symfony, в контроллере, при использовании сервисов:
 
 ```php
-$webhook = new FSA\Telegram\Webhook();
-$reply=(new \FSA\Telegram\TelegramBotApi())->SendMessage($chat_id, "Привет");
-$this->json($webhook->getReply($reply))->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+$this->json($telegramBotWebhook->getReply($telegramBotApi->sendMessage($chat_id, "Привет")))->setEncodingOptions(JSON_UNESCAPED_UNICODE);
 ```
 
 ## Сущности Update
