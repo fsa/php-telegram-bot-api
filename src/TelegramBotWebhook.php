@@ -47,7 +47,7 @@ class TelegramBotWebhook
         if (!$this->secret) {
             throw new TelegramBotSecretException('Secret is not set');
         }
-        if ($secret == $this->secret) {
+        if ($secret != $this->secret) {
             throw new TelegramBotSecretException('Wrong secret');
         };
 
