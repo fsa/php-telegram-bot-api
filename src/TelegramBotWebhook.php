@@ -42,7 +42,7 @@ class TelegramBotWebhook
     /**
      * @param $secret: header X_TELEGRAM_BOT_API_SECRET_TOKEN
      */
-    public function verify(string $secret): static
+    public function verify(?string $secret): static
     {
         if (!$this->secret) {
             throw new TelegramBotSecretException('Secret is not set');
