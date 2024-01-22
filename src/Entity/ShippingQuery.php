@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ShippingQuery extends AbstractEntity
+class ShippingQuery
 {
-
     public string $id;
     public User $from;
     public string $invoice_payload;

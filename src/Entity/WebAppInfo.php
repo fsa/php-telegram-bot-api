@@ -6,8 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class WebAppInfo extends AbstractEntity
+class WebAppInfo
 {
-
     public string $url;
 }

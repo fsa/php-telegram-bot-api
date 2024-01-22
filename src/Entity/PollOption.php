@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class PollOption extends AbstractEntity {
-
+class PollOption
+{
     public string $text;
     public int $voter_count;
-
 }

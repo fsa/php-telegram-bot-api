@@ -6,8 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class MessageId extends AbstractEntity {
-
+class MessageId
+{
     public int $message_id;
-
 }

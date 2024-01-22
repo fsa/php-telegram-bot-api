@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class Dice extends AbstractEntity {
-
+class Dice
+{
     public string $emoji;
     public int $value;
-
 }

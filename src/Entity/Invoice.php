@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class Invoice extends AbstractEntity
+class Invoice
 {
-
     public string $title;
     public string $description;
     public string $start_parameter;

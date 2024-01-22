@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class Animation extends AbstractEntity
+class Animation
 {
-
     public string $file_id;
     public string $file_unique_id;
     public int $width;

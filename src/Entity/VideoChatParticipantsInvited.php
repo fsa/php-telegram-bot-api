@@ -6,22 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class VideoChatParticipantsInvited extends AbstractEntity
+class VideoChatParticipantsInvited
 {
-
+    /**
+     * @Type("array<User>")
+     */
     public array $users;
-
-    protected function parseArray($key, $value)
-    {
-        $result = [];
-        switch ($key) {
-            case 'users':
-                foreach ($value as $entity) {
-                    $result[] = new User($entity);
-                }
-                break;
-        }
-        return $result;
-    }
-
 }

@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class Location extends AbstractEntity
+class Location
 {
-
     public float $longitude;
     public float $latitude;
     public ?float $horizontal_accuracy = null;

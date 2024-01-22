@@ -6,12 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class InlineQuery extends AbstractEntity {
-
+class InlineQuery
+{
     public string $id;
     public User $from;
-    public ?Location $location=null;
+    public ?Location $location = null;
     public string $query;
     public string $offset;
-
 }

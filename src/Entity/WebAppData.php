@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class WebAppData extends AbstractEntity
+class WebAppData
 {
-
     public string $data;
     public string $button_text;
 }

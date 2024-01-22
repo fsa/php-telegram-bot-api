@@ -6,7 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatMember extends AbstractEntity {
+class ChatMember
+{
     //TODO: Разные типы пользователей
     public string $status;
     public User $user;
@@ -28,5 +29,4 @@ class ChatMember extends AbstractEntity {
     public ?bool $can_send_other_messages;
     public ?bool $can_add_web_page_previews;
     public ?int $until_date;
-
 }

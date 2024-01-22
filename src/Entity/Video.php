@@ -6,16 +6,15 @@
 
 namespace FSA\Telegram\Entity;
 
-class Video extends AbstractEntity {
-
+class Video
+{
     public string $file_id;
     public string $file_unique_id;
     public int $width;
     public int $height;
     public int $duration;
-    public ?PhotoSize $thumb=null;
-    public ?string $file_name=null;
-    public ?string $mime_type=null;
-    public ?int $file_size=null;
-
+    public ?PhotoSize $thumb = null;
+    public ?string $file_name = null;
+    public ?string $mime_type = null;
+    public ?int $file_size = null;
 }

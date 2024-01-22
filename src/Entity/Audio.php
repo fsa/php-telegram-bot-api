@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class Audio extends AbstractEntity
+class Audio
 {
-
     public string $file_id;
     public string $file_unique_id;
     public int $duration;

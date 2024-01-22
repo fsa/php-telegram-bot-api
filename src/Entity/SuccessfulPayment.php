@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class SuccessfulPayment extends AbstractEntity
+class SuccessfulPayment
 {
-
     public string $currency;
     public int $total_amount;
     public string $invoice_payload;

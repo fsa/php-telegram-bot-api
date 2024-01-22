@@ -6,10 +6,9 @@
 
 namespace FSA\Telegram\Entity;
 
-class PollAnswer extends AbstractEntity {
-
+class PollAnswer
+{
     public string $poll_id;
     public User $user;
     public array $option_ids;
-
 }

@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class PassportData extends AbstractEntity
+class PassportData
 {
-
     public array $data;
     public ?EncryptedCredentials $credentials;
 }

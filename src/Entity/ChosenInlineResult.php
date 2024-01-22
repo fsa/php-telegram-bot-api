@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChosenInlineResult extends AbstractEntity
+class ChosenInlineResult
 {
-
     public string $result_id;
     public User $from;
     public ?Location $location;

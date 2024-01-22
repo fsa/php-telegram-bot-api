@@ -6,13 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class MessageEntity extends AbstractEntity {
-
+class MessageEntity
+{
     public string $type;
     public int $offset;
     public int $length;
-    public ?string $url=null;
-    public ?User $user=null;
-    public ?string $language=null;
-
+    public ?string $url = null;
+    public ?User $user = null;
+    public ?string $language = null;
 }

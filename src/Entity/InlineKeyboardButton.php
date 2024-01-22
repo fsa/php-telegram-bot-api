@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class InlineKeyboardButton extends AbstractEntity
+class InlineKeyboardButton
 {
     public string $text;
     public ?string $url;

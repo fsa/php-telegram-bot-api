@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class Game extends AbstractEntity
+class Game
 {
-
     public string $title;
     public string $description;
     public array $photo;

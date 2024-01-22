@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ForceReply extends AbstractEntity
+class ForceReply
 {
-
     public bool $force_reply;
     public ?string $input_field_placeholder;
     public ?bool $selective = null;

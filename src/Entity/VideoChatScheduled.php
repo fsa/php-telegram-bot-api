@@ -6,8 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class VideoChatScheduled extends AbstractEntity
+class VideoChatScheduled
 {
-
     public int $start_date;
 }

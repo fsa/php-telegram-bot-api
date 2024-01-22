@@ -6,8 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class MessageAutoDeleteTimerChanged extends AbstractEntity
+class MessageAutoDeleteTimerChanged
 {
-
     public int $message_auto_delete_time;
 }

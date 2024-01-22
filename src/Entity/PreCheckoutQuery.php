@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class PreCheckoutQuery extends AbstractEntity
+class PreCheckoutQuery
 {
-
     public string $id;
     public User $from;
     public string $currency;

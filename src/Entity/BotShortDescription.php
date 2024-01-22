@@ -6,8 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class BotShortDescription extends AbstractEntity
+class BotShortDescription
 {
-
     public string $short_description;
 }

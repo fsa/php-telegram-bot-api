@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ResponseParameters extends AbstractEntity
+class ResponseParameters
 {
-
     public ?int $migrate_to_chat_id;
     public ?int $retry_after;
 }

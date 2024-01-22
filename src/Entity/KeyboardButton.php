@@ -6,7 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class KeyboardButton extends AbstractEntity
+class KeyboardButton
 {
     public string $text;
     public ?bool $request_contact;

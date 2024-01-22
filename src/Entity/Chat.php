@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class Chat extends AbstractEntity
+class Chat
 {
-
     public int $id;
     public string $type;
     public ?string $title;

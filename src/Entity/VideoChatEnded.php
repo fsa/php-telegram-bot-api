@@ -6,8 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class VideoChatEnded extends AbstractEntity
+class VideoChatEnded
 {
-
     public int $duration;
 }

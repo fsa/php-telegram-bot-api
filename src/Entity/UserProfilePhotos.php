@@ -6,24 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class UserProfilePhotos extends AbstractEntity {
-
+class UserProfilePhotos
+{
     public int $total_count;
+    /**
+     * @Type("array<PhotoSize>")
+     */
     public array $photos;
-
-    protected function parseArray($key, $value) {
-        if($key!='photos') {
-            return $value;
-        }
-        $result=[];
-        $i=0;
-        foreach ($value as $row) {
-            foreach ($row as $entity) {
-                $result[$i][]=new PhotoSize($entity);
-            }
-            $i++;
-        }
-        return $result;
-    }
-
 }

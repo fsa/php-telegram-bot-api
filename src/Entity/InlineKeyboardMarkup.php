@@ -6,8 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class InlineKeyboardMarkup extends AbstractEntity
+class InlineKeyboardMarkup
 {
-
     public array $inline_keyboard = [];
 }

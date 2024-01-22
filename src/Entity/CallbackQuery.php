@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class CallbackQuery extends AbstractEntity
+class CallbackQuery
 {
-
     public string $id;
     public User $from;
     public ?Message $message;

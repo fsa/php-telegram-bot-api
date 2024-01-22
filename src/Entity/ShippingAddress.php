@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ShippingAddress extends AbstractEntity
+class ShippingAddress
 {
-
     public string $country_code;
     public string $state;
     public string $city;

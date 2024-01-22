@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class Sticker extends AbstractEntity
+class Sticker
 {
-
     public string $file_id;
     public string $file_unique_id;
     public string $type;

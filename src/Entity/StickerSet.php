@@ -6,25 +6,15 @@
 
 namespace FSA\Telegram\Entity;
 
-class StickerSet extends AbstractEntity {
-
+class StickerSet
+{
     public string $name;
     public string $title;
     public bool $is_animated;
     public bool $contains_masks;
+    /**
+     * @Type("array<Sticker>")
+     */
     public array $stickers;
     public ?PhotoSize $thumb;
-
-    protected function parseArray($key, $value) {
-        $result=[];
-        switch ($key) {
-            case 'thumb':
-                foreach ($value as $entity) {
-                    $result[]=new Sticker($entity);
-                }
-                break;
-        }
-        return $result;
-    }
-
 }

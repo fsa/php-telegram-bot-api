@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class OrderInfo extends AbstractEntity
+class OrderInfo
 {
-
     public ?string $name;
     public ?string $phone_number;
     public ?string $email;

@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatPermissions extends AbstractEntity
+class ChatPermissions
 {
-
     public ?bool $can_send_messages;
     public ?bool $can_send_media_messages;
     public ?bool $can_send_polls;

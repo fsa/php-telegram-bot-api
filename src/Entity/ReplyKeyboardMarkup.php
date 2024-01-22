@@ -6,11 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class ReplyKeyboardMarkup extends AbstractEntity
+class ReplyKeyboardMarkup
 {
-
     public array $keyboard;
-    public ?bool $is_persistent; 
+    public ?bool $is_persistent;
     public ?bool $resize_keyboard = null;
     public ?bool $one_time_keyboard = null;
     public ?bool $selective = null;

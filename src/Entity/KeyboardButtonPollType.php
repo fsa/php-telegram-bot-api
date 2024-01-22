@@ -6,8 +6,7 @@
 
 namespace FSA\Telegram\Entity;
 
-class KeyboardButtonPollType extends AbstractEntity
+class KeyboardButtonPollType
 {
-
     public ?string $type;
 }

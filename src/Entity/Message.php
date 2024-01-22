@@ -6,11 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class Message extends AbstractEntity {
-
+class Message
+{
     public int $message_id;
     public ?int $message_thread_id;
-    public ?User $from=null;
+    public ?User $from = null;
     public Chat $chat;
     public int $date;
     public ?User $forward_from;
@@ -28,16 +28,25 @@ class Message extends AbstractEntity {
     public ?string $media_group_id;
     public ?string $author_signature;
     public ?string $text;
+    /**
+     * @Type("array<MessageEntity>")
+     */
     public ?array $entities;
     public ?Animation $animation;
     public ?Audio $audio;
     public ?Document $document;
+    /**
+     * @Type("array<PhotoSize>")
+     */
     public ?array $photo;
     public ?Sticker $sticker;
     public ?Video $video;
     public ?VideoNote $video_note;
     public ?Voice $voice;
     public ?string $caption;
+    /**
+     * @Type("array<MessageEntity>")
+     */
     public ?array $caption_entities;
     public ?bool $has_media_spoiler;
     public ?Contact $contact;
@@ -46,9 +55,15 @@ class Message extends AbstractEntity {
     public ?Poll $poll;
     public ?Venue $venue;
     public ?Location $location;
+    /**
+     * @Type("array<User>")
+     */
     public ?array $new_chat_members;
     public ?User $left_chat_member;
     public ?string $new_chat_title;
+    /**
+     * @Type("array<PhotoSize>")
+     */
     public ?array $new_chat_photo;
     public ?bool $delete_chat_photo;
     public ?bool $group_chat_created;
@@ -76,38 +91,4 @@ class Message extends AbstractEntity {
     public ?VideoChatParticipantsInvited $video_chat_participants_invited;
     public ?WebAppData $web_app_data;
     public ?InlineKeyboardMarkup $reply_markup;
-
-    protected function parseArray($key, $value) {
-        $result=[];
-        switch ($key) {
-            case 'entities':
-                foreach ($value as $entity) {
-                    $result[]=new MessageEntity($entity);
-                }
-                break;
-            case 'photo':
-                foreach ($value as $entity) {
-                    $result[]=new PhotoSize($entity);
-                }
-                break;
-            case 'caption_entities':
-                foreach ($value as $entity) {
-                    $result[]=new MessageEntity($entity);
-                }
-                break;
-            case 'new_chat_members':
-                foreach ($value as $entity) {
-                    $result[]=new User($entity);
-                }
-                break;
-            case 'new_chat_photo':
-                foreach ($value as $entity) {
-                    $result[]=new PhotoSize($entity);
-                }
-                break;
-            default:
-        }
-        return $result;
-    }
-
 }

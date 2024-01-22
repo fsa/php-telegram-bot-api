@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatLocation extends AbstractEntity
+class ChatLocation
 {
-
     public Location $location;
     public string $address;
 }

@@ -6,9 +6,8 @@
 
 namespace FSA\Telegram\Entity;
 
-class ReplyKeyboardRemove extends AbstractEntity
+class ReplyKeyboardRemove
 {
-
     public bool $remove_keyboard = true;
     public ?bool $selective = null;
 }
