@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 6.4
+ * Telegram Bot API 7.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -13,6 +13,6 @@ class PreCheckoutQuery
     public string $currency;
     public int $total_amount;
     public string $invoice_payload;
-    public ?string $shipping_option_id;
-    public ?OrderInfo $order_info;
+    public ?string $shipping_option_id = null;
+    public ?OrderInfo $order_info = null;
 }

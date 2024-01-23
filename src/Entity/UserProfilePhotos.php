@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 7.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -10,7 +10,7 @@ class UserProfilePhotos
 {
     public int $total_count;
     /**
-     * @Type("array<PhotoSize>")
+     * @Type("array<array<PhotoSize>>")
      */
     public array $photos;
 }

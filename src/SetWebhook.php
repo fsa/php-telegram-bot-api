@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 6.4
+ * Telegram Bot API 7.0
  */
 
 namespace FSA\Telegram;
@@ -24,18 +24,21 @@ class SetWebhook extends AbstractMethod
     public function setUrl(string $url): static
     {
         $this->url = $url;
+
         return $this;
     }
 
     public function setCertificate($certificate): static
     {
         $this->certificate = $certificate;
+
         return $this;
     }
 
     public function setIpAddress(string $ip_address): static
     {
         $this->ip_address = $ip_address;
+
         return $this;
     }
 
@@ -45,24 +48,28 @@ class SetWebhook extends AbstractMethod
             throw new TelegramBotParameterException('Max_connections - 1-100');
         }
         $this->max_connections = $max_connections;
+
         return $this;
     }
 
     public function setAllowedUpdates(string|array $allowed_updates): static
     {
         $this->allowed_updates = $allowed_updates;
+
         return $this;
     }
 
     public function setDropPendingUpdates(bool $drop_pending_updates): static
     {
         $this->drop_pending_updates = $drop_pending_updates;
+
         return $this;
     }
 
     public function setSecretToken(string $secret_token)
     {
         $this->secret_token = $secret_token;
+
         return $this;
     }
 }

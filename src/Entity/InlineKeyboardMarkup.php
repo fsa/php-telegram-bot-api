@@ -8,5 +8,8 @@ namespace FSA\Telegram\Entity;
 
 class InlineKeyboardMarkup
 {
-    public array $inline_keyboard = [];
+    /**
+     * @Type("array<array<InlineKeyboardButton>>")
+     */
+    public array $inline_keyboard;
 }

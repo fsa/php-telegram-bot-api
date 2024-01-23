@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 6.4
+ * Telegram Bot API 7.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -13,8 +13,8 @@ class Animation
     public int $width;
     public int $height;
     public int $duration;
-    public ?PhotoSize $thumb;
-    public ?string $file_name;
-    public ?string $mime_type;
-    public ?int $file_size;
+    public ?PhotoSize $thumb = null;
+    public ?string $file_name = null;
+    public ?string $mime_type = null;
+    public ?int $file_size = null;
 }

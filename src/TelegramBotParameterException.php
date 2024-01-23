@@ -2,6 +2,6 @@
 
 namespace FSA\Telegram;
 
-class TelegramBotParameterException extends \Exception
+class TelegramBotParameterException extends \DomainException
 {
 }

@@ -8,6 +8,9 @@ namespace FSA\Telegram\Entity;
 
 class PassportData
 {
+    /**
+     * @Type("array<EncryptedPassportElement>")
+     */
     public array $data;
-    public ?EncryptedCredentials $credentials;
+    public ?EncryptedCredentials $credentials = null;
 }

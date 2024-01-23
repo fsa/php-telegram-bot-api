@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 7.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -14,6 +14,7 @@ class WebhookInfo
     public ?string $ip_address = null;
     public ?int $last_error_date = null;
     public ?string $last_error_message = null;
+    public ?int $last_synchronization_error_date = null;
     public ?int $max_connections = null;
     public ?array $allowed_updates = null;
 }

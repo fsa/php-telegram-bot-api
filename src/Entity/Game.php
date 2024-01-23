@@ -10,8 +10,14 @@ class Game
 {
     public string $title;
     public string $description;
+    /**
+     * @Type("array<PhotoSize>")
+     */
     public array $photo;
-    public ?string $text;
-    public ?array $text_entities;
-    public ?Animation $animation;
+    public ?string $text = null;
+    /**
+     * @Type("array<MessageEntity>")
+     */
+    public ?array $text_entities = null;
+    public ?Animation $animation = null;
 }

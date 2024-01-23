@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 5.0
+ * Telegram Bot API 7.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -12,6 +12,6 @@ class VideoNote
     public string $file_unique_id;
     public int $length;
     public int $duration;
-    public ?PhotoSize $thumb;
-    public ?int $file_size;
+    public ?PhotoSize $thumb = null;
+    public ?int $file_size = null;
 }
