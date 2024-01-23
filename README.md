@@ -92,11 +92,13 @@ $telegramBotQuery->httpPostJson($telegramBotApi->sendMessage($chat_id, 'Прив
 ## Работа с WebHook
 
 ```php
-$webhook = new FSA\Telegram\TelegramBotWebhook;
+$webhook = new FSA\Telegram\TelegramBotWebhook('SECRET');
 $update = $webhook->getUpdate();
 ```
 
-Данные можно получить в сыром виде:
+Указывать значение `SECRET` необходимо, если вы хотите проверить заголовок `X-Telegram-Bot-Api-Secret-Token` в запросах от сервера.
+
+Данные можно получить в сыром виде, в виде строки:
 
 ```php
 $update = $webhook->getUpdateRaw();
@@ -112,18 +114,11 @@ $this->json($telegramBotWebhook->getReply($telegramBotApi->sendMessage($chat_id,
 
 ## Сущности Update
 
-При необходимости Update можем быть разобран на сущности. Все необходимые сущности собраны в пространстве имён `Entity`.
+При необходимости Update можем быть разобран на сущности с помощью `symfony/serializer` или пакета с аналогичным функционалом. Все необходимые сущности собраны в пространстве имён `Entity`.
 
 ```php
 $webhook = new FSA\Telegram\Webhook;
-$update = new FSA\Telegram\Entity\Update($webhook->getUpdate());
+$update = $serializer->deserialize($webhook->getUpdateRaw(), FSA\Telegram\Entity\Update::class, 'json');
 ```
 
-Операция разбора всего Update выполняется довольно медленно, поэтому можно обойтись разбором только нужных частей, например, `User`, для использования в `MessageEntity`:
-
-```php
-$user = new FSA\Telegram\Entity\User($update->callback_query->message->from);
-$message_entity->setUser($user);
-```
-
-Также можно использовать классы из пространства имён `Entity` в IDE для формирования подсказок без непосредственного использования.
+Также, можно использовать классы из пространства имён `Entity` в IDE для формирования подсказок без непосредственного использования.
