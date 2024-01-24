@@ -76,7 +76,7 @@ $message = (new FSA\Telegram\TelegramBotApi)->sendPhoto($chat_id, $file);
 
 ```php
 // Создание нового запроса
-$query = new FSA\Telegram\TelegramBotQuery('TOKEN');
+$telegram_bot_query = new FSA\Telegram\TelegramBotQuery('TOKEN');
 // Создание метода sendMessage
 $message = new FSA\Telegram\SendMessage($chat_id, "Привет");
 // Передача запроса на сервер
