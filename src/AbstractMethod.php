@@ -1,12 +1,8 @@
 <?php
 
-/**
- * Telegram Bot API 6.4
- */
-
 namespace FSA\Telegram;
 
-abstract class AbstractMethod
+abstract class AbstractMethod implements TelegramBotMethodInterface
 {
     public function getActionName(): string
     {
