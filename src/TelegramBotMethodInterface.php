@@ -4,6 +4,7 @@ namespace FSA\Telegram;
 
 interface TelegramBotMethodInterface
 {
-    public function getActionName(): string;
-    public function buildQuery(): array;
+    public function getMethodName(): string;
+    public function getRequestParameters(): array;
+    public function getWebhookResponse(): array;
 }

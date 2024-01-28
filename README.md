@@ -89,11 +89,19 @@ $telegram_bot_query->httpPostJson($message);
 $telegramBotQuery->httpPostJson($telegramBotApi->sendMessage($chat_id, 'Привет'));
 ```
 
+Любой объект для методов API реализует интерфейс `TelegramBotMethodInterface`:
+
+* `getMethodName()` — позволяет получить имя метода API;
+* `getRequestParameters()` — параметры запроса в виде массива;
+* `getWebhookResponse()` — получить массив для формирования ответа на `Webhook`.
+
 ## Работа с WebHook
+
+Использование `TelegramBotWebhook` не обязательно. Его можно использовать для хранения текущего `Update`, его декодирования и для проверки секретного токена.
 
 ```php
 $webhook = new FSA\Telegram\TelegramBotWebhook('SECRET');
-$update = $webhook->getUpdate();
+$update = $webhook->verify($request->headers->get('X-Telegram-Bot-Api-Secret-Token'))->setUpdate($request->getContent())->getDecodedUpdate();
 ```
 
 Указывать значение `SECRET` необходимо, если вы хотите проверить заголовок `X-Telegram-Bot-Api-Secret-Token` в запросах от сервера.
@@ -101,15 +109,15 @@ $update = $webhook->getUpdate();
 Данные можно получить в сыром виде, в виде строки:
 
 ```php
-$update = $webhook->getUpdateRaw();
+$update = $webhook->getUpdate();
 ```
 
-Получать данные запроса можно любое число раз. Оригинальный запрос сохраняется внутри класса и используется при последующих запросах.
+Получать данные запроса можно любое число раз. Оригинальный запрос сохраняется внутри класса.
 
-Ответ на WebHook может быть получен с помощью метода `getReply()`. Его необходимо передать в формате JSON просто выводя на экран и используя соответствующие HTTP заголовки или, при использовании фреймворков, например, Symfony, в контроллере, при использовании сервисов:
+Ответ на WebHook может быть получен с помощью метода `getWebhookResponse()` любого метода API:
 
 ```php
-$this->json($telegramBotWebhook->getReply($telegramBotApi->sendMessage($chat_id, "Привет")))->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+$this->json($telegramBotApi->sendMessage($chat_id, "Привет")->getWebhookResponse())->setEncodingOptions(JSON_UNESCAPED_UNICODE);
 ```
 
 ## Сущности Update

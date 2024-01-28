@@ -29,14 +29,14 @@ class TelegramBotWebhook
         return $this;
     }
 
-    public function getUpdate(): object
-    {
-        return json_decode(json: $this->json, flags: JSON_THROW_ON_ERROR);
-    }
-
-    public function getUpdateRaw(): string
+    public function getUpdate(): string
     {
         return $this->json;
+    }
+
+    public function getDecodedUpdate(): object
+    {
+        return json_decode(json: $this->json, flags: JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -52,12 +52,5 @@ class TelegramBotWebhook
         };
 
         return $this;
-    }
-
-    public function getReply(AbstractMethod $query): array
-    {
-        $query_string = $query->buildQuery();
-        $query_string['method'] = $query->getActionName();
-        return $query_string;
     }
 }
