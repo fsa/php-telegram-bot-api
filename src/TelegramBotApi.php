@@ -56,7 +56,7 @@ class TelegramBotApi
         return new InlineKeyboardButton($text);
     }
 
-    public function InlineKeyboardMarkup(array $buttons): InlineKeyboardMarkup
+    public function InlineKeyboardMarkup(array $buttons = null): InlineKeyboardMarkup
     {
         return new InlineKeyboardMarkup($buttons);
     }
