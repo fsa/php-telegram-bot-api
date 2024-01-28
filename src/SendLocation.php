@@ -21,11 +21,6 @@ class SendLocation extends AbstractSendMethod
         $this->setLocation($latitude, $longitude);
     }
 
-    public function getActionName(): string
-    {
-        return 'sendLocation';
-    }
-
     public function setLocation(float $latitude, float $longitude): static
     {
         $this->latitude = $latitude;

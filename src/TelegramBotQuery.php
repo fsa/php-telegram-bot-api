@@ -32,10 +32,10 @@ class TelegramBotQuery
         return $this;
     }
 
-    public function httpPost(AbstractMethod $query): object
+    public function httpPost(TelegramBotMethodInterface $query): object
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getActionName());
+        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName());
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -43,20 +43,20 @@ class TelegramBotQuery
             curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
         }
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $query->buildQuery());
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $query->getRequestParameters());
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getActionName());
+            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
         }
         return json_decode($result);
     }
 
-    public function httpPostJson(AbstractMethod $query): object
+    public function httpPostJson(TelegramBotMethodInterface $query): object
     {
-        $query_string = json_encode($query->buildQuery(), JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
+        $query_string = json_encode($query->getRequestParameters(), JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getActionName());
+        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName());
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -76,15 +76,15 @@ class TelegramBotQuery
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getActionName());
+            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
         }
         return json_decode($result);
     }
 
-    public function httpGet(AbstractMethod $query): object
+    public function httpGet(TelegramBotMethodInterface $query): object
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getActionName() . '?' . http_build_query($query->buildQuery()));
+        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName() . '?' . http_build_query($query->getRequestParameters()));
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -94,7 +94,7 @@ class TelegramBotQuery
         $result = curl_exec($ch);
         curl_close($ch);
         if ($result === false) {
-            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getActionName());
+            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
         }
         return json_decode($result);
     }
