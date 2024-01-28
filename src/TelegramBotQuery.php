@@ -9,13 +9,11 @@ namespace FSA\Telegram;
 
 class TelegramBotQuery
 {
-    protected string $token;
-    protected string $api_url = 'https://api.telegram.org';
-    protected string $proxy;
-
-    public function __construct(string $token)
-    {
-        $this->token = $token;
+    public function __construct(
+        protected string $token,
+        protected ?string $proxy = null,
+        protected string $api_url = 'https://api.telegram.org'
+    ) {
     }
 
     public function setApiUrl(string $url): static
@@ -49,6 +47,7 @@ class TelegramBotQuery
         if ($result === false) {
             throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
         }
+
         return json_decode($result);
     }
 
@@ -78,6 +77,7 @@ class TelegramBotQuery
         if ($result === false) {
             throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
         }
+
         return json_decode($result);
     }
 
@@ -96,10 +96,11 @@ class TelegramBotQuery
         if ($result === false) {
             throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
         }
+
         return json_decode($result);
     }
 
-    public function getFileContent(string $file_id)
+    public function getFileContent(string $file_id): string
     {
         $file = $this->httpPost(new GetFile($file_id));
         if (!$file->ok) {
@@ -115,6 +116,10 @@ class TelegramBotQuery
         }
         $result = curl_exec($ch);
         curl_close($ch);
+        if ($result === false) {
+            throw new TelegramBotQueryException('Не удалось поучить файл');
+        }
+
         return $result;
     }
 }
