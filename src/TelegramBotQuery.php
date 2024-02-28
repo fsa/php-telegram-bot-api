@@ -12,7 +12,9 @@ class TelegramBotQuery
     public function __construct(
         protected string $token,
         protected ?string $proxy = null,
-        protected string $api_url = 'https://api.telegram.org'
+        protected string $api_url = 'https://api.telegram.org',
+        protected int $curl_timeout = 5,
+        protected int $curl_connect_timeout =3
     ) {
     }
 
@@ -30,12 +32,26 @@ class TelegramBotQuery
         return $this;
     }
 
+    public function setCurlTimeout(int $timeout): static
+    {
+        $this->curl_timeout = $timeout;
+
+        return $this;
+    }
+
+    public function setCurlConnectTimeout(int $timeout): static
+    {
+        $this->curl_connect_timeout = $timeout;
+
+        return $this;
+    }
+
     public function httpPost(TelegramBotMethodInterface $query): object
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName());
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         if (isset($this->proxy)) {
             curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
@@ -56,8 +72,8 @@ class TelegramBotQuery
         $query_string = json_encode($query->getRequestParameters(), JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName());
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         if (isset($this->proxy)) {
             curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
@@ -85,8 +101,8 @@ class TelegramBotQuery
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName() . '?' . http_build_query($query->getRequestParameters()));
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         if (isset($this->proxy)) {
             curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
@@ -108,8 +124,8 @@ class TelegramBotQuery
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->api_url . '/file/bot' . $this->token . '/' . $file->result->file_path);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         if (isset($this->proxy)) {
             curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
