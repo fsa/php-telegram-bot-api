@@ -7,12 +7,16 @@
 
 namespace FSA\Telegram;
 
+use Psr\Log\LoggerInterface;
+
 class TelegramBotWebhook
 {
     private string $json;
 
-    public function __construct(private ?string $secret = null)
-    {
+    public function __construct(
+        private ?string $secret = null,
+        private ?LoggerInterface $logger = null
+    ) {
     }
 
     public function setSecret(?string $secret): static
@@ -25,6 +29,7 @@ class TelegramBotWebhook
     public function setUpdate(string $json): static
     {
         $this->json = $json;
+        $this->logger?->info('Telegram API Webhook', [$json]);
 
         return $this;
     }
