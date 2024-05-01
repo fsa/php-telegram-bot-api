@@ -10,6 +10,6 @@ class PollAnswer
 {
     public string $poll_id;
     public ?Chat $voter_chat = null;
-    public User $user = null;
+    public ?User $user = null;
     public array $option_ids;
 }

@@ -35,7 +35,7 @@ class ForceReply extends AbstractObject implements ReplyMarkupInterface
         return json_encode($this->jsonSerialize(), JSON_UNESCAPED_UNICODE);
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $props = get_object_vars($this);
         return array_filter($props, fn ($element) => !is_null($element));

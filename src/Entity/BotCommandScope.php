@@ -9,6 +9,6 @@ namespace FSA\Telegram\Entity;
 class BotCommandScope
 {
     public string $type;
-    public int|string $chat_id = null;
+    public int|string|null $chat_id = null;
     public ?int $user_id = null;
 }

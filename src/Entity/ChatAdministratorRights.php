@@ -17,10 +17,10 @@ class ChatAdministratorRights
     public bool $can_change_info;
     public bool $can_invite_users;
     public bool $can_post_messages;
-    public bool $can_edit_messages = null;
-    public bool $can_pin_messages = null;
-    public bool $can_post_stories = null;
-    public bool $can_edit_stories = null;
-    public bool $can_delete_stories = null;
-    public bool $can_manage_topics = null; 
+    public ?bool $can_edit_messages = null;
+    public ?bool $can_pin_messages = null;
+    public ?bool $can_post_stories = null;
+    public ?bool $can_edit_stories = null;
+    public ?bool $can_delete_stories = null;
+    public ?bool $can_manage_topics = null; 
 }

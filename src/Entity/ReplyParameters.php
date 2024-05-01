@@ -9,7 +9,7 @@ namespace FSA\Telegram\Entity;
 class ReplyParameters
 {
     public int $message_id;
-    public int|string $emoji = null;
+    public int|string|null $emoji = null;
     public ?bool $allow_sending_without_reply;
     public ?string $quote;
     public ?string $quote_parse_mode;

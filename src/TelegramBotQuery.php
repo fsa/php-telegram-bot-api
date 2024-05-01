@@ -116,7 +116,7 @@ class TelegramBotQuery
         return json_decode($result);
     }
 
-    public function getFileContent(string $file_id): string
+    public function getFileContent(string $file_id): ?string
     {
         $file = $this->httpPost(new GetFile($file_id));
         if (!$file->ok) {
