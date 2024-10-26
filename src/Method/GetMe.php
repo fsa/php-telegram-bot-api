@@ -6,6 +6,4 @@
 
 namespace FSA\Telegram\Method;
 
-class GetMe extends AbstractMethod
-{
-}
+class GetMe extends AbstractMethod {}

@@ -32,7 +32,7 @@ composer require fsa/telegram-bot-api
 
 ## Создание сообщения для запроса на сервер
 
-Дла методов Telegram Bot API созданы соответствующие классы. Отличие имени метода от имени класса в том, что имя класса начинается с заглавной буквы.
+Для создания запросов к Telegram используется класс TelegramBotApi, который содержит конструкторы методов объектов, необходимых для этого запроса.
 
 Доступные через библиотеку методы API:
 
@@ -51,19 +51,13 @@ composer require fsa/telegram-bot-api
 * sendVideo;
 * setWebhook.
 
-Создать нужный запрос можно как с помощью класса TelegramBotApi вызвав соответствующий метод, так и непосредственно используя соответствующий класс. Методы и конструкторы классов в качестве аргументов требуют соответствующие обязательные параметры для выбранного запроса. Для установки необязательных аргументов можно использовать цепочки методов, например:
-
-```php
-$message = (new FSA\Telegram\SendDice($chat_id, 1))->setDisableNotification()->setProtectContent();
-```
-
-или
+Создать нужный запрос можно с помощью класса TelegramBotApi вызвав соответствующий метод. Методы в качестве аргументов требуют соответствующие обязательные параметры для выбранного запроса. Для установки необязательных аргументов можно использовать цепочки методов, например:
 
 ```php
 $message = (new FSA\Telegram\TelegramBotApi)->sendDice($chat_id, 1)->setDisableNotification()->setProtectContent();
 ```
 
-Если в запросе необходимо прикрепить файл, то сделать это можно с помощью `CURLFile`, в том числе через процедурный стиль:
+Если в запросе необходимо прикрепить файл, то сделать это можно с помощью класса `CURLFile`, который можно создать, в том числе, через процедурный стиль:
 
 ```php
 $file = curl_file_create(realpath('my_photo.jpg'));
@@ -72,28 +66,22 @@ $message = (new FSA\Telegram\TelegramBotApi)->sendPhoto($chat_id, $file);
 
 ## Выполнение запросов на сервер
 
-Запросы на сервер выполняются с помощью методов `httpGet()`, `httpPost()` или `httpPostJson()`. При этом необходимо установить токен доступа в конструкторе `FSA\Telegram\TelegramBotQuery`.
+Для выполнения запросов на сервер используется http клиент Symfony. При необходимости можно задать для него дополнительные настройки, например, указать прокси. Запросы на сервер выполняются с помощью методов класса `FSA\Telegram\TelegramBotQuery`: `httpGet()`, `httpPost()` или `httpPostJson()`. При создании экземпляра класса ему необходимо передать токен доступа и, при необходимости, URL сервера, если не не пользуетесь своим локальным сервером вместо `api.telegram.org`.
 
 ```php
-// Создание нового запроса
-$telegram_bot_query = new FSA\Telegram\TelegramBotQuery('TOKEN');
+$api = new FSA\Telegram\TelegramBotApi;
+$query = new FSA\Telegram\TelegramBotQuery(Symfony\Component\HttpClient\HttpClient::create(), 'TOKEN');
 // Создание метода sendMessage
-$message = new FSA\Telegram\SendMessage($chat_id, "Привет");
+$message = $api->sendMessage($chat_id, "Привет");
 // Передача запроса на сервер
 $telegram_bot_query->httpPostJson($message);
-```
-
-Или при использовании контроллера фреймворка, который передаёт в `$telegramBotApi` сервис `TelegramBotApi`, а в `$telegramBotQuery` -- `TelegramBotQuery`:
-
-```php
-$telegramBotQuery->httpPostJson($telegramBotApi->sendMessage($chat_id, 'Привет'));
 ```
 
 Любой объект для методов API реализует интерфейс `TelegramBotMethodInterface`:
 
 * `getMethodName()` — позволяет получить имя метода API;
 * `getRequestParameters()` — параметры запроса в виде массива;
-* `getWebhookResponse()` — получить массив для формирования ответа на `Webhook`.
+* `getResponseClassName` — имя класса сущности в ответе или null, если ответ не возвращает сущностей (например, true, false и т.д.).
 
 ## Работа с WebHook
 
@@ -114,19 +102,19 @@ $update = $webhook->getUpdate();
 
 Получать данные запроса можно любое число раз. Оригинальный запрос сохраняется внутри класса.
 
-Ответ на WebHook может быть получен с помощью метода `getWebhookResponse()` любого метода API:
+Ответ на WebHook может быть получен с обычной JSON сериализацией метода API, например, можно отправить ответ в контроллере Symfony следующим образом:
 
 ```php
-$this->json($telegramBotApi->sendMessage($chat_id, "Привет")->getWebhookResponse())->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+$this->json($telegramBotApi->sendMessage($chat_id, "Привет"))->setEncodingOptions(JSON_UNESCAPED_UNICODE);
 ```
 
-## Сущности Update
+## Разбор ответа на сущности
 
-При необходимости Update можем быть разобран на сущности с помощью `symfony/serializer` или пакета с аналогичным функционалом. Все необходимые сущности собраны в пространстве имён `Entity`.
+При необходимости ответ можем быть разобран на сущности с помощью `symfony/serializer` или пакета с аналогичным функционалом. Все необходимые сущности собраны в пространстве имён `Entity`. Например, для сущности `Update` при декодировании вебхука.
 
 ```php
 $webhook = new FSA\Telegram\Webhook;
 $update = $serializer->deserialize($webhook->getUpdateRaw(), FSA\Telegram\Entity\Update::class, 'json');
 ```
 
-Также, можно использовать классы из пространства имён `Entity` в IDE для формирования подсказок без непосредственного использования.
+Также, можно просто использовать классы из пространства имён `Entity` в IDE для формирования подсказок без непосредственного их использования.

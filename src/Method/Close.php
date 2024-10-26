@@ -6,6 +6,4 @@
 
 namespace FSA\Telegram\Method;
 
-class Close extends AbstractMethod
-{
-}
+class Close extends AbstractMethod {}

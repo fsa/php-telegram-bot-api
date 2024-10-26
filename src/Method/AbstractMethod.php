@@ -3,8 +3,9 @@
 namespace FSA\Telegram\Method;
 
 use FSA\Telegram\TelegramBotMethodInterface;
+use JsonSerializable;
 
-abstract class AbstractMethod implements TelegramBotMethodInterface
+abstract class AbstractMethod implements TelegramBotMethodInterface, JsonSerializable
 {
     public function getMethodName(): string
     {
@@ -17,7 +18,7 @@ abstract class AbstractMethod implements TelegramBotMethodInterface
         return array_filter(get_object_vars($this), fn($element) => !empty($element));
     }
 
-    public function getWebhookResponse(): array
+    public function jsonSerialize(): mixed
     {
         $query_string = $this->getRequestParameters();
         $query_string['method'] = $this->getMethodName();
