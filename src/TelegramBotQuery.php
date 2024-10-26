@@ -14,16 +14,23 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class TelegramBotQuery
 {
     protected HttpClientInterface $httpClient;
+    protected ?SerializerInterface $serializer = null;
 
     public function __construct(
         HttpClientInterface $httpClient,
         protected string $token,
-        string $api_server_url = 'https://api.telegram.org',
-        protected ?SerializerInterface $serializer = null
+        string $api_server_url = 'https://api.telegram.org'
     ) {
         $this->httpClient = $httpClient->withOptions([
             'base_uri' => $api_server_url
         ]);
+    }
+
+    public function setSerializer(?SerializerInterface $serializer = null): static
+    {
+        $this->serializer = $serializer;
+
+        return $this;
     }
 
     public function httpPost(TelegramBotMethodInterface $query): object
