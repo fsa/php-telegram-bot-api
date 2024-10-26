@@ -7,135 +7,72 @@
 
 namespace FSA\Telegram;
 
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\HttpClient\ResponseInterface;
+
 class TelegramBotQuery
 {
+    protected HttpClientInterface $httpClient;
+
     public function __construct(
+        HttpClientInterface $httpClient,
         protected string $token,
-        protected ?string $proxy = null,
-        protected string $api_url = 'https://api.telegram.org',
-        protected int $curl_timeout = 5,
-        protected int $curl_connect_timeout =3
+        string $api_server_url = 'https://api.telegram.org',
     ) {
-    }
-
-    public function setApiUrl(string $url): static
-    {
-        $this->api_url = $url;
-
-        return $this;
-    }
-
-    public function setProxy(string $proxy): static
-    {
-        $this->proxy = $proxy;
-
-        return $this;
-    }
-
-    public function setCurlTimeout(int $timeout): static
-    {
-        $this->curl_timeout = $timeout;
-
-        return $this;
-    }
-
-    public function setCurlConnectTimeout(int $timeout): static
-    {
-        $this->curl_connect_timeout = $timeout;
-
-        return $this;
+        $this->httpClient = $httpClient->withOptions([
+            'base_uri' => $api_server_url
+        ]);
     }
 
     public function httpPost(TelegramBotMethodInterface $query): object
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName());
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if (isset($this->proxy)) {
-            curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
-        }
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $query->getRequestParameters());
-        $result = curl_exec($ch);
-        curl_close($ch);
-        if ($result === false) {
+        $response = $this->httpClient->request('POST', '/bot' . $this->token . '/' . $query->getMethodName(), [
+            'body' => $query->getRequestParameters()
+        ]);
+        if ($response->getStatusCode() != 200) {
             throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
         }
 
-        return json_decode($result);
+        return $this->responseGetResult($response);
     }
 
     public function httpPostJson(TelegramBotMethodInterface $query): object
     {
-        $query_string = json_encode($query->getRequestParameters(), JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK);
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName());
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if (isset($this->proxy)) {
-            curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
-        }
-        curl_setopt(
-            $ch,
-            CURLOPT_HTTPHEADER,
-            array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($query_string)
-            )
-        );
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $query_string);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        if ($result === false) {
+        $response = $this->httpClient->request('POST', '/bot' . $this->token . '/' . $query->getMethodName(), [
+            'json' => $query->getRequestParameters()
+        ]);
+        if ($response->getStatusCode() != 200) {
             throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
         }
 
-        return json_decode($result);
+        return $this->responseGetResult($response);
     }
 
     public function httpGet(TelegramBotMethodInterface $query): object
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/bot' . $this->token . '/' . $query->getMethodName() . '?' . http_build_query($query->getRequestParameters()));
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if (isset($this->proxy)) {
-            curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
-        }
-        $result = curl_exec($ch);
-        curl_close($ch);
-        if ($result === false) {
-            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
-        }
+        $response = $this->httpClient->request('GET', '/bot' . $this->token . '/' . $query->getMethodName() . '?' . http_build_query($query->getRequestParameters()));
 
-        return json_decode($result);
+        return $this->responseGetResult($response);
     }
 
     public function getFileContent(string $file_id): ?string
     {
-        $file = $this->httpPost(new GetFile($file_id));
-        if (!$file->ok) {
-            return null;
-        }
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->api_url . '/file/bot' . $this->token . '/' . $file->result->file_path);
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->curl_timeout);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->curl_connect_timeout);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        if (isset($this->proxy)) {
-            curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
-        }
-        $result = curl_exec($ch);
-        curl_close($ch);
-        if ($result === false) {
-            throw new TelegramBotQueryException('Не удалось поучить файл');
+        $file = $this->httpPost(new Method\GetFile($file_id));
+        $response = $this->httpClient->request('GET', '/file/bot' . $this->token . '/' . $file->file_path);
+        
+        return $response->getContent(true);
+    }
+
+    private function responseGetResult(ResponseInterface $response): object
+    {
+        $content = json_decode($response->getContent(true));
+        if (!isset($content->ok)) {
+            throw new TelegramBotQueryException('Неверный ответ сервера');
+        };
+        if ($content->ok != true) {
+            throw new TelegramBotQueryException('Сервер сообщает об ошибке обработки запроса для: ' . $content->description);
         }
 
-        return $result;
+        return $content->result;
     }
 }

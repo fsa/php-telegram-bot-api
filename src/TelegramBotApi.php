@@ -6,153 +6,153 @@ use CURLFile;
 
 class TelegramBotApi
 {
-    public function deleteWebhook(): DeleteWebhook
+    public function deleteWebhook(): Method\DeleteWebhook
     {
-        return new DeleteWebhook;
+        return new Method\DeleteWebhook;
     }
 
-    public function forceReply(bool $force_reply = true): ForceReply
+    public function forceReply(bool $force_reply = true): Object\ForceReply
     {
-        return new ForceReply($force_reply);
+        return new Object\ForceReply($force_reply);
     }
 
-    public function forwardMessage(int|string $chat_id, int|string $from_chat_id, int $message_id): ForwardMessage
+    public function forwardMessage(int|string $chat_id, int|string $from_chat_id, int $message_id): Method\ForwardMessage
     {
-        return new ForwardMessage($chat_id, $from_chat_id, $message_id);
+        return new Method\ForwardMessage($chat_id, $from_chat_id, $message_id);
     }
 
-    public function getFile(string $file_id): GetFile
+    public function getFile(string $file_id): Method\GetFile
     {
-        return new GetFile($file_id);
+        return new Method\GetFile($file_id);
     }
 
-    public function getMe(): GetMe
+    public function getMe(): Method\GetMe
     {
-        return new GetMe;
+        return new Method\GetMe;
     }
 
-    public function getMyDescription(): GetMyDescription
+    public function getMyDescription(): Method\GetMyDescription
     {
-        return new GetMyDescription;
+        return new Method\GetMyDescription;
     }
 
-    public function getMyShortDescription(): GetMyShortDescription
+    public function getMyShortDescription(): Method\GetMyShortDescription
     {
-        return new GetMyShortDescription;
+        return new Method\GetMyShortDescription;
     }
 
-    public function getUpdates(): GetUpdates
+    public function getUpdates(): Method\GetUpdates
     {
-        return new GetUpdates;
+        return new Method\GetUpdates;
     }
 
-    public function getWebhookInfo(): GetWebhookInfo
+    public function getWebhookInfo(): Method\GetWebhookInfo
     {
-        return new GetWebhookInfo;
+        return new Method\GetWebhookInfo;
     }
 
-    public function InlineKeyboardButton(string $text): InlineKeyboardButton
+    public function InlineKeyboardButton(string $text): Object\InlineKeyboardButton
     {
-        return new InlineKeyboardButton($text);
+        return new Object\InlineKeyboardButton($text);
     }
 
-    public function InlineKeyboardMarkup(array $buttons = null): InlineKeyboardMarkup
+    public function InlineKeyboardMarkup(array $buttons = null): Object\InlineKeyboardMarkup
     {
-        return new InlineKeyboardMarkup($buttons);
+        return new Object\InlineKeyboardMarkup($buttons);
     }
 
-    public function KeyboardButton(string $text): KeyboardButton
+    public function KeyboardButton(string $text): Object\KeyboardButton
     {
-        return new KeyboardButton($text);
+        return new Object\KeyboardButton($text);
     }
 
-    public function KeyboardButtonPoolType(): KeyboardButtonPollType
+    public function KeyboardButtonPoolType(): Object\KeyboardButtonPollType
     {
-        return new KeyboardButtonPollType;
+        return new Object\KeyboardButtonPollType;
     }
 
-    public function LoginUrl(string $url): LoginUrl
+    public function LoginUrl(string $url): Object\LoginUrl
     {
-        return new LoginUrl($url);
+        return new Object\LoginUrl($url);
     }
 
-    public function MessageEntity($type, $offset, $length): MessageEntity
+    public function MessageEntity($type, $offset, $length): Object\MessageEntity
     {
-        return new MessageEntity($type, $offset, $length);
+        return new Object\MessageEntity($type, $offset, $length);
     }
 
-    public function ReplyKeyboardMarkup(): ReplyKeyboardMarkup
+    public function ReplyKeyboardMarkup(): Object\ReplyKeyboardMarkup
     {
-        return new ReplyKeyboardMarkup;
+        return new Object\ReplyKeyboardMarkup;
     }
 
-    public function ReplyKeyboardRemove(bool $selective = null): ReplyKeyboardRemove
+    public function ReplyKeyboardRemove(bool $selective = null): Object\ReplyKeyboardRemove
     {
-        return new ReplyKeyboardRemove($selective);
+        return new Object\ReplyKeyboardRemove($selective);
     }
 
-    public function sendAnimation(int|string $chat_id, CURLFile|string $animation): SendAnimation
+    public function sendAnimation(int|string $chat_id, CURLFile|string $animation): Method\SendAnimation
     {
-        return new SendAnimation($chat_id, $animation);
+        return new Method\SendAnimation($chat_id, $animation);
     }
 
-    public function sendAudio(int|string $chat_id, CURLFile|string $audio): SendAudio
+    public function sendAudio(int|string $chat_id, CURLFile|string $audio): Method\SendAudio
     {
-        return new SendAudio($chat_id, $audio);
+        return new Method\SendAudio($chat_id, $audio);
     }
 
-    public function sendDice(int|string $chat_id, int|string $emoji): SendDice
+    public function sendDice(int|string $chat_id, int|string $emoji): Method\SendDice
     {
-        return new SendDice($chat_id, $emoji);
+        return new Method\SendDice($chat_id, $emoji);
     }
 
-    public function sendDocument(int|string $chat_id, CURLFile|string $document): SendDocument
+    public function sendDocument(int|string $chat_id, CURLFile|string $document): Method\SendDocument
     {
-        return new SendDocument($chat_id, $document);
+        return new Method\SendDocument($chat_id, $document);
     }
 
-    public function sendLocation(int|string $chat_id, float $latitude, float $longitude): SendLocation
+    public function sendLocation(int|string $chat_id, float $latitude, float $longitude): Method\SendLocation
     {
-        return new SendLocation($chat_id, $latitude, $longitude);
+        return new Method\SendLocation($chat_id, $latitude, $longitude);
     }
 
-    public function sendMessage(int|string $chat_id, string $text = null, string $parse_mode = null): SendMessage
+    public function sendMessage(int|string $chat_id, string $text = null, string $parse_mode = null): Method\SendMessage
     {
-        return new SendMessage($chat_id, $text, $parse_mode);
+        return new Method\SendMessage($chat_id, $text, $parse_mode);
     }
 
-    public function sendPhoto(int|string $chat_id, CURLFile|string $photo): SendPhoto
+    public function sendPhoto(int|string $chat_id, CURLFile|string $photo): Method\SendPhoto
     {
-        return new SendPhoto($chat_id, $photo);
+        return new Method\SendPhoto($chat_id, $photo);
     }
 
-    public function sendSticker(string $chat_id, string $sticker): SendSticker
+    public function sendSticker(string $chat_id, string $sticker): Method\SendSticker
     {
-        return new SendSticker($chat_id, $sticker);
+        return new Method\SendSticker($chat_id, $sticker);
     }
 
-    public function sendVideo(int|string $chat_id, CURLFile|string $video): SendVideo
+    public function sendVideo(int|string $chat_id, CURLFile|string $video): Method\SendVideo
     {
-        return new SendVideo($chat_id, $video);
+        return new Method\SendVideo($chat_id, $video);
     }
 
-    public function setMyDescription(): SetMyDescription
+    public function setMyDescription(): Method\SetMyDescription
     {
-        return new SetMyDescription;
+        return new Method\SetMyDescription;
     }
 
-    public function setMyShortDescription(): SetMyShortDescription
+    public function setMyShortDescription(): Method\SetMyShortDescription
     {
-        return new SetMyShortDescription;
+        return new Method\SetMyShortDescription;
     }
 
-    public function setWebhook(string $url): SetWebhook
+    public function setWebhook(string $url): Method\SetWebhook
     {
-        return new SetWebhook($url);
+        return new Method\SetWebhook($url);
     }
 
-    public function WebAppInfo(string $url): WebAppInfo
+    public function WebAppInfo(string $url): Object\WebAppInfo
     {
-        return new WebAppInfo($url);
+        return new Object\WebAppInfo($url);
     }
 }

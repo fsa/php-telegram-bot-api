@@ -7,4 +7,5 @@ interface TelegramBotMethodInterface
     public function getMethodName(): string;
     public function getRequestParameters(): array;
     public function getWebhookResponse(): array;
+    public function getResponseClassName(): ?string;
 }
