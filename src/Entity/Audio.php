@@ -8,13 +8,15 @@ namespace FSA\Telegram\Entity;
 
 class Audio
 {
-    public string $file_id;
-    public string $file_unique_id;
-    public int $duration;
-    public ?string $performer = null;
-    public ?string $title = null;
-    public ?string $file_name = null;
-    public ?string $mime_type = null;
-    public ?int $file_size = null;
-    public ?PhotoSize $thumb = null;
+    public function __construct(
+        public string $file_id,
+        public string $file_unique_id,
+        public int $duration,
+        public ?string $performer,
+        public ?string $title,
+        public ?string $file_name,
+        public ?string $mime_type,
+        public ?int $file_size,
+        public ?PhotoSize $thumb,
+    ) {}
 }

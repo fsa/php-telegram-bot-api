@@ -6,6 +6,17 @@
 
 namespace FSA\Telegram\Entity;
 
-class CallbackGame
+readonly class CallbackGame
 {
+    private array $params;
+
+    public function __construct(...$args)
+    {
+        $this->params = $args;
+    }
+
+    public function getData(): array
+    {
+        return $this->params;
+    }
 }

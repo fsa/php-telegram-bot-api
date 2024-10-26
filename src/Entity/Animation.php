@@ -6,15 +6,17 @@
 
 namespace FSA\Telegram\Entity;
 
-class Animation
+readonly class Animation
 {
-    public string $file_id;
-    public string $file_unique_id;
-    public int $width;
-    public int $height;
-    public int $duration;
-    public ?PhotoSize $thumb = null;
-    public ?string $file_name = null;
-    public ?string $mime_type = null;
-    public ?int $file_size = null;
+    public function __construct(
+        public string $file_id,
+        public string $file_unique_id,
+        public int $width,
+        public int $height,
+        public int $duration,
+        public ?PhotoSize $thumb,
+        public ?string $file_name,
+        public ?string $mime_type,
+        public ?int $file_size,
+    ) {}
 }

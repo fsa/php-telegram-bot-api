@@ -6,7 +6,9 @@
 
 namespace FSA\Telegram\Entity;
 
-class BotShortDescription
+readonly class BotShortDescription
 {
-    public string $short_description;
+    public function __construct(
+        public string $short_description
+    ) {}
 }

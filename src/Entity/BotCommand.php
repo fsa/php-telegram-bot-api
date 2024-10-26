@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class BotCommand
+readonly class BotCommand
 {
-    public string $command;
-    public string $description;
+    public function __construct(
+        public string $command,
+        public string $description,
+    ) {}
 }
