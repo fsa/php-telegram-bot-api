@@ -20,6 +20,11 @@
             "FSA\\Telegram\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": "^8.2",
         "ext-curl": "*",
@@ -29,6 +34,7 @@
         "phpstan/phpstan": "^1.10",
         "symfony/serializer": "^7.1",
         "symfony/http-client": "^7.1",
-        "symfony/property-access": "^7.1"
+        "symfony/property-access": "^7.1",
+        "phpunit/phpunit": "^11.4"
     }
 }
