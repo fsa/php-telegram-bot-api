@@ -79,7 +79,10 @@ class TelegramBotQuery
             throw new TelegramBotQueryException('Неверный ответ сервера');
         };
         if ($content->ok != true) {
-            throw new TelegramBotQueryException('Сервер сообщает об ошибке обработки запроса для: ' . $content->description);
+            throw new TelegramBotQueryException('Сервер сообщает об ошибке обработки запроса для: ' . ($content->description ?? 'отсутствует описание в ответе сервера'));
+        }
+        if (!isset($content->result)) {
+            throw new TelegramBotQueryException('Неверный ответ сервера, запрос обработан, но отсутствует результат');
         }
 
         return ($this->serializer && $class) ? $this->serializer->deserialize(json_encode($content->result), $class, 'json') : $content->result;
