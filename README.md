@@ -51,7 +51,7 @@ composer require fsa/telegram-bot-api
 * sendVideo;
 * setWebhook.
 
-Создать нужный запрос можно с помощью класса TelegramBotApi вызвав соответствующий метод. Методы в качестве аргументов требуют соответствующие обязательные параметры для выбранного запроса. Для установки необязательных аргументов можно использовать цепочки методов, например:
+Создать нужный запрос можно с помощью класса `TelegramBotApi` вызвав соответствующий метод. Методы в качестве аргументов требуют соответствующие обязательные параметры для выбранного запроса. Для установки необязательных аргументов можно использовать цепочки методов, например:
 
 ```php
 $message = (new FSA\Telegram\TelegramBotApi)->sendDice($chat_id, 1)->setDisableNotification()->setProtectContent();
@@ -83,6 +83,8 @@ $telegram_bot_query->httpPostJson($message);
 * `getRequestParameters()` — параметры запроса в виде массива;
 * `getResponseClassName` — имя класса сущности в ответе или null, если ответ не возвращает сущностей (например, true, false и т.д.).
 
+Методы, которые осуществляют отправку сообщений, также реализуют интерфейс `TelegramBotSendMethodInterface`, который, в дополнении к `TelegramBotMethodInterface` также предоставляет доступ к сессерам, которые присутствуют в любом методе с отправкой сообщения, например, `setChatId()` и другие.
+
 ## Работа с WebHook
 
 Использование `TelegramBotWebhook` не обязательно. Его можно использовать для хранения текущего `Update`, его декодирования и для проверки секретного токена.
@@ -110,7 +112,15 @@ $this->json($telegramBotApi->sendMessage($chat_id, "Привет"))->setEncoding
 
 ## Разбор ответа на сущности
 
-При необходимости ответ можем быть разобран на сущности с помощью `symfony/serializer` или пакета с аналогичным функционалом. Все необходимые сущности собраны в пространстве имён `Entity`. Например, для сущности `Update` при декодировании вебхука.
+Разбор ответа на сущности не является обязательным, но позволит не проводить проверку наличия определённых полей ответа, т.к. в случае их отсутствия в ответе будет получен `null`. Включить десериализацию ответов можно с помощью установки сериалайзера через `TelegramBotQuery::setSerializer()`. В качестве параметра требуется класс, реализующий `Symfony\Component\Serializer\SerializerInterface`, который можно найти в пакете `symfony/serializer`. После его установки все ответы на методы `httpGet()`, `httpPost()` или `httpPostJson()` будут десериализованы.
+
+```php
+$serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder]);
+$query = new FSA\Telegram\TelegramBotQuery(Symfony\Component\HttpClient\HttpClient::create(), 'TOKEN');
+$query->setSerializer($serializer);
+```
+
+Разбор данных вебхука на сущности:
 
 ```php
 $webhook = new FSA\Telegram\Webhook;
