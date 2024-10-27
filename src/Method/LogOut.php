@@ -1,11 +1,9 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 7.10
  */
 
 namespace FSA\Telegram\Method;
 
-class LogOut extends AbstractMethod
-{
-}
+class LogOut extends AbstractMethod {}

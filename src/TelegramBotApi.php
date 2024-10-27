@@ -6,6 +6,11 @@ use CURLFile;
 
 class TelegramBotApi
 {
+    public function close(): Method\Close
+    {
+        return new Method\Close;
+    }
+
     public function deleteWebhook(): Method\DeleteWebhook
     {
         return new Method\DeleteWebhook;
@@ -74,6 +79,11 @@ class TelegramBotApi
     public function LoginUrl(string $url): Object\LoginUrl
     {
         return new Object\LoginUrl($url);
+    }
+
+    public function logOut(): Method\LogOut
+    {
+        return new Method\LogOut;
     }
 
     public function MessageEntity($type, $offset, $length): Object\MessageEntity
