@@ -7,8 +7,9 @@
 namespace FSA\Telegram\Method;
 
 use FSA\Telegram\Object\ReplyMarkupInterface;
+use FSA\Telegram\TelegramBotSendMethodInterface;
 
-class AbstractSendMethod extends AbstractMethod
+class AbstractSendMethod extends AbstractMethod implements TelegramBotSendMethodInterface
 {
     public $chat_id;
     public $message_thread_id;
