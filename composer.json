@@ -9,6 +9,12 @@
         }
     ],
     "license": "GPL-3.0-or-later",
+    "funding": [
+        {
+            "type": "boosty",
+            "url": "https://boosty.to/tavdainfo"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "FSA\\Telegram\\": "src/"
