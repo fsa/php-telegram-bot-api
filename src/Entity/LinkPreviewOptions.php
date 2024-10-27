@@ -6,11 +6,13 @@
 
 namespace FSA\Telegram\Entity;
 
-class LinkPreviewOptions
+readonly class LinkPreviewOptions
 {
-    public ?bool $is_disabled = null;
-    public ?string $url = null;
-    public ?bool $prefer_small_media = null;
-    public ?bool $prefer_large_media = null;
-    public ?bool $show_above_text = null;
+    public function __construct(
+        public ?bool $is_disabled,
+        public ?string $url,
+        public ?bool $prefer_small_media,
+        public ?bool $prefer_large_media,
+        public ?bool $show_above_text,
+    ) {}
 }

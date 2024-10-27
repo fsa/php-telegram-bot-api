@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class ForceReply
+readonly class ForceReply
 {
-    public bool $force_reply;
-    public ?string $input_field_placeholder = null;
-    public ?bool $selective = null;
+    public function __construct(
+        public bool $force_reply,
+        public ?string $input_field_placeholder,
+        public ?bool $selective,
+    ) {}
 }

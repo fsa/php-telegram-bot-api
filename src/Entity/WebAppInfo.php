@@ -6,7 +6,9 @@
 
 namespace FSA\Telegram\Entity;
 
-class WebAppInfo
+readonly class WebAppInfo
 {
-    public string $url;
+    public function __construct(
+        public string $url,
+    ) {}
 }

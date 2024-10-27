@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class GiveawayCompleted
+readonly class GiveawayCompleted
 {
-    public int $winner_count;
-    public ?int $unclaimed_prize_count = null;
-    public ?Message $giveaway_message = null;	
+    public function __construct(
+        public int $winner_count,
+        public ?int $unclaimed_prize_count,
+        public ?Message $giveaway_message,
+    ) {}
 }

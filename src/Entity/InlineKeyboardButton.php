@@ -6,16 +6,18 @@
 
 namespace FSA\Telegram\Entity;
 
-class InlineKeyboardButton
+readonly class InlineKeyboardButton
 {
-    public string $text;
-    public ?string $url;
-    public ?string $callback_data;
-    public ?WebAppInfo $web_app;
-    public ?LoginUrl $login_url;
-    public ?string $switch_inline_query;
-    public ?string $switch_inline_query_current_chat;
-    public ?SwitchInlineQueryChosenChat $switch_inline_query_chosen_chat;
-    public ?CallbackGame $callback_game;
-    public ?bool $pay;
+    public function __construct(
+        public string $text,
+        public ?string $url,
+        public ?string $callback_data,
+        public ?WebAppInfo $web_app,
+        public ?LoginUrl $login_url,
+        public ?string $switch_inline_query,
+        public ?string $switch_inline_query_current_chat,
+        public ?SwitchInlineQueryChosenChat $switch_inline_query_chosen_chat,
+        public ?CallbackGame $callback_game,
+        public ?bool $pay,
+    ) {}
 }

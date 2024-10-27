@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class ReactionCount
+readonly class ReactionCount
 {
-    public ReactionType $type;
-    public int $total_count;
+    public function __construct(
+        public ReactionType $type,
+        public int $total_count,
+    ) {}
 }

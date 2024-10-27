@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class EncryptedCredentials
+readonly class EncryptedCredentials
 {
-    public string $data;
-    public string $hash;
-    public string $secret;
+    public function __construct(
+        public string $data,
+        public string $hash,
+        public string $secret,
+    ) {}
 }

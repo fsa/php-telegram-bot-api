@@ -6,7 +6,9 @@
 
 namespace FSA\Telegram\Entity;
 
-class MessageId
+readonly class MessageId
 {
-    public int $message_id;
+    public function __construct(
+        public int $message_id,
+    ) {}
 }

@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class InaccessibleMessage
+readonly class InaccessibleMessage
 {
-    public Chat $chat;
-    public int $message_id;
-    public int $date;
+    public function __construct(
+        public Chat $chat,
+        public int $message_id,
+        public int $date,
+    ) {}
 }

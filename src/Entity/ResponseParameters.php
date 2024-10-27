@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class ResponseParameters
+readonly class ResponseParameters
 {
-    public ?int $migrate_to_chat_id = null;
-    public ?int $retry_after = null;
+    public function __construct(
+        public ?int $migrate_to_chat_id,
+        public ?int $retry_after,
+    ) {}
 }

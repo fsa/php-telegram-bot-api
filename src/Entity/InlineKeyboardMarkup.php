@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class InlineKeyboardMarkup
+readonly class InlineKeyboardMarkup
 {
-    /**
-     * @Type("array<array<InlineKeyboardButton>>")
-     */
-    public array $inline_keyboard;
+    public function __construct(
+        /**
+         * @Type("array<array<InlineKeyboardButton>>")
+         */
+        public array $inline_keyboard,
+    ) {}
 }

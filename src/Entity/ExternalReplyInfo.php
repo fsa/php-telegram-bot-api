@@ -6,32 +6,34 @@
 
 namespace FSA\Telegram\Entity;
 
-class ExternalReplyInfo
+readonly class ExternalReplyInfo
 {
-    public MessageOrigin $origin;
-    public ?Chat $chat = null;
-    public ?int $message_id = null;
-    public ?LinkPreviewOptions $link_preview_options = null;
-    public ?Animation $animation = null;
-    public ?Audio $audio = null;
-    public ?Document $document = null;
-    /**
-     * @Type("array<PhotoSize>")
-     */
-    public ?array $photo = null;
-    public ?Sticker $sticker = null;
-    public ?Story $story = null;
-    public ?Video $video = null;
-    public ?VideoNote $video_note = null;
-    public ?Voice $voice = null;
-    public ?bool $has_media_spoiler = null;
-    public ?Contact $contact = null;
-    public ?Dice $dice = null;
-    public ?Game $game = null;
-    public ?Giveaway $giveaway = null;
-    public ?GiveawayWinners $giveaway_winners = null;
-    public ?Invoice $invoice = null;
-    public ?Location $location = null;
-    public ?Poll $poll = null;
-    public ?Venue $venue = null;
+    public function __construct(
+        public MessageOrigin $origin,
+        public ?Chat $chat,
+        public ?int $message_id,
+        public ?LinkPreviewOptions $link_preview_options,
+        public ?Animation $animation,
+        public ?Audio $audio,
+        public ?Document $document,
+        /**
+         * @Type("array<PhotoSize>")
+         */
+        public ?array $photo,
+        public ?Sticker $sticker,
+        public ?Story $story,
+        public ?Video $video,
+        public ?VideoNote $video_note,
+        public ?Voice $voice,
+        public ?bool $has_media_spoiler,
+        public ?Contact $contact,
+        public ?Dice $dice,
+        public ?Game $game,
+        public ?Giveaway $giveaway,
+        public ?GiveawayWinners $giveaway_winners,
+        public ?Invoice $invoice,
+        public ?Location $location,
+        public ?Poll $poll,
+        public ?Venue $venue,
+    ) {}
 }

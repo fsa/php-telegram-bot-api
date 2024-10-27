@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class MaskPosition
+readonly class MaskPosition
 {
-    public string $point;
-    public float $x_shift;
-    public float $y_shift;
-    public float $scale;
+    public function __construct(
+        public string $point,
+        public float $x_shift,
+        public float $y_shift,
+        public float $scale,
+    ) {}
 }

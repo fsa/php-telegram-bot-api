@@ -6,13 +6,15 @@
 
 namespace FSA\Telegram\Entity;
 
-class TextQuote
+readonly class TextQuote
 {
-    public string $text;
-    /**
-     * @Type("array<MessageEntity>")
-     */
-    public ?array $entities = null;
-    public int $position;
-    public ?bool $is_manual = null;
+    public function __construct(
+        public string $text,
+        /**
+         * @Type("array<MessageEntity>")
+         */
+        public ?array $entities,
+        public int $position,
+        public ?bool $is_manual,
+    ) {}
 }

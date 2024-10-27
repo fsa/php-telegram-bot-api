@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class ShippingQuery
+readonly class ShippingQuery
 {
-    public string $id;
-    public User $from;
-    public string $invoice_payload;
-    public ShippingAddress $shipping_address;
+    public function __construct(
+        public string $id,
+        public User $from,
+        public string $invoice_payload,
+        public ShippingAddress $shipping_address,
+    ) {}
 }

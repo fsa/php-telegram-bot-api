@@ -6,7 +6,9 @@
 
 namespace FSA\Telegram\Entity;
 
-class VideoChatScheduled
+readonly class VideoChatScheduled
 {
-    public int $start_date;
+    public function __construct(
+        public int $start_date,
+    ) {}
 }

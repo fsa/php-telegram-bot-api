@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class ForumTopicEdited
+readonly class ForumTopicEdited
 {
-    public ?string $name = null;
-    public ?string $icon_custom_emoji_id = null;
+    public function __construct(
+        public ?string $name,
+        public ?string $icon_custom_emoji_id,
+    ) {}
 }

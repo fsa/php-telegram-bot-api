@@ -6,6 +6,4 @@
 
 namespace FSA\Telegram\Entity;
 
-class Story
-{
-}
+readonly class Story {}

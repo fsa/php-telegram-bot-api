@@ -6,6 +6,4 @@
 
 namespace FSA\Telegram\Entity;
 
-class ForumTopicReopened
-{
-}
+readonly class ForumTopicReopened {}

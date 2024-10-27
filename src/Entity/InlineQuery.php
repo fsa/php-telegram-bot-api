@@ -6,12 +6,14 @@
 
 namespace FSA\Telegram\Entity;
 
-class InlineQuery
+readonly class InlineQuery
 {
-    public string $id;
-    public User $from;
-    public string $query;
-    public string $offset;
-    public ?string $chat_type = null;
-    public ?Location $location = null;
+    public function __construct(
+        public string $id,
+        public User $from,
+        public string $query,
+        public string $offset,
+        public ?string $chat_type,
+        public ?Location $location,
+    ) {}
 }

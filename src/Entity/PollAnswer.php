@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class PollAnswer
+readonly class PollAnswer
 {
-    public string $poll_id;
-    public ?Chat $voter_chat = null;
-    public ?User $user = null;
-    public array $option_ids;
+    public function __construct(
+        public string $poll_id,
+        public ?Chat $voter_chat,
+        public ?User $user,
+        public array $option_ids,
+    ) {}
 }

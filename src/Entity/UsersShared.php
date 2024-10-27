@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class UsersShared
+readonly class UsersShared
 {
-    public int $request_id;
-    public array $user_ids;
+    public function __construct(
+        public int $request_id,
+        public array $user_ids,
+    ) {}
 }

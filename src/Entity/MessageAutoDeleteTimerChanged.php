@@ -6,7 +6,9 @@
 
 namespace FSA\Telegram\Entity;
 
-class MessageAutoDeleteTimerChanged
+readonly class MessageAutoDeleteTimerChanged
 {
-    public int $message_auto_delete_time;
+    public function __construct(
+        public int $message_auto_delete_time,
+    ) {}
 }

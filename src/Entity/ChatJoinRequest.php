@@ -6,12 +6,14 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatJoinRequest
+readonly class ChatJoinRequest
 {
-    public Chat $chat;
-    public User $from;
-    public int $user_chat_id;
-    public int $date;
-    public ?string $bio = null;
-    public ?ChatInviteLink $invite_link = null;
+    public function __construct(
+        public Chat $chat,
+        public User $from,
+        public int $user_chat_id,
+        public int $date,
+        public ?string $bio,
+        public ?ChatInviteLink $invite_link,
+    ) {}
 }

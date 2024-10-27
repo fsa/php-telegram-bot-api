@@ -6,13 +6,15 @@
 
 namespace FSA\Telegram\Entity;
 
-class MessageReactionCountUpdated
+readonly class MessageReactionCountUpdated
 {
-    public Chat $chat;
-    public int $message_id;
-    public int $date;
-    /**
-     * @Type("array<ReactionType>")
-     */
-    public array $reactions;
+    public function __construct(
+        public Chat $chat,
+        public int $message_id,
+        public int $date,
+        /**
+         * @Type("array<ReactionType>")
+         */
+        public array $reactions,
+    ) {}
 }

@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class LoginUrl
+readonly class LoginUrl
 {
-    public string $url;
-    public ?string $forward_text = null;
-    public ?string $bot_username = null;
-    public ?bool $request_write_access = null;
+    public function __construct(
+        public string $url,
+        public ?string $forward_text,
+        public ?string $bot_username,
+        public ?bool $request_write_access,
+    ) {}
 }

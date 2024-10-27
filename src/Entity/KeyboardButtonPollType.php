@@ -6,7 +6,9 @@
 
 namespace FSA\Telegram\Entity;
 
-class KeyboardButtonPollType
+readonly class KeyboardButtonPollType
 {
-    public ?string $type;
+    public function __construct(
+        public ?string $type,
+    ) {}
 }

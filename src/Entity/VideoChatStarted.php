@@ -6,6 +6,6 @@
 
 namespace FSA\Telegram\Entity;
 
-class VideoChatStarted
+readonly class VideoChatStarted
 {
 }

@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class Dice
+readonly class Dice
 {
-    public string $emoji;
-    public int $value;
+    public function __construct(
+        public string $emoji,
+        public int $value,
+    ) {}
 }

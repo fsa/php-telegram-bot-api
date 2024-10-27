@@ -6,11 +6,13 @@
 
 namespace FSA\Telegram\Entity;
 
-class Invoice
+readonly class Invoice
 {
-    public string $title;
-    public string $description;
-    public string $start_parameter;
-    public string $currency;
-    public int $total_amount;
+    public function __construct(
+        public string $title,
+        public string $description,
+        public string $start_parameter,
+        public string $currency,
+        public int $total_amount,
+    ) {}
 }

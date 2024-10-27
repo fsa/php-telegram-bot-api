@@ -6,14 +6,16 @@
 
 namespace FSA\Telegram\Entity;
 
-class ReplyKeyboardMarkup
+readonly class ReplyKeyboardMarkup
 {
-    /**
-     * @Type("array<array<KeyboardButton>>")
-     */
-    public array $keyboard;
-    public ?bool $is_persistent = null;
-    public ?bool $resize_keyboard = null;
-    public ?bool $one_time_keyboard = null;
-    public ?bool $selective = null;
+    public function __construct(
+        /**
+         * @Type("array<array<KeyboardButton>>")
+         */
+        public array $keyboard,
+        public ?bool $is_persistent,
+        public ?bool $resize_keyboard,
+        public ?bool $one_time_keyboard,
+        public ?bool $selective,
+    ) {}
 }

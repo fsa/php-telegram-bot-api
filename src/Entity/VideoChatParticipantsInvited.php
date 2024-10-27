@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class VideoChatParticipantsInvited
+readonly class VideoChatParticipantsInvited
 {
-    /**
-     * @Type("array<User>")
-     */
-    public array $users;
+    public function __construct(
+        /**
+         * @Type("array<User>")
+         */
+        public array $users,
+    ) {}
 }

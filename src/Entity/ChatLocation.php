@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatLocation
+readonly class ChatLocation
 {
-    public Location $location;
-    public string $address;
+    public function __construct(
+        public Location $location,
+        public string $address,
+    ) {}
 }

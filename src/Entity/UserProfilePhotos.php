@@ -6,11 +6,13 @@
 
 namespace FSA\Telegram\Entity;
 
-class UserProfilePhotos
+readonly class UserProfilePhotos
 {
-    public int $total_count;
-    /**
-     * @Type("array<array<PhotoSize>>")
-     */
-    public array $photos;
+    public function __construct(
+        public int $total_count,
+        /**
+         * @Type("array<array<PhotoSize>>")
+         */
+        public array $photos,
+    ) {}
 }

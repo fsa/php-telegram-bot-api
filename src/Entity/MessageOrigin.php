@@ -6,13 +6,15 @@
 
 namespace FSA\Telegram\Entity;
 
-class MessageOrigin
+readonly class MessageOrigin
 {
-    public string $type;
-    public int $date;
-    public ?User $sender_user = null;
-    public ?string $sender_user_name = null;
-    public ?Chat $sender_chat = null;
-    public ?string $author_signature = null;
-    public ?int $message_id = null;
+    public function __construct(
+        public string $type,
+        public int $date,
+        public ?User $sender_user,
+        public ?string $sender_user_name,
+        public ?Chat $sender_chat,
+        public ?string $author_signature,
+        public ?int $message_id,
+    ) {}
 }

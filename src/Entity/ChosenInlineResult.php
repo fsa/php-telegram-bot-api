@@ -6,11 +6,13 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChosenInlineResult
+readonly class ChosenInlineResult
 {
-    public string $result_id;
-    public User $from;
-    public ?Location $location = null;
-    public ?string $inline_message_id = null;
-    public string $query;
+    public function __construct(
+        public string $result_id,
+        public User $from,
+        public ?Location $location,
+        public ?string $inline_message_id,
+        public string $query,
+    ) {}
 }

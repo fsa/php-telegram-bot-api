@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class PollOption
+readonly class PollOption
 {
-    public string $text;
-    public int $voter_count;
+    public function __construct(
+        public string $text,
+        public int $voter_count,
+    ) {}
 }

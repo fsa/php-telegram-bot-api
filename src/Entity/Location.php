@@ -6,12 +6,14 @@
 
 namespace FSA\Telegram\Entity;
 
-class Location
+readonly class Location
 {
-    public float $longitude;
-    public float $latitude;
-    public ?float $horizontal_accuracy = null;
-    public ?int $live_period = null;
-    public ?int $heading = null;
-    public ?int $proximity_alert_radius = null;
+    public function __construct(
+        public float $longitude,
+        public float $latitude,
+        public ?float $horizontal_accuracy,
+        public ?int $live_period,
+        public ?int $heading,
+        public ?int $proximity_alert_radius,
+    ) {}
 }

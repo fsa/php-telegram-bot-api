@@ -6,11 +6,13 @@
 
 namespace FSA\Telegram\Entity;
 
-class SwitchInlineQueryChosenChat
+readonly class SwitchInlineQueryChosenChat
 {
-    public ?string $query;
-    public ?bool $allow_user_chats = null;
-    public ?bool $allow_bot_chats = null;
-    public ?bool $allow_group_chats = null;
-    public ?bool $allow_channel_chats = null;
+    public function __construct(
+        public ?string $query,
+        public ?bool $allow_user_chats,
+        public ?bool $allow_bot_chats,
+        public ?bool $allow_group_chats,
+        public ?bool $allow_channel_chats,
+    ) {}
 }

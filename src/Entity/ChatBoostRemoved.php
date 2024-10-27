@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatBoostRemoved
+readonly class ChatBoostRemoved
 {
-    public Chat $chat;
-    public string $boost_id;
-    public int $remove_date;
-    public ChatBoostSource $source;
+    public function __construct(
+        public Chat $chat,
+        public string $boost_id,
+        public int $remove_date,
+        public ChatBoostSource $source,
+    ) {}
 }

@@ -6,21 +6,23 @@
 
 namespace FSA\Telegram\Entity;
 
-class Sticker
+readonly class Sticker
 {
-    public string $file_id;
-    public string $file_unique_id;
-    public string $type;
-    public int $width;
-    public int $height;
-    public ?bool $is_animated = null;
-    public ?bool $is_video = null;
-    public ?PhotoSize $thumbnail = null;
-    public ?string $emoji = null;
-    public ?string $set_name = null;
-    public ?File $premium_animation = null;
-    public ?MaskPosition $mask_position = null;
-    public ?string $custom_emoji_id = null;
-    public ?bool $needs_repainting = null;
-    public ?int $file_size = null;
+    public function __construct(
+        public string $file_id,
+        public string $file_unique_id,
+        public string $type,
+        public int $width,
+        public int $height,
+        public ?bool $is_animated,
+        public ?bool $is_video,
+        public ?PhotoSize $thumbnail,
+        public ?string $emoji,
+        public ?string $set_name,
+        public ?File $premium_animation,
+        public ?MaskPosition $mask_position,
+        public ?string $custom_emoji_id,
+        public ?bool $needs_repainting,
+        public ?int $file_size,
+    ) {}
 }

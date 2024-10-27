@@ -6,14 +6,16 @@
 
 namespace FSA\Telegram\Entity;
 
-class KeyboardButtonRequestChat
+readonly class KeyboardButtonRequestChat
 {
-    public int $request_id;
-    public ?bool $chat_is_channel = null;
-    public ?bool $chat_is_forum = null;
-    public ?bool $chat_has_username = null;
-    public ?bool $chat_is_created = null;
-    public ?ChatAdministratorRights $user_administrator_rights = null;
-    public ?ChatAdministratorRights $bot_administrator_rights = null;
-    public ?bool $bot_is_member = null;
+    public function __construct(
+        public int $request_id,
+        public ?bool $chat_is_channel,
+        public ?bool $chat_is_forum,
+        public ?bool $chat_has_username,
+        public ?bool $chat_is_created,
+        public ?ChatAdministratorRights $user_administrator_rights,
+        public ?ChatAdministratorRights $bot_administrator_rights,
+        public ?bool $bot_is_member,
+    ) {}
 }

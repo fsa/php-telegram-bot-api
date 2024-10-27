@@ -6,13 +6,15 @@
 
 namespace FSA\Telegram\Entity;
 
-class KeyboardButton
+readonly class KeyboardButton
 {
-    public string $text;
-    public ?KeyboardButtonRequestUsers $request_users = null;
-    public ?KeyboardButtonRequestChat $request_chat = null;
-    public ?bool $request_contact;
-    public ?bool $request_location;
-    public ?KeyboardButtonPollType $request_poll;
-    public ?WebAppInfo $web_app;
+    public function __construct(
+        public string $text,
+        public ?KeyboardButtonRequestUsers $request_users,
+        public ?KeyboardButtonRequestChat $request_chat,
+        public ?bool $request_contact,
+        public ?bool $request_location,
+        public ?KeyboardButtonPollType $request_poll,
+        public ?WebAppInfo $web_app,
+    ) {}
 }

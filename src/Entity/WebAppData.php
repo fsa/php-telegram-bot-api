@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class WebAppData
+readonly class WebAppData
 {
-    public string $data;
-    public string $button_text;
+    public function __construct(
+        public string $data,
+        public string $button_text,
+    ) {}
 }

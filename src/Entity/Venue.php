@@ -6,13 +6,15 @@
 
 namespace FSA\Telegram\Entity;
 
-class Venue
+readonly class Venue
 {
-    public Location $location;
-    public string $title;
-    public string $address;
-    public ?string $forsquare_id = null;
-    public ?string $forsquare_type = null;
-    public ?string $google_place_id = null;
-    public ?string $google_place_type = null;
+    public function __construct(
+        public Location $location,
+        public string $title,
+        public string $address,
+        public ?string $forsquare_id,
+        public ?string $forsquare_type,
+        public ?string $google_place_id,
+        public ?string $google_place_type,
+    ) {}
 }

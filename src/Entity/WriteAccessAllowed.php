@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class WriteAccessAllowed
+readonly class WriteAccessAllowed
 {
-    public ?bool $from_request = null;
-    public ?string $web_app_name = null;
-    public ?bool $from_attachment_menu = null;
+    public function __construct(
+        public ?bool $from_request,
+        public ?string $web_app_name,
+        public ?bool $from_attachment_menu,
+    ) {}
 }

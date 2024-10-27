@@ -6,13 +6,15 @@
 
 namespace FSA\Telegram\Entity;
 
-class MessageEntity
+readonly class MessageEntity
 {
-    public string $type;
-    public int $offset;
-    public int $length;
-    public ?string $url = null;
-    public ?User $user = null;
-    public ?string $language = null;
-    public ?string $custom_emoji_id = null;
+    public function __construct(
+        public string $type,
+        public int $offset,
+        public int $length,
+        public ?string $url,
+        public ?User $user,
+        public ?string $language,
+        public ?string $custom_emoji_id,
+    ) {}
 }

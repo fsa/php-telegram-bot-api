@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatShared
+readonly class ChatShared
 {
-    public int $request_id;
-    public int $chat_id;
+    public function __construct(
+        public int $request_id,
+        public int $chat_id,
+    ) {}
 }

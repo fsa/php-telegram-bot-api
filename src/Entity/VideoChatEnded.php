@@ -6,7 +6,9 @@
 
 namespace FSA\Telegram\Entity;
 
-class VideoChatEnded
+readonly class VideoChatEnded
 {
-    public int $duration;
+    public function __construct(
+        public int $duration,
+    ) {}
 }

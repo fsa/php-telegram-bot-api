@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class ReactionType
+readonly class ReactionType
 {
-    public string $type;
-    public ?string $emoji = null;
-    public ?string $custom_emoji_id = null;
+    public function __construct(
+        public string $type,
+        public ?string $emoji,
+        public ?string $custom_emoji_id,
+    ) {}
 }

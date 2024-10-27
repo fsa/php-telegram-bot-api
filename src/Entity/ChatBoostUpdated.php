@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatBoostUpdated
+readonly class ChatBoostUpdated
 {
-    public Chat $chat;
-    public ChatBoost $boost;
+    public function __construct(
+        public Chat $chat,
+        public ChatBoost $boost,
+    ) {}
 }

@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class ProximityAlertTriggered
+readonly class ProximityAlertTriggered
 {
-    public User $traveler;
-    public User $watcher;
-    public int $distance;
+    public function __construct(
+        public User $traveler,
+        public User $watcher,
+        public int $distance,
+    ) {}
 }

@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class PassportFile
+readonly class PassportFile
 {
-    public string $file_id;
-    public string $file_unique_id;
-    public int $file_size;
-    public int $file_date;
+    public function __construct(
+        public string $file_id,
+        public string $file_unique_id,
+        public int $file_size,
+        public int $file_date,
+    ) {}
 }

@@ -6,6 +6,4 @@
 
 namespace FSA\Telegram\Entity;
 
-class GeneralForumTopicHidden
-{
-}
+readonly class GeneralForumTopicHidden {}

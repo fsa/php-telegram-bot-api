@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-class ReplyKeyboardRemove
+readonly class ReplyKeyboardRemove
 {
-    public bool $remove_keyboard = true;
-    public ?bool $selective = null;
+    public function __construct(
+        public bool $remove_keyboard = true,
+        public ?bool $selective,
+    ) {}
 }

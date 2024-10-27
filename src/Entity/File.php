@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class File
+readonly class File
 {
-    public string $file_id;
-    public string $file_unique_id;
-    public ?int $file_size = null;
-    public ?string $file_path = null;
+    public function __construct(
+        public string $file_id,
+        public string $file_unique_id,
+        public ?int $file_size,
+        public ?string $file_path,
+    ) {}
 }

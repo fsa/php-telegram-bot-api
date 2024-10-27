@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-class MenuButton
+readonly class MenuButton
 {
-    public string $type;
-    public ?string $text = null;
-    public ?WebAppInfo $web_app = null;
+    public function __construct(
+        public string $type,
+        public ?string $text,
+        public ?WebAppInfo $web_app,
+    ) {}
 }

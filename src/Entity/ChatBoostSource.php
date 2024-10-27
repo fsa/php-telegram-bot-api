@@ -6,11 +6,13 @@
 
 namespace FSA\Telegram\Entity;
 
-class ChatBoostSource
+readonly class ChatBoostSource
 {
-    #TODO: разные типы ChatBoostSource
-    public string $source;
-    public ?User $user = null;
-    public ?int $giveaway_message_id = null;
-    public ?bool $is_unclaimed = null;
+    public function __construct(
+        #TODO: разные типы ChatBoostSource
+        public string $source,
+        public ?User $user,
+        public ?int $giveaway_message_id,
+        public ?bool $is_unclaimed,
+    ) {}
 }

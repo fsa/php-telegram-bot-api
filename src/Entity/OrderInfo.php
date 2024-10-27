@@ -6,10 +6,12 @@
 
 namespace FSA\Telegram\Entity;
 
-class OrderInfo
+readonly class OrderInfo
 {
-    public ?string $name = null;
-    public ?string $phone_number = null;
-    public ?string $email = null;
-    public ?ShippingAddress $shipping_address = null;
+    public function __construct(
+        public ?string $name,
+        public ?string $phone_number,
+        public ?string $email,
+        public ?ShippingAddress $shipping_address,
+    ) {}
 }
