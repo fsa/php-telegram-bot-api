@@ -72,7 +72,7 @@ class TelegramBotQuery
         return $response->getContent(true);
     }
 
-    private function responseGetResult(ResponseInterface $response, string $class): object
+    private function responseGetResult(ResponseInterface $response, ?string $class): object
     {
         $content = json_decode($response->getContent(true));
         if (!isset($content->ok)) {
