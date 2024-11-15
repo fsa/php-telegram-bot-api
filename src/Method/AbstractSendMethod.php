@@ -6,6 +6,7 @@
 
 namespace FSA\Telegram\Method;
 
+use FSA\Telegram\Entity\Message;
 use FSA\Telegram\Object\ReplyMarkupInterface;
 use FSA\Telegram\TelegramBotSendMethodInterface;
 
@@ -64,5 +65,11 @@ class AbstractSendMethod extends AbstractMethod implements TelegramBotSendMethod
     protected function removeHtmlEntities(string $text)
     {
         return html_entity_decode($text);
+    }
+
+
+    public function getResponseClassName(): ?string
+    {
+        return Message::class;
     }
 }
