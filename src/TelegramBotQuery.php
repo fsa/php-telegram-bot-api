@@ -33,7 +33,7 @@ class TelegramBotQuery
         return $this;
     }
 
-    public function httpPost(TelegramBotMethodInterface $query): object
+    public function httpPost(TelegramBotMethodInterface $query): mixed
     {
         $response = $this->httpClient->request('POST', '/bot' . $this->token . '/' . $query->getMethodName(), [
             'body' => $query->getRequestParameters()
@@ -45,7 +45,7 @@ class TelegramBotQuery
         return $this->responseGetResult($response, $query->getResponseClassName());
     }
 
-    public function httpPostJson(TelegramBotMethodInterface $query, bool $serialize = false): object
+    public function httpPostJson(TelegramBotMethodInterface $query, bool $serialize = false): mixed
     {
         $response = $this->httpClient->request('POST', '/bot' . $this->token . '/' . $query->getMethodName(), [
             'json' => $query->getRequestParameters()
@@ -57,7 +57,7 @@ class TelegramBotQuery
         return $this->responseGetResult($response, $query->getResponseClassName());
     }
 
-    public function httpGet(TelegramBotMethodInterface $query, bool $serialize = false): object
+    public function httpGet(TelegramBotMethodInterface $query, bool $serialize = false): mixed
     {
         $response = $this->httpClient->request('GET', '/bot' . $this->token . '/' . $query->getMethodName() . '?' . http_build_query($query->getRequestParameters()));
 
@@ -72,7 +72,7 @@ class TelegramBotQuery
         return $response->getContent(true);
     }
 
-    private function responseGetResult(ResponseInterface $response, ?string $class): object
+    private function responseGetResult(ResponseInterface $response, ?string $class): mixed
     {
         $content = json_decode($response->getContent(true));
         if (!isset($content->ok)) {
