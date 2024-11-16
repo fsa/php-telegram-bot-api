@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-class TelegramBotQuery
+class TelegramBotHttpClient
 {
     protected HttpClientInterface $httpClient;
     protected ?SerializerInterface $serializer = null;
@@ -33,31 +33,31 @@ class TelegramBotQuery
         return $this;
     }
 
-    public function httpPost(TelegramBotMethodInterface $query): mixed
+    public function requestPost(TelegramBotMethodInterface $query): mixed
     {
         $response = $this->httpClient->request('POST', '/bot' . $this->token . '/' . $query->getMethodName(), [
             'body' => $query->getRequestParameters()
         ]);
         if ($response->getStatusCode() != 200) {
-            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
+            throw new TelegramBotHttpClientException('Не удалось поучить данные для ' . $query->getMethodName());
         }
 
         return $this->responseGetResult($response, $query->getResponseClassName());
     }
 
-    public function httpPostJson(TelegramBotMethodInterface $query, bool $serialize = false): mixed
+    public function requestPostJson(TelegramBotMethodInterface $query, bool $serialize = false): mixed
     {
         $response = $this->httpClient->request('POST', '/bot' . $this->token . '/' . $query->getMethodName(), [
             'json' => $query->getRequestParameters()
         ]);
         if ($response->getStatusCode() != 200) {
-            throw new TelegramBotQueryException('Не удалось поучить данные для ' . $query->getMethodName());
+            throw new TelegramBotHttpClientException('Не удалось поучить данные для ' . $query->getMethodName());
         }
 
         return $this->responseGetResult($response, $query->getResponseClassName());
     }
 
-    public function httpGet(TelegramBotMethodInterface $query, bool $serialize = false): mixed
+    public function requestGet(TelegramBotMethodInterface $query, bool $serialize = false): mixed
     {
         $response = $this->httpClient->request('GET', '/bot' . $this->token . '/' . $query->getMethodName() . '?' . http_build_query($query->getRequestParameters()));
 
@@ -66,7 +66,7 @@ class TelegramBotQuery
 
     public function getFileContent(string $file_id): ?string
     {
-        $file = $this->httpPost(new Method\GetFile($file_id));
+        $file = $this->requestPost(new Method\GetFile($file_id));
         $response = $this->httpClient->request('GET', '/file/bot' . $this->token . '/' . $file->file_path);
 
         return $response->getContent(true);
@@ -76,13 +76,13 @@ class TelegramBotQuery
     {
         $content = json_decode($response->getContent(true));
         if (!isset($content->ok)) {
-            throw new TelegramBotQueryException('Неверный ответ сервера');
+            throw new TelegramBotHttpClientException('Неверный ответ сервера');
         };
         if ($content->ok != true) {
-            throw new TelegramBotQueryException('Сервер сообщает об ошибке обработки запроса для: ' . ($content->description ?? 'отсутствует описание в ответе сервера'));
+            throw new TelegramBotHttpClientException('Сервер сообщает об ошибке обработки запроса для: ' . ($content->description ?? 'отсутствует описание в ответе сервера'));
         }
         if (!isset($content->result)) {
-            throw new TelegramBotQueryException('Неверный ответ сервера, запрос обработан, но отсутствует результат');
+            throw new TelegramBotHttpClientException('Неверный ответ сервера, запрос обработан, но отсутствует результат');
         }
 
         return ($this->serializer && $class) ? $this->serializer->deserialize(json_encode($content->result), $class, 'json') : $content->result;

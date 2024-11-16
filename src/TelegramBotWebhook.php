@@ -7,80 +7,77 @@
 
 namespace FSA\Telegram;
 
-use FSA\Telegram\Entity\Update;
-use JsonException;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class TelegramBotWebhook
+class TelegramBotWebhookService implements LoggerAwareInterface
 {
-    private string $json;
-    protected ?SerializerInterface $serializer = null;
+    private string $request_secret_token;
+    private string $webhook_update;
+    private LoggerInterface $logger;
 
     public function __construct(
-        private ?string $secret = null,
-        private ?LoggerInterface $logger = null,
-        RequestStack $requestStack = null,
+        RequestStack $requestStack,
+        private SerializerInterface $serializer,
+        private ?string $secret,
     ) {
-        if ($requestStack === null) {
-            return;
-        }
         $request = $requestStack->getCurrentRequest();
-        $this->setUpdate($request->getContent());
-        if ($secret !== null) {
-            $this->verify($request->headers->get('X-Telegram-Bot-Api-Secret-Token'));
-        }
+        $this->request_secret_token = $request->headers->get('X-Telegram-Bot-Api-Secret-Token');
+        $this->webhook_update = $request->getContent();
     }
 
-    public function setSecret(?string $secret): static
+    public function setLogger(LoggerInterface $logger): void
     {
-        $this->secret = $secret;
-
-        return $this;
+        $this->logger = $logger;
     }
 
-    public function setSerializer(?SerializerInterface $serializer = null): static
+    public function logUpdate(): void
     {
-        $this->serializer = $serializer;
-
-        return $this;
+        $this->logger?->debug('Telegram Bot Webhook: ' . $this->webhook_update);
     }
 
-    public function setUpdate(string $json): static
+    public function logError(string $message, array $context = []): void
     {
-        $this->json = $json;
-        $this->logger?->info('Telegram API Webhook:' . $json);
-
-        return $this;
+        $this->logger?->error($message, $context);
     }
 
-    public function getUpdate(): string
-    {
-        return $this->json;
-    }
-
-    public function getDecodedUpdate(): object
-    {
-        try {
-            return $this->serializer ? $this->serializer->deserialize($this->json, Update::class, 'json') : json_decode(json: $this->json, flags: JSON_THROW_ON_ERROR);
-        } catch (JsonException $ex) {
-            throw new TelegramBotWebhookException('JSON syntax error');
-        }
-    }
-
-    /**
-     * @param $secret: header X_TELEGRAM_BOT_API_SECRET_TOKEN
-     */
-    public function verify(?string $secret): static
+    public function isSecretTokenValid(): bool
     {
         if (!$this->secret) {
-            throw new TelegramBotSecretException('Secret is not set');
+            throw new TelegramBotWebhookException('Secret not set');
         }
-        if ($secret != $this->secret) {
-            throw new TelegramBotSecretException('Wrong secret');
+        if ($this->request_secret_token != $this->secret) {
+            return false;
         };
+        return true;
+    }
 
-        return $this;
+    public function getUpdate(): Entity\Update
+    {
+        return $this->serializer->deserialize($this->webhook_update, Entity\Update::class, 'json');
+    }
+
+    public function getEvent(): TelegramBotUpdateEvent
+    {
+        return new TelegramBotUpdateEvent($this->getUpdate());
+    }
+
+    public function dispatch(EventDispatcherInterface $eventDispatcher, callable $exception_notify = null): ?TelegramBotMethodInterface
+    {
+        $this->logUpdate();
+        $event = $this->getEvent();
+        try {
+            $eventDispatcher->dispatch($event);
+        } catch (\Exception $e) {
+            $this->logError('Telegram Bot Update ID ' . $event->getUpdate()->update_id . "\n" . $e);
+            if ($exception_notify) {
+                $eventDispatcher->dispatch($exception_notify($event->getUpdate()->update_id, $e));
+            }
+        }
+
+        return $event->getResponse();
     }
 }
