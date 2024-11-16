@@ -17,6 +17,20 @@ class LinkPreviewOptions extends AbstractObject
         return $this;
     }
 
+    public function setDisabled(): static
+    {
+        $this->is_disabled = true;
+
+        return $this;
+    }
+
+    public function setEnabled(): static
+    {
+        $this->is_disabled = false;
+
+        return $this;
+    }
+
     public function setUrl(?string $url): static
     {
         $this->url = $url;

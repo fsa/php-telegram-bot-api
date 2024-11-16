@@ -79,9 +79,16 @@ class SendMessage extends AbstractSendMethod
         return $this;
     }
 
-    public function setLinkPreviewOptions(?LinkPreviewOptions $link_preview_options): self
+    public function setLinkPreviewOptions(?LinkPreviewOptions $link_preview_options): static
     {
         $this->link_preview_options = $link_preview_options;
+
+        return $this;
+    }
+
+    public function setDisableWebPagePreview(): static
+    {
+        $this->link_preview_options = (new LinkPreviewOptions())->setDisabled();
 
         return $this;
     }
