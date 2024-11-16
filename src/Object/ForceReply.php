@@ -33,7 +33,7 @@ class ForceReply extends AbstractObject implements ReplyMarkupInterface
 
     public function __toString(): string
     {
-        return json_encode($this->jsonSerialize(), JSON_UNESCAPED_UNICODE);
+        return json_encode($this->jsonSerialize(), JSON_UNESCAPED_UNICODE)?:'';
     }
 
     /**

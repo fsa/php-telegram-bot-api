@@ -34,7 +34,7 @@ class AbstractSendMethod extends AbstractMethod implements TelegramBotSendMethod
         return $this;
     }
 
-    public function setMessageThreadId(int|string $id): static
+    public function setMessageThreadId(int $id): static
     {
         $this->message_thread_id = $id;
 
