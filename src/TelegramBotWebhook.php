@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class TelegramBotWebhookService implements LoggerAwareInterface
+class TelegramBotWebhook implements LoggerAwareInterface
 {
     private string $request_secret_token;
     private string $webhook_update;
