@@ -13,6 +13,7 @@ class GetUpdates extends AbstractMethod
     public int $offset;
     public int $limit;
     public int $timeout;
+    /** @var string[] */
     public array $allowed_updates;
 
     public function setOffset(int $offset): static
@@ -33,12 +34,14 @@ class GetUpdates extends AbstractMethod
         return $this;
     }
 
-    public function setAllowedUpdates(string|array $allowed_updates): static
+    /**
+     * @param string[] $allowed_updates
+     */
+    public function setAllowedUpdates(array $allowed_updates): static
     {
         $this->allowed_updates = $allowed_updates;
         return $this;
     }
-
 
     public function getResponseClassName(): ?string
     {

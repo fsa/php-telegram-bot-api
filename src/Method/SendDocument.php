@@ -11,12 +11,13 @@ use FSA\Telegram\Object\MessageEntity;
 
 class SendDocument extends AbstractSendMethod
 {
-    public $document;
-    public $thumb;
-    public $caption;
-    public $parse_mode;
-    public $caption_entities;
-    public $disable_content_type_detection;
+    public CURLFile|string $document;
+    public CURLFile|string|null $thumb;
+    public ?string $caption;
+    public ?string $parse_mode;
+    /** @var MessageEntity[] */
+    public ?array $caption_entities;
+    public ?bool $disable_content_type_detection;
 
     public function __construct(int|string $chat_id, CURLFile|string $document)
     {
@@ -27,18 +28,21 @@ class SendDocument extends AbstractSendMethod
     public function setDocument(CURLFile|string $document): static
     {
         $this->document = $document;
+
         return $this;
     }
 
     public function setThumb(CURLFile|string $thumb): static
     {
         $this->thumb = $thumb;
+
         return $this;
     }
 
     public function setCaption(string $caption): static
     {
         $this->caption = $this->removeHtmlEntities($caption);
+
         return $this;
     }
 
@@ -51,24 +55,31 @@ class SendDocument extends AbstractSendMethod
             default:
                 $this->parse_mode = $parse_mode;
         }
+
         return $this;
     }
 
     public function setParseModeMarkdown(): static
     {
         $this->parse_mode = 'MarkdownV2';
+
         return $this;
     }
 
     public function setParseModeHTML(): static
     {
         $this->parse_mode = 'HTML';
+
         return $this;
     }
 
+    /**
+     * @param MessageEntity[] $caption_entities
+     */
     public function setCaptionEntities(array $caption_entities): static
     {
         $this->caption_entities = $caption_entities;
+
         return $this;
     }
 
@@ -79,12 +90,14 @@ class SendDocument extends AbstractSendMethod
         } else {
             $this->caption_entities[] = $caption_entity;
         }
+
         return $this;
     }
 
     public function setDisableContentTypeDetection(bool $disable_content_type_detection): static
     {
         $this->disable_content_type_detection = $disable_content_type_detection;
+
         return $this;
     }
 }

@@ -24,6 +24,9 @@ class ReplyKeyboardRemove extends AbstractObject implements ReplyMarkupInterface
         return json_encode($this->jsonSerialize(), JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function jsonSerialize(): array
     {
         $props = get_object_vars($this);

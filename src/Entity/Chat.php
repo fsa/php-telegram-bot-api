@@ -17,10 +17,9 @@ readonly class Chat
         public ?string $last_name,
         public ?bool $is_forum,
         public ?ChatPhoto $photo,
+        /** @var string[] */
         public ?array $active_usernames,
-        /**
-         * @Type("array<ReactionType>")
-         */
+        /** @var ReactionType[] */
         public ?array $available_reactions,
         public ?int $accent_color_id,
         public ?string $background_custom_emoji_id,

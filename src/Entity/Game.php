@@ -11,14 +11,10 @@ readonly class Game
     public function __construct(
         public string $title,
         public string $description,
-        /**
-         * @Type("array<PhotoSize>")
-         */
+        /** @var PhotoSize[] */
         public array $photo,
         public ?string $text,
-        /**
-         * @Type("array<MessageEntity>")
-         */
+        /** @var MessageEntity[] */
         public ?array $text_entities,
         public ?Animation $animation,
     ) {}

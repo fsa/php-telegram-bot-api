@@ -8,7 +8,7 @@ namespace FSA\Telegram\Method;
 
 class SendSticker extends AbstractSendMethod
 {
-    public $sticker;
+    public string $sticker;
 
     public function __construct(string $chat_id, string $sticker)
     {

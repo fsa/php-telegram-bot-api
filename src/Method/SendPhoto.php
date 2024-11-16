@@ -11,11 +11,12 @@ use FSA\Telegram\Object\MessageEntity;
 
 class SendPhoto extends AbstractSendMethod
 {
-    public $photo;
-    public $caption;
-    public $parse_mode;
-    public $caption_entities;
-    public $has_spoiler;
+    public CURLFile|string $photo;
+    public ?string $caption;
+    public ?string $parse_mode;
+    /** @var MessageEntity[] */
+    public ?array $caption_entities;
+    public ?bool $has_spoiler;
 
     public function __construct(int|string $chat_id, CURLFile|string $photo)
     {
@@ -59,6 +60,9 @@ class SendPhoto extends AbstractSendMethod
         return $this;
     }
 
+    /**
+     * @param MessageEntity[] $caption_entities
+     */
     public function setCaptionEntities(array $caption_entities): static
     {
         $this->caption_entities = $caption_entities;

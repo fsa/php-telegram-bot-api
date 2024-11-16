@@ -10,9 +10,7 @@ readonly class TextQuote
 {
     public function __construct(
         public string $text,
-        /**
-         * @Type("array<MessageEntity>")
-         */
+        /** @var MessageEntity[] */
         public ?array $entities,
         public int $position,
         public ?bool $is_manual,

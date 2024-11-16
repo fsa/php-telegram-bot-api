@@ -17,7 +17,7 @@ class SetMyDescription extends AbstractMethod
         return $this;
     }
 
-    public function setLanguageCode($language_code): static
+    public function setLanguageCode(string $language_code): static
     {
         $this->language_code = $language_code;
         return $this;

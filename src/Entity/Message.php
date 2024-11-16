@@ -32,18 +32,14 @@ readonly class Message
         public ?string $media_group_id,
         public ?string $author_signature,
         public ?string $text,
-        /**
-         * @Type("array<MessageEntity>")
-         */
+        /** @var MessageEntity[] */
         public ?array $entities,
         public ?LinkPreviewOptions $link_preview_options,
         public ?string $effect_id,
         public ?Animation $animation,
         public ?Audio $audio,
         public ?Document $document,
-        /**
-         * @Type("array<PhotoSize>")
-         */
+        /** @var PhotoSize[] */
         public ?array $photo,
         public ?Sticker $sticker,
         public ?Story $story,
@@ -51,9 +47,7 @@ readonly class Message
         public ?VideoNote $video_note,
         public ?Voice $voice,
         public ?string $caption,
-        /**
-         * @Type("array<MessageEntity>")
-         */
+        /** @var MessageEntity[] */
         public ?array $caption_entities,
         public ?bool $show_caption_above_media,
         public ?bool $has_media_spoiler,
@@ -63,15 +57,11 @@ readonly class Message
         public ?Poll $poll,
         public ?Venue $venue,
         public ?Location $location,
-        /**
-         * @Type("array<User>")
-         */
+        /** @var User[] */
         public ?array $new_chat_members,
         public ?User $left_chat_member,
         public ?string $new_chat_title,
-        /**
-         * @Type("array<PhotoSize>")
-         */
+        /** @var PhotoSize[] */
         public ?array $new_chat_photo,
         public ?bool $delete_chat_photo,
         public ?bool $group_chat_created,
@@ -111,6 +101,5 @@ readonly class Message
         public ?VideoChatParticipantsInvited $video_chat_participants_invited,
         public ?WebAppData $web_app_data,
         public ?InlineKeyboardMarkup $reply_markup,
-
     ) {}
 }

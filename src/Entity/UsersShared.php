@@ -10,6 +10,7 @@ readonly class UsersShared
 {
     public function __construct(
         public int $request_id,
+        /** @var SharedUser[] */
         public array $user_ids,
     ) {}
 }

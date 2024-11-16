@@ -7,13 +7,16 @@
 namespace FSA\Telegram\Method;
 
 use FSA\Telegram\Entity\Message;
+use FSA\Telegram\Object\LinkPreviewOptions;
+use FSA\Telegram\Object\MessageEntity;
 
 class SendMessage extends AbstractSendMethod
 {
-    public $text;
-    public $parse_mode;
-    public $entities;
-    public $disable_web_page_preview;
+    public string $text;
+    public ?string $parse_mode;
+    /** @var MessageEntity[] */
+    public ?array $entities;
+    public ?LinkPreviewOptions $link_preview_options;
 
     public function __construct(int|string $chat_id, string $text = null, string $parse_mode = null)
     {
@@ -34,7 +37,7 @@ class SendMessage extends AbstractSendMethod
 
     public function appendText(string $text): static
     {
-        if (is_null($this->text)) {
+        if (isset($this->text)) {
             $this->text = $this->removeHtmlEntities($text);
         } else {
             $this->text .= $this->removeHtmlEntities($text);
@@ -66,11 +69,20 @@ class SendMessage extends AbstractSendMethod
         return $this;
     }
 
-    // public function setEntities(array|MessageEntity $entity) {}
-
-    public function setDisableWebPagePreview(bool $disable_web_page_preview = true): static
+    /**
+     * @param MessageEntity[] $entities
+     */
+    public function setEntities(array $entities): self
     {
-        $this->disable_web_page_preview = $disable_web_page_preview;
+        $this->entities = $entities;
+
+        return $this;
+    }
+
+    public function setLinkPreviewOptions(?LinkPreviewOptions $link_preview_options): self
+    {
+        $this->link_preview_options = $link_preview_options;
+
         return $this;
     }
 

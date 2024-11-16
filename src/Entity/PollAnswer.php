@@ -12,6 +12,7 @@ readonly class PollAnswer
         public string $poll_id,
         public ?Chat $voter_chat,
         public ?User $user,
+        /** @var int[] */
         public array $option_ids,
     ) {}
 }

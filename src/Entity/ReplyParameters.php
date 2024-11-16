@@ -14,9 +14,7 @@ readonly class ReplyParameters
         public ?bool $allow_sending_without_reply,
         public ?string $quote,
         public ?string $quote_parse_mode,
-        /**
-         * @Type("array<MessageEntity>")
-         */
+        /** @var MessageEntity[] */
         public ?array $quote_entities,
         public ?int $quote_position,
     ) {}

@@ -13,6 +13,9 @@ abstract class AbstractMethod implements TelegramBotMethodInterface, JsonSeriali
         return lcfirst(end($class));
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getRequestParameters(): array
     {
         return array_filter(get_object_vars($this), fn($element) => !empty($element));

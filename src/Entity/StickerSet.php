@@ -14,9 +14,7 @@ readonly class StickerSet
         public string $sticker_type,
         public ?bool $is_animated,
         public ?bool $is_video,
-        /**
-         * @Type("array<Sticker>")
-         */
+        /** @var Sticker[] */
         public array $stickers,
         public ?PhotoSize $thumb,
     ) {}

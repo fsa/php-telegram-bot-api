@@ -6,14 +6,16 @@
 
 namespace FSA\Telegram\Method;
 
+use CURLFile;
 use FSA\Telegram\TelegramBotParameterException;
 
 class SetWebhook extends AbstractMethod
 {
     public string $url;
-    public $certificate;
+    public ?CURLFile $certificate;
     public string $ip_address;
     public int $max_connections;
+    /** @var string[] */
     public array $allowed_updates;
     public bool $drop_pending_updates;
     public string $secret_token;
@@ -30,7 +32,7 @@ class SetWebhook extends AbstractMethod
         return $this;
     }
 
-    public function setCertificate($certificate): static
+    public function setCertificate(CURLFile $certificate): static
     {
         $this->certificate = $certificate;
 
@@ -54,7 +56,10 @@ class SetWebhook extends AbstractMethod
         return $this;
     }
 
-    public function setAllowedUpdates(string|array $allowed_updates): static
+    /**
+     * @param string[] $allowed_updates
+     */
+    public function setAllowedUpdates(array $allowed_updates): static
     {
         $this->allowed_updates = $allowed_updates;
 
@@ -68,7 +73,7 @@ class SetWebhook extends AbstractMethod
         return $this;
     }
 
-    public function setSecretToken(string $secret_token)
+    public function setSecretToken(string $secret_token): static
     {
         $this->secret_token = $secret_token;
 

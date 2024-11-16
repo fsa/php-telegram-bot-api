@@ -9,9 +9,7 @@ namespace FSA\Telegram\Entity;
 readonly class ReplyKeyboardMarkup
 {
     public function __construct(
-        /**
-         * @Type("array<array<KeyboardButton>>")
-         */
+        /** @var array<KeyboardButton[]> */
         public array $keyboard,
         public ?bool $is_persistent,
         public ?bool $resize_keyboard,

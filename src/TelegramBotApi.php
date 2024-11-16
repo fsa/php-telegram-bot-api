@@ -3,9 +3,18 @@
 namespace FSA\Telegram;
 
 use CURLFile;
+use FSA\Telegram\Object\InlineKeyboardButton;
 
 class TelegramBotApi
 {
+    /**
+     * @param mixed ...$args
+     */
+    public function CallbackGame(...$args): Object\CallbackGame
+    {
+        return new Object\CallbackGame(...$args);
+    }
+
     public function close(): Method\Close
     {
         return new Method\Close;
@@ -61,6 +70,9 @@ class TelegramBotApi
         return new Object\InlineKeyboardButton($text);
     }
 
+    /**
+     * @param array<InlineKeyboardButton[]>|null $buttons
+     */
     public function InlineKeyboardMarkup(array $buttons = null): Object\InlineKeyboardMarkup
     {
         return new Object\InlineKeyboardMarkup($buttons);
@@ -76,6 +88,11 @@ class TelegramBotApi
         return new Object\KeyboardButtonPollType;
     }
 
+    public function LinkPreviewOptions(): Object\LinkPreviewOptions
+    {
+        return new Object\LinkPreviewOptions();
+    }
+
     public function LoginUrl(string $url): Object\LoginUrl
     {
         return new Object\LoginUrl($url);
@@ -86,7 +103,7 @@ class TelegramBotApi
         return new Method\LogOut;
     }
 
-    public function MessageEntity($type, $offset, $length): Object\MessageEntity
+    public function MessageEntity(string $type, int $offset, int $length): Object\MessageEntity
     {
         return new Object\MessageEntity($type, $offset, $length);
     }
@@ -99,6 +116,11 @@ class TelegramBotApi
     public function ReplyKeyboardRemove(bool $selective = null): Object\ReplyKeyboardRemove
     {
         return new Object\ReplyKeyboardRemove($selective);
+    }
+
+    public function ReplyParameters(int $message_id): Object\ReplyParameters
+    {
+        return new Object\ReplyParameters($message_id);
     }
 
     public function sendAnimation(int|string $chat_id, CURLFile|string $animation): Method\SendAnimation

@@ -9,15 +9,15 @@ namespace FSA\Telegram\Object;
 
 class InlineKeyboardButton extends AbstractObject
 {
-    public $text;
-    public $url;
-    public $callback_data;
-    public $web_app;
-    public $login_url;
-    public $switch_inline_query;
-    public $switch_inline_query_current_chat;
-    public $callback_game;
-    public $pay;
+    public string $text;
+    public ?string $url;
+    public ?string $callback_data;
+    public ?WebAppInfo $web_app;
+    public ?LoginUrl $login_url;
+    public ?string $switch_inline_query;
+    public ?string $switch_inline_query_current_chat;
+    public ?CallbackGame $callback_game;
+    public ?bool $pay;
 
     public function __construct(string $text)
     {
@@ -66,7 +66,7 @@ class InlineKeyboardButton extends AbstractObject
         return $this;
     }
 
-    public function setCallbackGame($callback_game): static
+    public function setCallbackGame(CallbackGame $callback_game): static
     {
         $this->callback_game = $callback_game;
         return $this;

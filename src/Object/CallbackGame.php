@@ -4,7 +4,7 @@
  * Telegram Bot API 7.0
  */
 
-namespace FSA\Telegram\Entity;
+namespace FSA\Telegram\Object;
 
 readonly class CallbackGame
 {

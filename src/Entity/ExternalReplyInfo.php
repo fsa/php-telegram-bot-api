@@ -16,9 +16,7 @@ readonly class ExternalReplyInfo
         public ?Animation $animation,
         public ?Audio $audio,
         public ?Document $document,
-        /**
-         * @Type("array<PhotoSize>")
-         */
+        /** @var PhotoSize[] */
         public ?array $photo,
         public ?Sticker $sticker,
         public ?Story $story,

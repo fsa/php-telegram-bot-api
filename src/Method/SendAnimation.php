@@ -11,15 +11,17 @@ use FSA\Telegram\Object\MessageEntity;
 
 class SendAnimation extends AbstractSendMethod
 {
-    public $animation;
-    public $duration;
-    public $width;
-    public $height;
-    public $thumb;
-    public $caption;
-    public $parse_mode;
-    public $caption_entities;
-    public $has_spoiler;
+    public CURLFile|string $animation;
+    public ?int $duration;
+    public ?int $width;
+    public ?int $height;
+    public CURLFile|string|null $thumb;
+    public ?string $caption;
+    public ?string $parse_mode;
+    /** @var MessageEntity[] */
+    public ?array $caption_entities;
+    public ?bool $show_caption_above_media;
+    public ?bool $has_spoiler;
 
     public function __construct(int|string $chat_id, CURLFile|string $animation)
     {
@@ -30,6 +32,7 @@ class SendAnimation extends AbstractSendMethod
     public function setAnimation(CURLFile|string $animation): static
     {
         $this->animation = $animation;
+
         return $this;
     }
 
@@ -87,9 +90,13 @@ class SendAnimation extends AbstractSendMethod
         return $this;
     }
 
+    /**
+     * @param MessageEntity[] $caption_entities
+     */
     public function setCaptionEntities(array $caption_entities): static
     {
         $this->caption_entities = $caption_entities;
+
         return $this;
     }
 
@@ -103,6 +110,13 @@ class SendAnimation extends AbstractSendMethod
         return $this;
     }
 
+    public function setShowCaptionAboveMedia(?bool $show_caption_above_media): static
+    {
+        $this->show_caption_above_media = $show_caption_above_media;
+
+        return $this;
+    }
+    
     public function setHasSpoiler(bool $has_spoiler = true): static
     {
         $this->has_spoiler = $has_spoiler;

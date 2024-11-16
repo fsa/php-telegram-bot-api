@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.10
+ * Telegram Bot API 7.11
  * BackgroundFillSolid +
  * BackgroundFillGradient +
  * BackgroundFillFreeformGradient
@@ -17,6 +17,7 @@ readonly class BackgroundFill
         public ?int $top_color,
         public ?int $bottom_color,
         public ?int $rotation_angle,
+        /** @var int[] */
         public ?array $colors,
     ) {}
 }

@@ -12,9 +12,7 @@ readonly class MessageReactionCountUpdated
         public Chat $chat,
         public int $message_id,
         public int $date,
-        /**
-         * @Type("array<ReactionType>")
-         */
+        /** @var ReactionType[] */
         public array $reactions,
     ) {}
 }

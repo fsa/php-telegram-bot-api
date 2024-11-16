@@ -14,13 +14,9 @@ readonly class MessageReactionUpdated
         public ?User $user,
         public ?Chat $actor_chat,
         public int $date,
-        /**
-         * @Type("array<ReactionType>")
-         */
+        /** @var ReactionType[] */
         public array $old_reaction,
-        /**
-         * @Type("array<ReactionType>")
-         */
+        /** @var ReactionType[] */
         public array $new_reaction,
     ) {}
 }

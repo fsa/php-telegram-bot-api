@@ -10,12 +10,12 @@ use FSA\Telegram\TelegramBotParameterException;
 
 class SendLocation extends AbstractSendMethod
 {
-    public $latitude;
-    public $longitude;
-    public $horizontal_accuracy;
-    public $live_period;
-    public $heading;
-    public $proximity_alert_radius;
+    public float $latitude;
+    public float $longitude;
+    public ?float $horizontal_accuracy;
+    public ?int $live_period;
+    public ?int $heading;
+    public ?int $proximity_alert_radius;
 
     public function __construct(int|string $chat_id, float $latitude, float $longitude)
     {

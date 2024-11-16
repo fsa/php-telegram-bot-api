@@ -11,8 +11,8 @@ use FSA\Telegram\Entity\Message;
 
 class ForwardMessage extends AbstractSendMethod
 {
-    public $from_chat_id;
-    public $message_id;
+    public int|string $from_chat_id;
+    public int $message_id;
 
     public function __construct(int|string $chat_id, int|string $from_chat_id, int $message_id)
     {

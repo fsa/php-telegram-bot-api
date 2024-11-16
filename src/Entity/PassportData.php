@@ -9,9 +9,7 @@ namespace FSA\Telegram\Entity;
 readonly class PassportData
 {
     public function __construct(
-        /**
-         * @Type("array<EncryptedPassportElement>")
-         */
+        /** @var EncryptedPassportElement[] */
         public array $data,
         public ?EncryptedCredentials $credentials,
     ) {}

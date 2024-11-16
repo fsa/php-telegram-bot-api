@@ -9,9 +9,7 @@ namespace FSA\Telegram\Entity;
 readonly class UserChatBoosts
 {
     public function __construct(
-        /**
-         * @Type("array<ChatBoost>")
-         */
+        /** @var ChatBoost[] */
         public array $boosts,
     ) {}
 }

@@ -13,9 +13,7 @@ readonly class GiveawayWinners
         public int $giveaway_message_id,
         public int $winners_selection_date,
         public int $winner_count,
-        /**
-         * @Type("array<User>")
-         */
+        /** @var User[] */
         public array $winners,
         public ?int $additional_chat_count,
         public ?int $premium_subscription_month_count,

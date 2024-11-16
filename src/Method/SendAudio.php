@@ -11,14 +11,15 @@ use FSA\Telegram\Object\MessageEntity;
 
 class SendAudio extends AbstractSendMethod
 {
-    public $audio;
-    public $caption;
-    public $parse_mode;
-    public $caption_entities;
-    public $duration;
-    public $performer;
-    public $title;
-    public $thumb;
+    public CURLFile|string $audio;
+    public ?string $caption;
+    public ?string $parse_mode;
+    /** @var MessageEntity[] */
+    public ?array $caption_entities;
+    public ?int $duration;
+    public ?string $performer;
+    public ?string $title;
+    public CURLFile|string|null $thumb;
 
     public function __construct(int|string $chat_id, CURLFile|string $audio)
     {
@@ -62,6 +63,9 @@ class SendAudio extends AbstractSendMethod
         return $this;
     }
 
+    /**
+     * @param MessageEntity[] $caption_entities
+     */
     public function setCaptionEntities(array $caption_entities): static
     {
         $this->caption_entities = $caption_entities;

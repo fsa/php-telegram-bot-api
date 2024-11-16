@@ -9,10 +9,13 @@ namespace FSA\Telegram\Object;
 
 class InlineKeyboardMarkup extends AbstractObject implements ReplyMarkupInterface
 {
-
+    /** @var array<InlineKeyboardButton[]> */
     public array $inline_keyboard = [];
-    private $row;
+    private int $row;
 
+    /**
+     * @param array<InlineKeyboardButton[]>|null $buttons
+     */
     public function __construct(array $buttons = null)
     {
         if (!is_null($buttons)) {
@@ -24,12 +27,14 @@ class InlineKeyboardMarkup extends AbstractObject implements ReplyMarkupInterfac
     public function addButton(InlineKeyboardButton $button): static
     {
         $this->inline_keyboard[$this->row][] = clone $button;
+
         return $this;
     }
 
     public function nextRow(): static
     {
         $this->row++;
+    
         return $this;
     }
 
@@ -38,10 +43,14 @@ class InlineKeyboardMarkup extends AbstractObject implements ReplyMarkupInterfac
         return json_encode($this->jsonSerialize(), JSON_UNESCAPED_UNICODE);
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function jsonSerialize(): array
     {
         $props = get_object_vars($this);
         unset($props['row']);
+
         return array_filter($props, fn ($element) => !is_null($element));
     }
 }

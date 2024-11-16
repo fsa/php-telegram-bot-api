@@ -12,15 +12,16 @@ use FSA\Telegram\TelegramBotParameterException;
 
 class MessageEntity extends AbstractObject
 {
-    public $type;
-    public $offset;
-    public $length;
-    public $url;
-    public $user;
-    public $language;
-    public $custom_emoji_id;
+    # TODO: использовать enum
+    public string $type;
+    public int $offset;
+    public int $length;
+    public ?string $url;
+    public ?User $user;
+    public ?string $language;
+    public ?string $custom_emoji_id;
 
-    public function __construct($type, $offset, $length)
+    public function __construct(string $type, int $offset, int $length)
     {
         $this->setType($type);
         $this->setOffset($offset);
@@ -79,9 +80,10 @@ class MessageEntity extends AbstractObject
         return $this;
     }
 
-    public function setLanguage(LoginUrl $language): static
+    public function setLanguage(string $language): static
     {
         $this->language = $language;
+
         return $this;
     }
 

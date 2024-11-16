@@ -17,6 +17,7 @@ readonly class WebhookInfo
         public ?string $last_error_message,
         public ?int $last_synchronization_error_date,
         public ?int $max_connections,
+        /** @var string[] */
         public ?array $allowed_updates,
     ) {}
 }

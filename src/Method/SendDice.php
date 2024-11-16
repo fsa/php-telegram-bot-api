@@ -8,7 +8,7 @@ namespace FSA\Telegram\Method;
 
 class SendDice extends AbstractSendMethod
 {
-    public $emoji;
+    public string $emoji;
 
     public function __construct(int|string $chat_id, int|string $emoji)
     {
@@ -23,6 +23,7 @@ class SendDice extends AbstractSendMethod
     public function setEmoji(string $emoji): static
     {
         $this->emoji = $emoji;
+
         return $this;
     }
 
