@@ -15,9 +15,9 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class TelegramBotWebhook implements LoggerAwareInterface
 {
-    private string $request_secret_token;
-    private string $webhook_update;
-    private LoggerInterface $logger;
+    private ?string $request_secret_token;
+    private ?string $webhook_update;
+    private ?LoggerInterface $logger;
 
     public function __construct(
         RequestStack $requestStack,
@@ -25,8 +25,10 @@ class TelegramBotWebhook implements LoggerAwareInterface
         private ?string $secret,
     ) {
         $request = $requestStack->getCurrentRequest();
-        $this->request_secret_token = $request->headers->get('X-Telegram-Bot-Api-Secret-Token');
-        $this->webhook_update = $request->getContent();
+        if ($request) {
+            $this->request_secret_token = $request->headers->get('X-Telegram-Bot-Api-Secret-Token');
+            $this->webhook_update = $request->getContent();
+        }
     }
 
     public function setLogger(LoggerInterface $logger): void
@@ -39,6 +41,9 @@ class TelegramBotWebhook implements LoggerAwareInterface
         $this->logger?->debug('Telegram Bot Webhook: ' . $this->webhook_update);
     }
 
+    /**
+     * @param array<mixed> $context
+     */
     public function logError(string $message, array $context = []): void
     {
         $this->logger?->error($message, $context);
