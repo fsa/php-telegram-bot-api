@@ -6,9 +6,11 @@
 
 namespace FSA\Telegram\Entity;
 
-readonly class ChatBoostAdded
+readonly class Birthdate
 {
     public function __construct(
-        public int $boost_count,
+        public int $day,
+        public int $month,
+        public ?int $year,
     ) {}
 }

@@ -6,9 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-readonly class ChatBoostAdded
+readonly class BusinessLocation
 {
     public function __construct(
-        public int $boost_count,
+        public ?string $address,
+        public ?Location $location
     ) {}
 }

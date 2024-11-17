@@ -6,10 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-readonly class ChatBoostUpdated
+readonly class BusinessOpeningHoursInterval
 {
     public function __construct(
-        public Chat $chat,
-        public ChatBoost $boost,
+        public int $opening_minute,
+        public int $closing_minute
     ) {}
 }
