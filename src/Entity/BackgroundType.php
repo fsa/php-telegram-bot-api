@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.10
+ * Telegram Bot API 8.0
  * BackgroundTypeFill +
  * BackgroundTypeWallpaper +
  * BackgroundTypePattern +
@@ -13,13 +13,14 @@ namespace FSA\Telegram\Entity;
 readonly class BackgroundType
 {
     public function __construct(
-        public string $type,
-        public ?Document $document,
-        public ?BackgroundFill $fill,
-        public ?int $dark_theme_dimming,
-        public ?int $intensity,
-        public ?bool $is_inverted,
-        public ?bool $is_blurred,
-        public ?bool $is_moving,
+        public string $type, //BackgroundType, BackgroundTypeWallpaper, BackgroundTypePattern, BackgroundTypeChatTheme
+        public ?Document $document, //BackgroundTypeWallpaper, BackgroundTypePattern
+        public ?BackgroundFill $fill, //BackgroundType, BackgroundTypePattern
+        public ?int $dark_theme_dimming, //BackgroundType, BackgroundTypeWallpaper
+        public ?int $intensity, //BackgroundTypePattern
+        public ?bool $is_inverted, //BackgroundTypePattern
+        public ?bool $is_blurred, //BackgroundTypeWallpaper
+        public ?bool $is_moving, //BackgroundTypeWallpaper, BackgroundTypePattern
+        public ?string $theme_name, //BackgroundTypeChatTheme
     ) {}
 }

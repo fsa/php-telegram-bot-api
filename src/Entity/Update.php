@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -14,6 +14,10 @@ readonly class Update
         public ?Message $edited_message,
         public ?Message $channel_post,
         public ?Message $edited_channel_post,
+        public ?BusinessConnection $business_connection,
+        public ?Message $business_message,
+        public ?Message $edited_business_message,
+        public ?BusinessMessagesDeleted $deleted_business_messages,
         public ?MessageReactionUpdated $message_reaction,
         public ?MessageReactionCountUpdated $message_reaction_count,
         public ?InlineQuery $inline_query,
@@ -21,6 +25,7 @@ readonly class Update
         public ?CallbackQuery $callback_query,
         public ?ShippingQuery $shipping_query,
         public ?PreCheckoutQuery $pre_checkout_query,
+        public ?PaidMediaPurchased $purchased_paid_media,
         public ?Poll $poll,
         public ?PollAnswer $poll_answer,
         public ?ChatMemberUpdated $my_chat_member,

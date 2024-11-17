@@ -15,7 +15,7 @@ class SendAnimation extends AbstractSendMethod
     public ?int $duration;
     public ?int $width;
     public ?int $height;
-    public CURLFile|string|null $thumb;
+    public CURLFile|string|null $thumbnail;
     public ?string $caption;
     public ?string $parse_mode;
     /** @var MessageEntity[] */
@@ -54,9 +54,9 @@ class SendAnimation extends AbstractSendMethod
         return $this;
     }
 
-    public function setThumb(CURLFile|string $thumb): static
+    public function setThumbnail(CURLFile|string $thumbnail): static
     {
-        $this->thumb = $thumb;
+        $this->thumbnail = $thumbnail;
         return $this;
     }
 

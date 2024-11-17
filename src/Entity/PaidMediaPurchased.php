@@ -6,10 +6,10 @@
 
 namespace FSA\Telegram\Entity;
 
-readonly class BotCommand
+readonly class PaidMediaPurchased
 {
     public function __construct(
-        public string $command,
-        public string $description,
+        public User $from,
+        public string $paid_media_payload,
     ) {}
 }

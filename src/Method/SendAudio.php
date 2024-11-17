@@ -19,7 +19,7 @@ class SendAudio extends AbstractSendMethod
     public ?int $duration;
     public ?string $performer;
     public ?string $title;
-    public CURLFile|string|null $thumb;
+    public CURLFile|string|null $thumbnail;
 
     public function __construct(int|string $chat_id, CURLFile|string $audio)
     {
@@ -100,9 +100,9 @@ class SendAudio extends AbstractSendMethod
         return $this;
     }
 
-    public function setThumb(CURLFile|string $thumb): static
+    public function setThumbnail(CURLFile|string $thumbnail): static
     {
-        $this->thumb = $thumb;
+        $this->thumbnail = $thumbnail;
         return $this;
     }
 }
