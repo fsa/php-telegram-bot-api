@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -17,6 +17,7 @@ readonly class InlineKeyboardButton
         public ?string $switch_inline_query,
         public ?string $switch_inline_query_current_chat,
         public ?SwitchInlineQueryChosenChat $switch_inline_query_chosen_chat,
+        public ?CopyTextButton $copy_text,
         public ?CallbackGame $callback_game,
         public ?bool $pay,
     ) {}

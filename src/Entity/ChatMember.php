@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -9,37 +9,36 @@ namespace FSA\Telegram\Entity;
 readonly class ChatMember
 {
     public function __construct(
-        //TODO: Разные типы пользователей
-        public string $status,
-        public User $user,
-        public ?bool $is_anonymous,
-        public ?string $custom_title,
-        public ?bool $can_be_edited,
-        public ?bool $can_manage_chat,
-        public ?bool $can_post_messages,
-        public ?bool $can_edit_messages,
-        public ?bool $can_delete_messages,
-        public ?bool $can_manage_video_chats,
-        public ?bool $can_restrict_members,
-        public ?bool $can_promote_members,
-        public ?bool $can_change_info,
-        public ?bool $can_invite_users,
-        public ?bool $can_pin_messages,
-        public ?bool $can_post_stories,
-        public ?bool $can_edit_stories,
-        public ?bool $can_delete_stories,
-        public ?bool $can_manage_topics,
-        public ?bool $is_member,
-        public ?bool $can_send_messages,
-        public ?bool $can_send_audios,
-        public ?bool $can_send_documents,
-        public ?bool $can_send_photos,
-        public ?bool $can_send_videos,
-        public ?bool $can_send_video_notes,
-        public ?bool $can_send_voice_notes,
-        public ?bool $can_send_polls,
-        public ?bool $can_send_other_messages,
-        public ?bool $can_add_web_page_previews,
-        public ?int $until_date,
+        public string $status, //ChatMemberOwner, ChatMemberAdministrator, ChatMemberMember, ChatMemberRestricted, ChatMemberLeft, ChatMemberBanned
+        public User $user, //ChatMemberOwner, ChatMemberAdministrator, ChatMemberMember, ChatMemberRestricted, ChatMemberLeft, ChatMemberBanned
+        public ?bool $is_anonymous, //ChatMemberOwner, ChatMemberAdministrator
+        public ?string $custom_title, //ChatMemberOwner, ChatMemberAdministrator
+        public ?bool $can_be_edited, //ChatMemberAdministrator
+        public ?bool $can_manage_chat, //ChatMemberAdministrator
+        public ?bool $can_post_messages, //ChatMemberAdministrator
+        public ?bool $can_edit_messages, //ChatMemberAdministrator
+        public ?bool $can_pin_messages, //ChatMemberAdministrator, ChatMemberRestricted
+        public ?bool $can_delete_messages, //ChatMemberAdministrator
+        public ?bool $can_manage_video_chats, //ChatMemberAdministrator
+        public ?bool $can_restrict_members, //ChatMemberAdministrator
+        public ?bool $can_promote_members, //ChatMemberAdministrator
+        public ?bool $can_change_info, //ChatMemberAdministrator, ChatMemberRestricted
+        public ?bool $can_invite_users, //ChatMemberAdministrator, ChatMemberRestricted
+        public ?bool $can_post_stories, //ChatMemberAdministrator
+        public ?bool $can_edit_stories, //ChatMemberAdministrator
+        public ?bool $can_delete_stories, //ChatMemberAdministrator
+        public ?bool $can_manage_topics, //ChatMemberAdministrator, ChatMemberRestricted
+        public ?bool $is_member, //ChatMemberRestricted
+        public ?bool $can_send_messages, //ChatMemberRestricted
+        public ?bool $can_send_audios, //ChatMemberRestricted
+        public ?bool $can_send_documents, //ChatMemberRestricted
+        public ?bool $can_send_photos, //ChatMemberRestricted
+        public ?bool $can_send_videos, //ChatMemberRestricted
+        public ?bool $can_send_video_notes, //ChatMemberRestricted
+        public ?bool $can_send_voice_notes, //ChatMemberRestricted
+        public ?bool $can_send_polls, //ChatMemberRestricted
+        public ?bool $can_send_other_messages, //ChatMemberRestricted
+        public ?bool $can_add_web_page_previews, //ChatMemberRestricted
+        public ?int $until_date, //ChatMemberMember, ChatMemberRestricted, ChatMemberBanned
     ) {}
 }

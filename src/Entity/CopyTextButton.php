@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Telegram Bot API 8.0
+ * Telegram Bot API 7.0
  */
 
 namespace FSA\Telegram\Entity;
 
-readonly class GiveawayCreated
+readonly class CopyTextButton
 {
     public function __construct(
-        public ?int $prize_star_count,
+        public string $text,
     ) {}
 }

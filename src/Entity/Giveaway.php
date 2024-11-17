@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -18,6 +18,7 @@ readonly class Giveaway
         public ?string $prize_description,
         /** @var string[] */
         public ?array $country_codes,
+        public ?int $prize_star_count,
         public ?int $premium_subscription_month_count,
     ) {}
 }

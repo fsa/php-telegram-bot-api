@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -12,7 +12,7 @@ readonly class EncryptedPassportElement
         public string $type,
         public ?string $data,
         public ?string $phone_number,
-        public string $email,
+        public ?string $email,
         /** @var PassportFile[] */
         public ?array $files,
         public ?PassportFile $front_side,

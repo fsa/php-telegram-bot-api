@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -16,6 +16,7 @@ readonly class GiveawayWinners
         /** @var User[] */
         public array $winners,
         public ?int $additional_chat_count,
+        public ?int $prize_star_count,
         public ?int $premium_subscription_month_count,
         public ?int $unclaimed_prize_count,
         public ?bool $only_new_members,
