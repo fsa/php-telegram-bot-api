@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -17,5 +17,8 @@ readonly class KeyboardButtonRequestChat
         public ?ChatAdministratorRights $user_administrator_rights,
         public ?ChatAdministratorRights $bot_administrator_rights,
         public ?bool $bot_is_member,
+        public ?bool $request_title,
+        public ?bool $request_username,
+        public ?bool $request_photo,       
     ) {}
 }

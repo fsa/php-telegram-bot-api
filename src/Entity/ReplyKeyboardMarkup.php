@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -14,6 +14,7 @@ readonly class ReplyKeyboardMarkup
         public ?bool $is_persistent,
         public ?bool $resize_keyboard,
         public ?bool $one_time_keyboard,
+        public ?string $input_field_placeholder,
         public ?bool $selective,
     ) {}
 }

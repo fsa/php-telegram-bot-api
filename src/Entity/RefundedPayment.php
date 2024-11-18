@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.10
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;

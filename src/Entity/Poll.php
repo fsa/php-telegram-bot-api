@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -11,6 +11,8 @@ readonly class Poll
     public function __construct(
         public string $id,
         public string $question,
+        /** @var MessageEntity[] */
+        public ?array $question_entities,
         /** @var PollOption[] */
         public array $options,
         public int $total_voter_count,

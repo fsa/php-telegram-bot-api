@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.10
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Entity;
@@ -70,9 +70,7 @@ readonly class Message
         public ?MessageAutoDeleteTimerChanged $message_auto_delete_timer_changed,
         public ?int $migrate_to_chat_id,
         public ?int $migrate_from_chat_id,
-        /* Поле может содержать InaccessibleMessage,
-        частный случай Message (поля chat, message_id, date)
-        */
+        /* MaybeInaccessibleMessage */
         public ?Message $pinned_message,
         public ?Invoice $invoice,
         public ?SuccessfulPayment $successful_payment,
