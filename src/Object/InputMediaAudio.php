@@ -26,7 +26,7 @@ class InputMediaAudio extends InputMedia
         parent::__construct('audio', $media);
     }
 
-    public function setThumbnail($thumbnail): self
+    public function setThumbnail(CURLFile|string|null $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
 

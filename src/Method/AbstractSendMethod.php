@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 6.4
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Method;
@@ -13,6 +13,7 @@ use FSA\Telegram\TelegramBotSendMethodInterface;
 
 class AbstractSendMethod extends AbstractMethod implements TelegramBotSendMethodInterface
 {
+    public ?string $business_connection_id;
     public int|string $chat_id;
     public ?int $message_thread_id;
     public ?bool $disable_notification;
@@ -21,6 +22,13 @@ class AbstractSendMethod extends AbstractMethod implements TelegramBotSendMethod
     public ?string $message_effect_id;
     public ?ReplyParameters $reply_parameters;
     public ?ReplyMarkupInterface $reply_markup;
+
+    public function setBusinessConnectionId(?string $business_connection_id): static
+    {
+        $this->business_connection_id = $business_connection_id;
+
+        return $this;
+    }
 
     public function getChatId(): int|string
     {

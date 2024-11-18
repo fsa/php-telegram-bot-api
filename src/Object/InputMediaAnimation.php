@@ -28,7 +28,7 @@ class InputMediaAnimation extends InputMedia
         parent::__construct('animation', $media);
     }
 
-    public function setThumbnail($thumbnail): self
+    public function setThumbnail(CURLFile|string|null $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
 

@@ -29,7 +29,7 @@ class InputMediaPhoto extends InputMedia
         parent::__construct('video', $media);
     }
 
-    public function setThumbnail($thumbnail): self
+    public function setThumbnail(CURLFile|string|null $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
 
