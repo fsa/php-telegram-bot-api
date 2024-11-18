@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Telegram Bot API 7.0
+ * Telegram Bot API 8.0
  */
 
 namespace FSA\Telegram\Method;
@@ -13,12 +13,12 @@ class SetWebhook extends AbstractMethod
 {
     public string $url;
     public ?CURLFile $certificate;
-    public string $ip_address;
-    public int $max_connections;
+    public ?string $ip_address;
+    public ?int $max_connections;
     /** @var string[] */
-    public array $allowed_updates;
-    public bool $drop_pending_updates;
-    public string $secret_token;
+    public ?array $allowed_updates;
+    public ?bool $drop_pending_updates;
+    public ?string $secret_token;
 
     public function __construct(string $url)
     {
