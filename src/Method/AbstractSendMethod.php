@@ -21,7 +21,7 @@ class AbstractSendMethod extends AbstractMethod implements TelegramBotSendMethod
     public ?bool $allow_paid_broadcast;
     public ?string $message_effect_id;
     public ?ReplyParameters $reply_parameters;
-    public ?ReplyMarkupInterface $reply_markup;
+    public ?string $reply_markup;
 
     public function setBusinessConnectionId(?string $business_connection_id): static
     {
@@ -79,7 +79,7 @@ class AbstractSendMethod extends AbstractMethod implements TelegramBotSendMethod
 
     public function setReplyMarkup(ReplyMarkupInterface $keyboard): static
     {
-        $this->reply_markup = $keyboard;
+        $this->reply_markup = (string)$keyboard;
 
         return $this;
     }
