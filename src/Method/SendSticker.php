@@ -6,6 +6,9 @@
 
 namespace FSA\Telegram\Method;
 
+use FSA\Telegram\Entity\Message;
+
+#[ResponseEntity(Message::class)]
 class SendSticker extends AbstractSendMethod
 {
     public string $sticker;

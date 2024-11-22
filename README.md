@@ -81,8 +81,7 @@ $telegram_bot_query->httpPostJson($message);
 Любой объект для методов API реализует интерфейс `TelegramBotMethodInterface`:
 
 * `getMethodName()` — позволяет получить имя метода API;
-* `getRequestParameters()` — параметры запроса в виде массива;
-* `getResponseClassName` — имя класса сущности в ответе или null, если ответ не возвращает сущностей (например, true, false и т.д.).
+* `getRequestParameters()` — параметры запроса в виде массива.
 
 Методы, которые осуществляют отправку сообщений, также реализуют интерфейс `TelegramBotSendMethodInterface`, который, в дополнении к `TelegramBotMethodInterface` также предоставляет доступ к сессерам, которые присутствуют в любом методе с отправкой сообщения, например, `setChatId()` и другие.
 

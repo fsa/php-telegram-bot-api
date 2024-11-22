@@ -6,8 +6,10 @@
 
 namespace FSA\Telegram\Method;
 
+use FSA\Telegram\Entity\Message;
 use FSA\Telegram\TelegramBotParameterException;
 
+#[ResponseEntity(Message::class)]
 class SendLocation extends AbstractSendMethod
 {
     public float $latitude;

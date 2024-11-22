@@ -7,8 +7,10 @@
 namespace FSA\Telegram\Method;
 
 use CURLFile;
+use FSA\Telegram\Entity\Message;
 use FSA\Telegram\Object\MessageEntity;
 
+#[ResponseEntity(Message::class)]
 class SendDocument extends AbstractSendMethod
 {
     public CURLFile|string $document;

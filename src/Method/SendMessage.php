@@ -10,6 +10,7 @@ use FSA\Telegram\Entity\Message;
 use FSA\Telegram\Object\LinkPreviewOptions;
 use FSA\Telegram\Object\MessageEntity;
 
+#[ResponseEntity(Message::class)]
 class SendMessage extends AbstractSendMethod
 {
     public string $text;
@@ -91,10 +92,5 @@ class SendMessage extends AbstractSendMethod
         $this->link_preview_options = (new LinkPreviewOptions())->setDisabled();
 
         return $this;
-    }
-
-    public function getResponseClassName(): ?string
-    {
-        return Message::class;
     }
 }

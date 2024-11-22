@@ -88,10 +88,4 @@ class AbstractSendMethod extends AbstractMethod implements TelegramBotSendMethod
     {
         return html_entity_decode($text);
     }
-
-
-    public function getResponseClassName(): ?string
-    {
-        return Message::class;
-    }
 }
