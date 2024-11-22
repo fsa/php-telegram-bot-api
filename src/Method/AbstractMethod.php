@@ -27,9 +27,4 @@ abstract class AbstractMethod implements TelegramBotMethodInterface, JsonSeriali
         $query_string['method'] = $this->getMethodName();
         return $query_string;
     }
-
-    public function getResponseClassName(): ?string
-    {
-        return null;
-    }
 }

@@ -9,5 +9,4 @@ interface TelegramBotMethodInterface
      * @return array<mixed>
      */
     public function getRequestParameters(): array;
-    public function getResponseClassName(): ?string;
 }

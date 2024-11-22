@@ -8,10 +8,5 @@ namespace FSA\Telegram\Method;
 
 use FSA\Telegram\Entity\User;
 
-class GetMe extends AbstractMethod {
-
-    public function getResponseClassName(): ?string
-    {
-        return User::class;
-    }
-}
+#[ResponseEntity(User::class)]
+class GetMe extends AbstractMethod {}

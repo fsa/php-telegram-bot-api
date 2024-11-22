@@ -8,6 +8,7 @@ namespace FSA\Telegram\Method;
 
 use FSA\Telegram\Entity\Update;
 
+#[ResponseEntity(Update::class)]
 class GetUpdates extends AbstractMethod
 {
     public int $offset;
@@ -41,10 +42,5 @@ class GetUpdates extends AbstractMethod
     {
         $this->allowed_updates = $allowed_updates;
         return $this;
-    }
-
-    public function getResponseClassName(): ?string
-    {
-        return Update::class;
     }
 }

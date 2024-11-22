@@ -9,6 +9,7 @@ namespace FSA\Telegram\Method;
 use FSA\Telegram\Entity\BotShortDescription;
 use FSA\Telegram\TelegramBotParameterException;
 
+#[ResponseEntity(BotShortDescription::class)]
 class GetMyShortDescription extends AbstractMethod
 {
     public ?string $language_code;
@@ -21,10 +22,5 @@ class GetMyShortDescription extends AbstractMethod
         $this->language_code = $language_code;
 
         return $this;
-    }
-
-    public function getResponseClassName(): ?string
-    {
-        return BotShortDescription::class;
     }
 }

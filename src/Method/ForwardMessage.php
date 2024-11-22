@@ -9,6 +9,7 @@ namespace FSA\Telegram\Method;
 
 use FSA\Telegram\Entity\Message;
 
+#[ResponseEntity(Message::class)]
 class ForwardMessage extends AbstractMethod
 {
     public int|string $chat_id;
@@ -63,10 +64,5 @@ class ForwardMessage extends AbstractMethod
     {
         $this->message_id = $id;
         return $this;
-    }
-
-    public function getResponseClassName(): ?string
-    {
-        return Message::class;
     }
 }

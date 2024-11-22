@@ -8,6 +8,7 @@ namespace FSA\Telegram\Method;
 
 use FSA\Telegram\Entity\File;
 
+#[ResponseEntity(File::class)]
 class GetFile extends AbstractMethod
 {
 
@@ -23,10 +24,5 @@ class GetFile extends AbstractMethod
         $this->file_id = $file_id;
 
         return $this;
-    }
-
-    public function getResponseClassName(): ?string
-    {
-        return File::class;
     }
 }

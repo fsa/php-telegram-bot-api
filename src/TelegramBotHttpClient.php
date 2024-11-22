@@ -7,6 +7,8 @@
 
 namespace FSA\Telegram;
 
+use FSA\Telegram\Method\ResponseEntity;
+use ReflectionClass;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
@@ -42,7 +44,7 @@ class TelegramBotHttpClient
             throw new TelegramBotHttpClientException('Не удалось поучить данные для ' . $query->getMethodName());
         }
 
-        return $this->responseGetResult($response, $query->getResponseClassName());
+        return $this->responseGetResult($response, $query);
     }
 
     public function requestPostJson(TelegramBotMethodInterface $query, bool $serialize = false): mixed
@@ -54,14 +56,14 @@ class TelegramBotHttpClient
             throw new TelegramBotHttpClientException('Не удалось поучить данные для ' . $query->getMethodName());
         }
 
-        return $this->responseGetResult($response, $query->getResponseClassName());
+        return $this->responseGetResult($response, $query);
     }
 
     public function requestGet(TelegramBotMethodInterface $query, bool $serialize = false): mixed
     {
         $response = $this->httpClient->request('GET', '/bot' . $this->token . '/' . $query->getMethodName() . '?' . http_build_query($query->getRequestParameters()));
 
-        return $this->responseGetResult($response, $query->getResponseClassName());
+        return $this->responseGetResult($response, $query);
     }
 
     public function getFileContent(string $file_id): ?string
@@ -72,7 +74,7 @@ class TelegramBotHttpClient
         return $response->getContent(true);
     }
 
-    private function responseGetResult(ResponseInterface $response, ?string $class): mixed
+    private function responseGetResult(ResponseInterface $response, TelegramBotMethodInterface $query): mixed
     {
         $content = json_decode($response->getContent(true));
         if (!isset($content->ok)) {
@@ -84,7 +86,16 @@ class TelegramBotHttpClient
         if (!isset($content->result)) {
             throw new TelegramBotHttpClientException('Неверный ответ сервера, запрос обработан, но отсутствует результат');
         }
+        if (!$this->serializer) {
+            return $content->result;
+        }
+        $reflection = new ReflectionClass($query);
+        $classAttribute = $reflection->getAttributes(ResponseEntity::class);
+        if (empty($classAttribute)) {
+            return $content->result;
+        }
+        $class = $classAttribute[0]->newInstance()->classname;
 
-        return ($this->serializer && $class) ? $this->serializer->deserialize(json_encode($content->result), $class, 'json') : $content->result;
+        return $this->serializer->deserialize(json_encode($content->result), $class, 'json');
     }
 }
