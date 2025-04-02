@@ -70,7 +70,7 @@ class TelegramBotWebhook implements LoggerAwareInterface
         return new TelegramBotUpdateEvent($this->getUpdate());
     }
 
-    public function dispatch(EventDispatcherInterface $eventDispatcher, callable $exception_notify = null): ?TelegramBotMethodInterface
+    public function dispatch(EventDispatcherInterface $eventDispatcher, ?callable $exception_notify = null): ?TelegramBotMethodInterface
     {
         $this->logUpdate();
         $event = $this->getEvent();

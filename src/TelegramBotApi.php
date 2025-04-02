@@ -73,7 +73,7 @@ class TelegramBotApi
     /**
      * @param array<InlineKeyboardButton[]>|null $buttons
      */
-    public function InlineKeyboardMarkup(array $buttons = null): Object\InlineKeyboardMarkup
+    public function InlineKeyboardMarkup(?array $buttons = null): Object\InlineKeyboardMarkup
     {
         return new Object\InlineKeyboardMarkup($buttons);
     }
@@ -113,7 +113,7 @@ class TelegramBotApi
         return new Object\ReplyKeyboardMarkup;
     }
 
-    public function ReplyKeyboardRemove(bool $selective = null): Object\ReplyKeyboardRemove
+    public function ReplyKeyboardRemove(?bool $selective = null): Object\ReplyKeyboardRemove
     {
         return new Object\ReplyKeyboardRemove($selective);
     }
@@ -148,7 +148,7 @@ class TelegramBotApi
         return new Method\SendLocation($chat_id, $latitude, $longitude);
     }
 
-    public function sendMessage(int|string $chat_id, string $text = null, string $parse_mode = null): Method\SendMessage
+    public function sendMessage(int|string $chat_id, ?string $text = null, ?string $parse_mode = null): Method\SendMessage
     {
         return new Method\SendMessage($chat_id, $text, $parse_mode);
     }

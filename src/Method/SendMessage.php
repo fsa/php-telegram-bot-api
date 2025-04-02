@@ -19,7 +19,7 @@ class SendMessage extends AbstractSendMethod
     public ?array $entities;
     public ?LinkPreviewOptions $link_preview_options;
 
-    public function __construct(int|string $chat_id, string $text = null, string $parse_mode = null)
+    public function __construct(int|string $chat_id, ?string $text = null, ?string $parse_mode = null)
     {
         $this->setChatId($chat_id);
         if ($text) {

@@ -16,7 +16,7 @@ class InlineKeyboardMarkup extends AbstractObject implements ReplyMarkupInterfac
     /**
      * @param array<InlineKeyboardButton[]>|null $buttons
      */
-    public function __construct(array $buttons = null)
+    public function __construct(?array $buttons = null)
     {
         if (!is_null($buttons)) {
             $this->inline_keyboard = $buttons;

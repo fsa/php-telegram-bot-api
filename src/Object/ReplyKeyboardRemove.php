@@ -12,7 +12,7 @@ class ReplyKeyboardRemove extends AbstractObject implements ReplyMarkupInterface
     public bool $remove_keyboard = true;
     public ?bool $selective = null;
 
-    public function __construct(bool $selective = null)
+    public function __construct(?bool $selective = null)
     {
         if (!is_null($selective)) {
             $this->selective = $selective;
